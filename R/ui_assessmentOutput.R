@@ -10,8 +10,6 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     stop("Directory 'www' exist. Provide 'overwrite=T' if the content should be overwritten.")
   }
 
-  addResourcePath("www", "./")
-
   shinyassess_internal_initialize_storage()
 
 
@@ -59,8 +57,10 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     });
     ")
 
+
   )
 
+  addResourcePath("www", "./")
 
 }
 
