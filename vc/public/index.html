@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>        
+ 
+      //forward player-postmessages to shiny
+
+      window.addEventListener('message', (event) => {
+          if(!!parent && parent !== window && event.source !== parent){
+                  
+              let _data = JSON.parse(event.data)
+              if(_data?.eventType == "itemsLoadedInPlayer"){      
+                parent.postMessage(JSON.stringify( {'eventname':'loaded','cbasession': cbasession}),'*');			  
+              }
+              else if(_data?.eventType == "traceLogTransmission"){
+                parent.postMessage(JSON.stringify( {'eventname':'trace','cbasession': cbasession, 'trace': JSON.stringify(_data?.traceLogData)}),'*');
+              }
+              else if(_data?.eventType == "getScoringResultReturn"){
+                parent.postMessage(JSON.stringify( {'eventname':'score-task-next','cbasession': cbasession, 'result': JSON.stringify(_data?.result)}),'*');
+              } 
+              else if (_data?.eventType == "taskPlayerReady"){
+              }
+              else if (_data?.eventType == "taskSwitchRequest"){
+                parent.postMessage(JSON.stringify( {'eventname':'taskSwitchRequest','cbasession': cbasession, 'request': JSON.stringify(_data?.request)}),'*');
+              }			
+              else {
+                console.log("Un-processed Event:");
+                console.log(event);			
+              }
+          }
+      });
+    
+      // get query string parameter (https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript)
+
+      var shinyconfig = {};
+      (window.onpopstate = function () {
+          var match,
+              pl     = /\+/g,  // Regex for replacing addition symbol with a space
+              search = /([^&=]+)=?([^&]*)/g,
+              decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+              query  = window.location.search.substring(1);
+        
+              shinyconfig = {};
+          while (match = search.exec(query))
+          shinyconfig[decode(match[1])] = decode(match[2]);
+      })();
+      
+      function generateUUID() { // Public Domain/MIT
+            var d = new Date().getTime();//Timestamp
+            var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16;//random number between 0 and 16
+                if(d > 0){//Use timestamp until depleted
+                    r = (d + r)%16 | 0;
+                    d = Math.floor(d/16);
+                } else {//Use microseconds since page-load if supported
+                    r = (d2 + r)%16 | 0;
+                    d2 = Math.floor(d2/16);
+                }
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        }
+        
+        // Store session id in coockie
+        
+      function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else 
+        {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+            end = dc.length;
+            }
+        }
+        return decodeURI(dc.substring(begin + prefix.length, end));
+      } 
+
+      var cbasession = "";
+      if (shinyconfig ['sessiontype'] == "cookie" || shinyconfig ['sessiontype'] == null){
+        cbasession = getCookie("cbasession");
+        if (cbasession == null || cbasession == "") {
+          cbasession = generateUUID();
+          document.cookie = "cbasession="+cbasession;
+        }     
+      } else if (shinyconfig ['sessiontype'] == "localstorage"){ 
+        cbasession = localStorage.getItem( "session");             
+        if (cbasession == null || cbasession == "") {
+          cbasession = generateUUID();
+          localStorage.setItem( "session", window.cbasession ); 
+        } else {
+          cbasession = cbasession.replace("\"","");
+        }
+      } else if (shinyconfig ['sessiontype'] == "provided"){ 
+        cbasession = shinyconfig ['session'] 
+      }  
+      else  // default = "sessionstorage"
+      {
+        // Session Storage
+        
+        cbasession = sessionStorage.getItem('session');
+        if (cbasession == null || cbasession == "") {
+            cbasession = generateUUID();
+            sessionStorage.setItem('session',cbasession); 
+        }    
+      }
+
+      document.addEventListener('keydown', function(event) {
+        // test administrator menu 
+        console.log("key: " + event.key);
+        if (event.ctrlKey && event.key === 'x') {
+          parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
+        }
+      });
+
+  </script>
+  </head>
+  <body style="height: 100%;"  oncontextmenu="return false;"> 
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="wrap" id="ee4basicsRoot"></div>    
+  </body>
+</html>

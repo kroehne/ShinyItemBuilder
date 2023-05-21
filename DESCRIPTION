@@ -1,0 +1,13 @@
+Package: ShinyItemBuilder
+Type: Package
+Title: Create CBA ItemBuilder Assessments using R/Shiny (ShinyItemBuilder)
+Version: 0.1.0
+Author: Ulf Kroehne, Felix Wagner
+Maintainer: Ulf Kroehne <ulf@kroehne.de>
+Description: Digitally-based assessments that are created using CBA ItemBuilder items (http://cba.itembuilder.de) can be used as R/Shiny application using this package. 
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
