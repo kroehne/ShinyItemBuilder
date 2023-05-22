@@ -13,8 +13,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   if (!dir.exists("www")){
     dir.create("www")
   }
-  addResourcePath("www", "./")
 
+  shiny::removeResourcePath("www")
 
   shinyassess_internal_initialize_storage()
 
@@ -30,7 +30,9 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   shinyassess_internal_prepare_www_folder(extended_pool)
   shinyassess_internal_prepare_execution_environment(extended_pool)
 
-  fluidPage(
+  shiny::addResourcePath("www", "./")
+
+  shiny::fluidPage(
 
     tags$head(HTML(paste0("<title>", assessment_env$config$WindowTitle , "</title>"))),
 
