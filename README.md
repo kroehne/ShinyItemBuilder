@@ -1,6 +1,6 @@
 # ShinyItemBuilder
 
-The R project `ShinyItemBuilder` can be used to implement computer-based assessments using the [CBA ItemBuilder](http://cba.itembuilder.de) and [R](https://www.r-project.org/)/[Shiny](https://shiny.posit.co/).  
+The R project `ShinyItemBuilder` can be used to implement computer-based assessments using the [CBA ItemBuilder](https://cba.itembuilder.de) and [R](https://www.r-project.org/)/[Shiny](https://shiny.posit.co/).  
 
 The CBA ItemBuilder is an authoring tool for designing and implementing simple and complex computer-based items that can be used without programming knowledge to create assessment content for computer-based testing. 
 
