@@ -26,8 +26,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     shiny::removeResourcePath(assessment_env$config$WWWfolder)
   }
 
-  if (!dir.exists(ret$Datafolder))
-    dir.create(ret$Datafolder)
+  if (!dir.exists(assessment_env$config$Datafolder))
+    dir.create(assessment_env$config$Datafolder)
 
   extended_pool <- shinyassess_internal_get_pool_from_folder(path = assessment_env$ibsource, pool)
 
