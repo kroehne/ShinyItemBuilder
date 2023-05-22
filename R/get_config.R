@@ -13,6 +13,7 @@ getConfig <- function(){
       footer = tagList()))
   }
   ret$WWWfolder="_mywww"
+  ret$Datafolder="_mydata"
 
   # visual presentation
 

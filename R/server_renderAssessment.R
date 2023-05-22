@@ -37,14 +37,14 @@ renderAssessment <- function(input, output, session){
       paste("output", "zip", sep=".")
     },
     content = function(fname) {
-      fs <- list.files("data/")
-      zip(zipfile=fname, files=paste0("data/",fs))
+      fs <- list.files(paste0(assessment_env$config$Datafolder,"/"))
+      zip(zipfile=fname, files=paste0(paste0(assessment_env$config$Datafolder,"/"),fs))
     },
     contentType = "application/zip"
   )
 
   observeEvent(input$deleteData, {
-    do.call(file.remove, list(list.files("data/", full.names = TRUE)))
+    do.call(file.remove, list(list.files(paste0(assessment_env$config$Datafolder,"/"), full.names = TRUE)))
     runtime.data <<- list()
     session$sendCustomMessage("shinyassess_restart","new")
     removeModal()

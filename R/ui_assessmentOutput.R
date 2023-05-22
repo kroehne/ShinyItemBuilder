@@ -6,14 +6,13 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     stop("pool object and config object required.")
   }
 
+  shinyassess_internal_initialize_storage()
+
   assessment_env$eesource = file.path(system.file("static", package = "ShinyItemBuilder"), "EE_App_Output/")
   assessment_env$jssource = file.path(system.file("static", package = "ShinyItemBuilder"), "ShinyAssessJS/")
   assessment_env$ibsource = file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
   assessment_env$pool = pool
   assessment_env$config = config
-
-
-
 
   if (!overwrite && dir.exists(assessment_env$config$WWWfolder)){
     stop(paste0("Directory '", assessment_env$config$WWWfolder, "' (configured as www folder) exist . Provide 'overwrite=T' if the content should be overwritten."))
@@ -27,10 +26,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     shiny::removeResourcePath(assessment_env$config$WWWfolder)
   }
 
-
-
-  shinyassess_internal_initialize_storage()
-
+  if (!dir.exists(ret$Datafolder))
+    dir.create(ret$Datafolder)
 
   extended_pool <- shinyassess_internal_get_pool_from_folder(path = assessment_env$ibsource, pool)
 
