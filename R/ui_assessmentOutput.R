@@ -10,6 +10,12 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     stop("Directory 'www' exist. Provide 'overwrite=T' if the content should be overwritten.")
   }
 
+  if (!dir.exists("www")){
+    dir.create("www")
+  }
+  addResourcePath("www", "./")
+
+
   shinyassess_internal_initialize_storage()
 
   assessment_env$eesource = file.path(system.file("static", package = "ShinyItemBuilder"), "EE_App_Output/")
@@ -23,8 +29,6 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
   shinyassess_internal_prepare_www_folder(extended_pool)
   shinyassess_internal_prepare_execution_environment(extended_pool)
-
-  addResourcePath("www", "./")
 
   fluidPage(
 
