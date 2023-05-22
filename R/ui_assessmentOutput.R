@@ -22,9 +22,9 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     dir.create(assessment_env$config$WWWfolder)
   }
 
-  #if (!is.na(match(assessment_env$config$WWWfolder,shiny::resourcePaths()))){
-  #  shiny::removeResourcePath(assessment_env$config$WWWfolder)
-  #}
+  if (!is.na(match(assessment_env$config$WWWfolder,shiny::resourcePaths()))){
+    shiny::removeResourcePath(assessment_env$config$WWWfolder)
+  }
 
   if (!dir.exists(assessment_env$config$Datafolder))
     dir.create(assessment_env$config$Datafolder)
@@ -34,7 +34,7 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   shinyassess_internal_prepare_www_folder(extended_pool,config)
   shinyassess_internal_prepare_execution_environment(extended_pool,config)
 
-  #shiny::addResourcePath(assessment_env$config$WWWfolder, "./")
+  shiny::addResourcePath(assessment_env$config$WWWfolder, "./ee/")
 
   shiny::fluidPage(
 
