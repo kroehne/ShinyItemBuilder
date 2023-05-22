@@ -26,6 +26,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   shinyassess_internal_prepare_www_folder(extended_pool)
   shinyassess_internal_prepare_execution_environment(extended_pool)
 
+  addResourcePath("www", "./")
+
   fluidPage(
 
     tags$head(HTML(paste0("<title>", assessment_env$config$WindowTitle , "</title>"))),
@@ -59,8 +61,6 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
 
   )
-
-  addResourcePath("www", "./")
 
 }
 
