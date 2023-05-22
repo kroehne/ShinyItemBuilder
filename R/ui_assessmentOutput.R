@@ -6,31 +6,38 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     stop("pool object and config object required.")
   }
 
-  if (!overwrite && dir.exists("www")){
-    stop("Directory 'www' exist. Provide 'overwrite=T' if the content should be overwritten.")
-  }
-
-  if (!dir.exists("www")){
-    dir.create("www")
-  }
-
-  shiny::removeResourcePath("www")
-
-  shinyassess_internal_initialize_storage()
-
   assessment_env$eesource = file.path(system.file("static", package = "ShinyItemBuilder"), "EE_App_Output/")
   assessment_env$jssource = file.path(system.file("static", package = "ShinyItemBuilder"), "ShinyAssessJS/")
   assessment_env$ibsource = file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
-
   assessment_env$pool = pool
   assessment_env$config = config
+
+
+
+
+  if (!overwrite && dir.exists(assessment_env$config$WWWfolder)){
+    stop(paste0("Directory '", assessment_env$config$WWWfolder, "' (configured as www folder) exist . Provide 'overwrite=T' if the content should be overwritten."))
+  }
+
+  if (!dir.exists(assessment_env$config$WWWfolder)){
+    dir.create(assessment_env$config$WWWfolder)
+  }
+
+  if (!is.na(match(assessment_env$config$WWWfolder,shiny::resourcePaths()))){
+    shiny::removeResourcePath(assessment_env$config$WWWfolder)
+  }
+
+
+
+  shinyassess_internal_initialize_storage()
+
 
   extended_pool <- shinyassess_internal_get_pool_from_folder(path = assessment_env$ibsource, pool)
 
   shinyassess_internal_prepare_www_folder(extended_pool)
   shinyassess_internal_prepare_execution_environment(extended_pool)
 
-  shiny::addResourcePath("www", "./")
+  shiny::addResourcePath(assessment_env$config$WWWfolder, "./")
 
   shiny::fluidPage(
 
@@ -77,20 +84,20 @@ shinyassess_internal_prepare_execution_environment <- function (pool){
 
   #fn <- list.files(assessment_env$jssource)
   #for (f in fn){
-  #  file.copy(file.path(assessment_env$jssource,f), "www", recursive=TRUE)
+  #  file.copy(file.path(assessment_env$jssource,f), assessment_env$config$WWWfolder, recursive=TRUE)
   #}
 
   fn <- list.files(assessment_env$eesource)
   for (f in fn){
-    file.copy(file.path(assessment_env$eesource,f), "www", recursive=TRUE)
+    file.copy(file.path(assessment_env$eesource,f), assessment_env$config$WWWfolder, recursive=TRUE)
   }
 
   if (assessment_env$config$verbose){
     cat(paste0("Write configuration file.\n"))
   }
 
-  if(!dir.exists(file.path("www","assessments"))){
-    dir.create(file.path("www","assessments"))
+  if(!dir.exists(file.path(assessment_env$config$WWWfolder,"assessments"))){
+    dir.create(file.path(assessment_env$config$WWWfolder,"assessments"))
   }
 
   fileConn<-file("www/assessments/config.json")
@@ -104,37 +111,37 @@ shinyassess_internal_prepare_execution_environment <- function (pool){
 
 shinyassess_internal_prepare_www_folder <- function(pool){
 
-  if(!dir.exists("www")){
-    dir.create("www")
+  if(!dir.exists(assessment_env$config$WWWfolder)){
+    dir.create(assessment_env$config$WWWfolder)
   }
-  if(!dir.exists(file.path("www","items"))){
-    dir.create(file.path("www","items"))
+  if(!dir.exists(file.path(assessment_env$config$WWWfolder,"items"))){
+    dir.create(file.path(assessment_env$config$WWWfolder,"items"))
   }
 
   for (i in 1:dim(pool)[1]){
-    if(!dir.exists(file.path("www","items",pool[i,"itemName"]))){
-      dir.create(file.path("www","items",pool[i,"itemName"]))
+    if(!dir.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]))){
+      dir.create(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]))
     }
 
-    unzip(pool[i,"FullPath"],exdir=file.path("www","items",pool[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
+    unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
 
     fn <- unzip(pool[i,"FullPath"],list=T)
 
     if (length(fn[startsWith(fn$Name, "resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path("www","items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
+      unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
     }
 
     if (length(fn[startsWith(fn$Name, "external-resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path("www","items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
+      unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
     }
 
-    if (!file.exists(file.path("www","items",pool[i,"itemName"],"config.json"))){
+    if (!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"config.json"))){
       cat(paste0("File 'config.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
-    } else if (!file.exists(file.path("www","items",pool[i,"itemName"],"internal.json"))){
+    } else if (!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"internal.json"))){
       cat(paste0("File 'internal.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
-    } else if(!file.exists(file.path("www","items",pool[i,"itemName"],"stimulus.json"))){
+    } else if(!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"stimulus.json"))){
       cat(paste0("File 'stimulus.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
     }
