@@ -97,7 +97,7 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
     dir.create(file.path(config$WWWfolder,"assessments"))
   }
 
-  fileConn<-file("www/assessments/config.json")
+  fileConn<-file(paste0(config$WWWfolder,"/assessments/config.json"))
   writeLines(paste0('{"tasks": [', paste0('{"item": "', pool$itemName, '", "task":"', pool$Task, '", "scope":"' , pool$Scope, '"}', collapse = ",") , '] }'), fileConn)
   close(fileConn)
 
