@@ -34,8 +34,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
   extended_pool <- shinyassess_internal_get_pool_from_folder(path = assessment_env$ibsource, pool)
 
-  shinyassess_internal_prepare_www_folder(extended_pool)
-  shinyassess_internal_prepare_execution_environment(extended_pool)
+  shinyassess_internal_prepare_www_folder(extended_pool,config)
+  shinyassess_internal_prepare_execution_environment(extended_pool,config)
 
   shiny::addResourcePath(assessment_env$config$WWWfolder, "./")
 
@@ -76,77 +76,77 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 }
 
 
-shinyassess_internal_prepare_execution_environment <- function (pool){
+shinyassess_internal_prepare_execution_environment <- function (pool,config){
 
-  if (assessment_env$config$verbose){
+  if (config$verbose){
     cat(paste0("Start preparing execution environment.\n"))
   }
 
   #fn <- list.files(assessment_env$jssource)
   #for (f in fn){
-  #  file.copy(file.path(assessment_env$jssource,f), assessment_env$config$WWWfolder, recursive=TRUE)
+  #  file.copy(file.path(assessment_env$jssource,f), config$WWWfolder, recursive=TRUE)
   #}
 
   fn <- list.files(assessment_env$eesource)
   for (f in fn){
-    file.copy(file.path(assessment_env$eesource,f), assessment_env$config$WWWfolder, recursive=TRUE)
+    file.copy(file.path(assessment_env$eesource,f), config$WWWfolder, recursive=TRUE)
   }
 
-  if (assessment_env$config$verbose){
+  if (config$verbose){
     cat(paste0("Write configuration file.\n"))
   }
 
-  if(!dir.exists(file.path(assessment_env$config$WWWfolder,"assessments"))){
-    dir.create(file.path(assessment_env$config$WWWfolder,"assessments"))
+  if(!dir.exists(file.path(config$WWWfolder,"assessments"))){
+    dir.create(file.path(config$WWWfolder,"assessments"))
   }
 
   fileConn<-file("www/assessments/config.json")
   writeLines(paste0('{"tasks": [', paste0('{"item": "', pool$itemName, '", "task":"', pool$Task, '", "scope":"' , pool$Scope, '"}', collapse = ",") , '] }'), fileConn)
   close(fileConn)
 
-  if (assessment_env$config$verbose){
+  if (config$verbose){
     cat(paste0("Preparation completed.\n"))
   }
 }
 
-shinyassess_internal_prepare_www_folder <- function(pool){
+shinyassess_internal_prepare_www_folder <- function(pool,config){
 
-  if(!dir.exists(assessment_env$config$WWWfolder)){
-    dir.create(assessment_env$config$WWWfolder)
+  if(!dir.exists(config$WWWfolder)){
+    dir.create(config$WWWfolder)
   }
-  if(!dir.exists(file.path(assessment_env$config$WWWfolder,"items"))){
-    dir.create(file.path(assessment_env$config$WWWfolder,"items"))
+  if(!dir.exists(file.path(config$WWWfolder,"items"))){
+    dir.create(file.path(config$WWWfolder,"items"))
   }
 
   for (i in 1:dim(pool)[1]){
-    if(!dir.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]))){
-      dir.create(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]))
+    if(!dir.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"]))){
+      dir.create(file.path(config$WWWfolder,"items",pool[i,"itemName"]))
     }
 
-    unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
+    unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
 
     fn <- unzip(pool[i,"FullPath"],list=T)
 
     if (length(fn[startsWith(fn$Name, "resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
+      unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
     }
 
     if (length(fn[startsWith(fn$Name, "external-resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
+      unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
     }
 
-    if (!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"config.json"))){
+    if (!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"config.json"))){
       cat(paste0("File 'config.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
-    } else if (!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"internal.json"))){
+    } else if (!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"internal.json"))){
       cat(paste0("File 'internal.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
-    } else if(!file.exists(file.path(assessment_env$config$WWWfolder,"items",pool[i,"itemName"],"stimulus.json"))){
+    } else if(!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"stimulus.json"))){
       cat(paste0("File 'stimulus.json' not found in item '", pool[i,"Project"], "' not found.\n"))
       stop()
     }
 
-    if (assessment_env$config$verbose){
+    if (config$verbose){
       cat(paste0("Prepared CBA ItemBuilder Project File '",pool[i,"Project"], "'.\n"))
     }
 
