@@ -34,7 +34,7 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   shinyassess_internal_prepare_www_folder(extended_pool,config)
   shinyassess_internal_prepare_execution_environment(extended_pool,config)
 
-  shiny::addResourcePath(paste0(getwd(),"/",assessment_config$WWWfolder), prefix = "ee")
+  shiny::addResourcePath(paste0(getwd(),"/",assessment_env$config$WWWfolder), prefix = "ee")
 
   shiny::fluidPage(
 
