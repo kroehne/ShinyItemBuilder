@@ -1,0 +1,15 @@
+{
+  "runtimeCompatibilityVersion" : "9.9.0",
+  "itemName" : "SinglePageItems_05END",
+  "itemWidth" : 1024,
+  "itemHeight" : 768,
+  "tasks" : [ "task0" ],
+  "resources" : [ {
+    "pathInZip" : "resources\\ExampleImage.png",
+    "size" : 655427,
+    "type" : "image"
+  } ],
+  "externalResources" : [ ],
+  "dependencies" : [ ],
+  "variables" : [ ]
+}

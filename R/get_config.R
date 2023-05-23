@@ -12,6 +12,7 @@
 #' @param scaling Scaling of content (should be one of 'up', 'down', 'updown' or 'none')
 #' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
+#' @param maintenanceQuery Query string parameter name to access data online.
 #' @return config object (list)
 #' @export
 #' @examples
@@ -26,7 +27,8 @@ getConfig <- function(WindowTitle="MyAssessment",
                       posV = "center",
                       scaling="updown",
                       sessiontype = "sessionstorage",
-                      maintenancePassword = ""
+                      maintenancePassword = "",
+                      maintenanceQuery = "maintenance"
                       ){
 
   ret <- list()
@@ -66,7 +68,6 @@ getConfig <- function(WindowTitle="MyAssessment",
   } else {
     ret$sessiontype <- sessiontype
   }
-
 
   # end function
 
@@ -128,6 +129,35 @@ getConfig <- function(WindowTitle="MyAssessment",
       current_item
     }
 
+
+
+  ret$queryStringParameterName = "token"
+
+  ret$login=function(session){
+    showModal(modalDialog(
+    tags$h2('Please Enter a Valid Token and Press "OK".'),
+    textInput('queryStringParameter', ''),
+    footer=tagList(
+      actionButton('submitLoginOK', 'OK')
+    )
+    ))
+  }
+
+  ret$custom_list_accounts <- sprintf("%03d", 0:99)
+
+  ret$validate=function(token_or_login=NULL, password=NULL){
+    if (is.null(token_or_login)||length(token_or_login)==0)
+    {
+      return (FALSE)
+    }
+    else {
+      if (!is.na(match(token_or_login,ret$custom_list_accounts))){
+        return (TRUE)
+      }
+    }
+    FALSE
+  }
+
   # menu function
 
   ret$menu = function(session,unvalidated=TRUE){
@@ -136,6 +166,7 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   # maintenance password
 
+  ret$queryStringAdminParameterName = maintenanceQuery
   ret$maintenancePassword = maintenancePassword
 
   ret

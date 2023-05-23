@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<body>
+<h2>JavaScript API Example</h2>
+
+<button onclick='updateStateFunction()'>Update state</button>
+<div id='countDisplay'>--</div>
+<div id='timeDisplay'>--</div>
+<div id='receivedDisplay'>--</div>
+<button onclick='traceStatusMessage()'>Post trace</button>
+<button onclick='setVariable()'>Post variable->3</button>
+<button onclick='getVariable()'>Post get variable</button>
+<button onclick='sendEvent()'>Post FSM event</button>
+
+
+<script type="text/javascript">
+
+// ----------------- example specific stuff -------------------------------------------
+
+let clickCount = 0;
+let receivedFromRuntime = '';
+
+/**
+ * Example implementation of the getState method used by the 
+ * CBA runtime to obtain the current internal state of our code
+ * when our hosting ExternalPageFrame component is about to become invisible.
+ */
+function getState() {
+    return { 
+        clickCount
+    }
+}
+
+/**
+ * Example implementation of the setState method used by the 
+ * CBA runtime to restore the current internal state of our code
+ * when our hosting ExternalPageFrame component becomes visible again.
+ */
+ function setState(state) {
+    clickCount = state.clickCount;
+    updateDisplay();
+}
+
+/**
+ * Helper method specific to our example: update the display.
+ */
+function updateDisplay() 
+{
+	try
+	{
+	    const now = new Date();
+	    const currentTime = "" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+		
+		document.getElementById("countDisplay").innerHTML = "Button click count is: " + clickCount;
+		document.getElementById("timeDisplay").innerHTML = currentTime;
+		document.getElementById("receivedDisplay").innerHTML = receivedFromRuntime;
+	} 
+	catch(e) {
+		console.debug(e); 
+	}
+}
+
+/**
+ * Helper method specific to our example: increment our click counter and update the display.
+ */
+ function updateStateFunction()
+{
+	try
+	{
+		clickCount += 1;
+		updateDisplay();
+	} 
+	catch(e) {
+		console.debug(e); 
+	}
+}
+
+
+/**
+ * An example callback to process getVariable result messages.
+ */
+function acceptGetVariableResult(name, type, value, callId) {
+	receivedFromRuntime = "Received variable info: " + name + "[" + type + "]=" + value + " (callId: " + callId + ")";
+	updateDisplay();
+}
+
+/**
+ * An example callback to process messages sent by the state machine operator callExternalPageFrame.
+ */
+function acceptOperatorMessage(data) {	
+	receivedFromRuntime = data.join();
+	updateDisplay();
+}
+
+/**
+ * An example callback to declare our variables.
+ */
+function declareVariables() {
+	return [
+		{ 
+			name: 'VarA',
+	  		type: 'Integer',
+	  		defaultValue: 0,
+	  		namedValues: []
+	  	}
+	];
+}
+
+
+/**
+ * An example for calling the postStatemachineEvent method. 
+ */
+function sendEvent()
+{
+	postStatemachineEvent('showDialogEvent', 0)
+}
+
+
+/**
+ * An example for calling the postSetVariable method. 
+ */
+function setVariable()
+{
+	postSetVariable('VarA', 3, 1)
+}
+
+/**
+ * An example for calling the postSetVariable method. 
+ */
+function getVariable()
+{
+	postGetVariable('VarA', '4711')
+}
+
+
+/**
+ * An example for calling the postTraceMessage method. 
+ */
+function traceStatusMessage()
+{
+    const now = new Date();
+    const currentTimeMessage = 'The current time is ' + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+
+	postTraceMessage(
+		{ 
+			time: currentTimeMessage,
+			url: window.location.href,
+			clickCount: clickCount
+		},
+		'Type X',
+        0
+	);
+}
+
+// start listening to post message events and process them with our example callbacks
+startListeningToRuntimePostMessageEvents(acceptGetVariableResult, acceptOperatorMessage);
+startListeningToVariableDeclarationRequests(declareVariables);
+
+// ------------------ methods for generic use ----------------------------------------------------------
+
+/**
+ * Trigger a state machine event in the CBA runtime. 
+ * 
+ * The traceCount parameter must be an integer value greater or equal 0 and
+ * specifies wether the given the event will count as one or more user interactions.   
+ */
+ function postStatemachineEvent(eventName, traceCount)
+{
+	postMessageWithPaths({
+        microfinEvent: eventName,
+        traceCount: traceCount
+	});
+}
+
+/**
+ * Inject a message into the trace log of the CBA runtime. 
+ * 
+ * The traceType parameter is optional. It determines the trace type attribute 
+ * of the injected trace message.
+ * 
+ * The traceCount parameter must be an integer value greater or equal 0 and
+ * specifies wether the given the event will count as one or more user interactions.   
+ */
+ function postTraceMessage(traceMessage, traceType, traceCount)
+{
+	postMessageWithPaths({
+    	traceMessage: traceMessage,
+        traceType: traceType,
+        traceCount: traceCount
+	});
+}
+
+/**
+ * Get the value of a variable in the CBA runtime. 
+ * 
+ * The callId parameter should be used to match the call to the 
+ * result coming in via the getVariableResultCallback (see startListeningToPostMessageEvents method).
+ */
+ function postGetVariable(variableName, callId)
+{
+	postMessageWithPaths({
+    	getVariable: {
+    	  variableName: variableName,
+    	  callId: callId,
+    	},
+        traceCount: 0
+
+	});
+}
+
+/**
+ * Set the value of a variable in the CBA runtime. 
+ * 
+ * The traceCount parameter must be an integer value greater or equal 0 and
+ * specifies wether the given the event will count as one or more user interactions.   
+ */
+function postSetVariable(variableName, variableValue, traceCount)
+{
+	postMessageWithPaths({
+    	setVariable: {
+    	  variableName: variableName,
+    	  newValue: variableValue,
+    	},
+        traceCount: traceCount
+	});
+}
+
+/**
+ * Send the given payload as an event to the CBA runtime 
+ * and implicitly extend it with the paths of our hosting ExternalPageFrame component.
+ * 
+ * This might might not work if the ExternalPageFrame content comes
+ * from an external server. 
+ * 
+ */
+function postMessageWithPaths(payload)
+{
+	payload.indexPath = getIndexPath();
+	payload.userDefIdPath = getUserDefIdPath();
+	postMessageWithErrorLog(payload);
+}
+
+/**
+ * Send an event to the CBA runtime.
+ */
+function postMessageWithErrorLog(payload)
+{
+	try
+	{
+		// TODO: adapt the target origin  
+		window.parent.postMessage(JSON.stringify(payload), '*');	
+	} 
+	catch(e) {
+		console.debug(e); 
+	}
+}
+
+/**
+ * Obtain the path of user defined IDs leading to our hosting ExternalPageFrame component.
+ * 
+ * You might use this as value for the userDefIdPath attribute in the message payload structure
+ * when sending events to the CBA runtime.
+ * 
+ * This might might not work if the ExternalPageFrame content comes
+ * from an external server. 
+ */
+ function getUserDefIdPath()
+{
+	return getQueryVariable('userDefIdPath');
+}
+
+/**
+ * Obtain the index path of our hosting ExternalPageFrame component.
+ * 
+ * You might use this as value for the userDefIdPath attribute in the message payload structure
+ * when sending events to the CBA runtime.
+ * 
+ * This might might not work if the ExternalPageFrame content comes
+ * from an external server. 
+ */
+function getIndexPath() 
+{
+	return getQueryVariable('indexPath');
+}
+
+/**
+ * Obtain the value of a query variable from the calling URL. 
+ * 
+ * @variable: The name of the variable in the URL query.
+ */
+function getQueryVariable(variable)
+{
+	const parsedUrl = new URL(window.location.href);
+	return parsedUrl.searchParams.get(variable);
+}
+
+/**
+ * Start listening on post message events coming in from the CBA runtime.
+ * 
+ * The getVariableResultCallback parameter should be a method that accepts four parameters: 
+ *   - name: the name of the variable
+ *   - type: the data type of the variable
+ *   - value: the value of the variable
+ *   - callId: the callId of the getVariable call that triggered this result message.
+ * 
+ * The operatorMessageCallback parameter should be a method that accepts an array.
+ * 
+ */
+ function startListeningToRuntimePostMessageEvents(getVariableResultCallback, operatorMessageCallback) {
+    window.addEventListener(
+	"message", 
+	(event) => {
+		const payload = JSON.parse(event.data);
+		if (payload !== null && typeof(payload) === 'object' && payload.callId !== undefined) {
+            if (payload.result !== null && typeof(payload.result) === 'object') {
+			    const { name, type, value } = payload.result;			
+			    getVariableResultCallback(name, type, value, payload.callId);
+            }   
+		} else if (Array.isArray(payload)) { 
+			operatorMessageCallback(payload);
+		}
+	}, 
+	false);
+ }
+
+ 
+/**
+ * Start listening on post message events coming in from the item builder during time design time.
+ * 
+ * The declareVariableCallback parameter should be a method that expects no parameter and returns 
+ * an array of variable declaration objects with these attributes:
+ *   - name: the name of the variable
+ *   - type: the type of the variable, one of 'Integer', 'Number', 'String', 'Boolean'
+ *   - defaultValue: the initial value of the variable
+ *   - namedValues: an array of objects with a name and a value attribute. 
+ */
+ function startListeningToVariableDeclarationRequests(declareVariableCallback) {
+    // listener for providing initial variable data signal.
+    window.addEventListener(
+    "message",
+    (event) => {    
+        const { callId } = JSON.parse(event.data);
+        if(callId !== undefined && callId.includes("importVariables")) {
+            const variables = declareVariables();
+            const pass_data = {
+            initialVariables: variables,
+            callId
+            }
+            try {
+                window.parent.postMessage(JSON.stringify(pass_data), '*');
+            } catch (error) {
+                console.log("error on external listener - ", error);
+            }
+        }
+    },
+    false);
+ }
+ 
+
+</script>
+</html>

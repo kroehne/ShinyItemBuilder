@@ -22,14 +22,51 @@ renderAssessment <- function(input, output, session){
 
   output$frame <- renderUI({
 
-    if (assessment_env$config$verbose)
-      print(paste0("Info: New Window."))
+    query <- shiny::parseQueryString(session$clientData$url_search)
+    if (!base::is.null(query[[assessment_env$config$queryStringAdminParameterName]])) {
+      value <- base_extract_parameter(query, assessment_env$config$queryStringAdminParameterName)
+      if (length(value)!=0 && assessment_env$config$maintenancePassword != "" && assessment_env$config$maintenancePassword == value)
+        assessment_env$config$menu(session, FALSE)
+      else
+        assessment_env$config$menu(session, TRUE)
+    }
 
-    tags$iframe(id="myiframe", class="myiframe", style="width: 100%; height: 100vh; transform: scale(1); display: inline; transform-origin: 0px 0px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: none; margin: 0; padding: 0; overflow: hidden",
-                src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
-                           "&posH=",assessment_env$config$posH,
-                           "&posV=",assessment_env$config$posV,
-                           "&scaling=",assessment_env$config$scaling))
+    if (assessment_env$config$sessiontype=="provided"){
+      provided_session <- ""
+      if (!base::is.null(query[[assessment_env$config$queryStringParameterName]])) {
+        provided_session <- base_extract_parameter(query, assessment_env$config$queryStringParameterName)
+        if (assessment_env$config$verbose)
+          print(paste0("Info: New Window, " , assessment_env$config$queryStringParameterName, "=", provided_session))
+      }
+      if (!assessment_env$config$validate(provided_session)){
+        assessment_env$config$login()
+      } else {
+
+        tags$iframe(id="myiframe", class="myiframe", style="width: 100%; height: 100vh; transform: scale(1); display: inline; transform-origin: 0px 0px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: none; margin: 0; padding: 0; overflow: hidden",
+                    src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
+                               "&posH=",assessment_env$config$posH,
+                               "&posV=",assessment_env$config$posV,
+                               "&scaling=",assessment_env$config$scaling,
+                               "&session=",provided_session))
+
+      }
+
+
+    } else {
+
+      if (assessment_env$config$verbose)
+        print(paste0("Info: New Window."))
+
+      tags$iframe(id="myiframe", class="myiframe", style="width: 100%; height: 100vh; transform: scale(1); display: inline; transform-origin: 0px 0px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: none; margin: 0; padding: 0; overflow: hidden",
+                  src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
+                             "&posH=",assessment_env$config$posH,
+                             "&posV=",assessment_env$config$posV,
+                             "&scaling=",assessment_env$config$scaling))
+
+    }
+
+
+
 
   })
 
@@ -42,7 +79,6 @@ renderAssessment <- function(input, output, session){
     if (!is.null(input$downloadPassword) && nzchar(input$downloadPassword) &&
         input$downloadPassword == assessment_env$config$maintenancePassword &&
         assessment_env$config$maintenancePassword != "") {
-
       assessment_env$config$menu(session, FALSE)
     } else {
       removeModal()
@@ -64,6 +100,11 @@ renderAssessment <- function(input, output, session){
     do.call(file.remove, list(list.files(paste0(assessment_env$config$Datafolder,"/"), full.names = TRUE)))
     runtime.data <<- list()
     session$sendCustomMessage("shinyassess_restart","new")
+    removeModal()
+  })
+
+  observeEvent(input$submitLoginOK, {
+    session$sendCustomMessage("shinyassess_redirect", paste0(session$clientData$url,"?", assessment_env$config$queryStringParameterName,"=",input$queryStringParameter))
     removeModal()
   })
 
@@ -165,3 +206,10 @@ renderAssessment <- function(input, output, session){
   })
 
 }
+
+
+base_extract_parameter <- function(query_list, parameter) {
+  regmatches(query_list[[parameter]], regexpr(pattern = "[^*/]+", text = query_list[[parameter]]))
+}
+
+### Internal Functions ####
