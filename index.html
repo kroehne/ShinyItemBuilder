@@ -55,15 +55,15 @@
 <div class="page-header"><h1 id="shinyitembuilder--use-shiny-with-cba-itembuilder-items">ShinyItemBuilder – Use Shiny with CBA ItemBuilder Items<a class="anchor" aria-label="anchor" href="#shinyitembuilder--use-shiny-with-cba-itembuilder-items"></a>
 </h1></div>
 <p>The R project <code>ShinyItemBuilder</code> can be used to implement computer-based assessments using the <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> and <a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a>.</p>
-<p>The <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> is an authoring tool for designing and implementing simple and complex computer-based items that can be used without programming knowledge to create assessment content for computer-based testing.</p>
-<p><a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a> is a technology to create web applications using R. Packages and functions from R can be executed on the server side. R/Shiny requires special Shiny servers, such as an account on <a href="https://shinyapps.io/" class="external-link">ShinyApps.io</a> or the operation of a <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a> server.</p>
+<p>The <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> is an authoring tool for designing and implementing simple and complex items for computer-based assessments (CBA) that can be used without a particular knowledge in a specific programming language (such as, for instance, JavaScript).</p>
+<p><a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a> is a technology to create web applications using R. Packages and functions from R can be executed on the server side. R/Shiny requires special Shiny servers, such as an account on <a href="https://shinyapps.io/" class="external-link">ShinyApps.io</a> or a prepared server using, for instance, <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a> or <a href="https://posit.co/download/shiny-server/" class="external-link">Shiny Server</a>.</p>
 <p>Demo:</p>
 <ul>
-<li>Install the packages <code>shiny</code>, <code>remotes</code> and <code>ShinyItemBuilder</code>:</li>
+<li>Install the packages <code>shiny</code>, <code>remotes</code> and <code>ShinyItemBuilder</code> by executing the following lines in R:</li>
 </ul>
-<pre><code><span><span class="co"># install.packages("shiny")</span></span>
-<span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="co"># remotes::install_github("kroehne/ShinyItemBuilder")</span></span></code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kroehne/ShinyItemBuilder"</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>Run the following code in R</li>
 </ul>
@@ -86,7 +86,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span> </span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ShinyItemBuilder</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">item_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getPool.html">getPool</a></span><span class="op">(</span>path<span class="op">=</span><span class="st">"demo01/"</span><span class="op">)</span></span>
+<span><span class="va">item_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getPool.html">getPool</a></span><span class="op">(</span>path<span class="op">=</span><span class="st">"items/"</span><span class="op">)</span></span>
 <span><span class="va">assessment_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getConfig.html">getConfig</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="fu"><a href="reference/assessmentOutput.html">assessmentOutput</a></span><span class="op">(</span>pool <span class="op">=</span> <span class="va">item_pool</span>,</span>
@@ -95,6 +95,7 @@
 <span>         <span class="va">renderAssessment</span><span class="op">)</span></span>
 <span> </span></code></pre>
 <p>This software is currently a proof-of-concept.</p>
+<p>Find more information about the <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> at <a href="https://cba.itembuilder.de" class="external-link">cba.itembuilder.de</a>.</p>
 </div>
 
   </main><aside class="col-md-3"><div class="license">
