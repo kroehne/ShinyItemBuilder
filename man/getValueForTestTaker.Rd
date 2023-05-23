@@ -19,5 +19,10 @@ getValueForTestTaker(session, name, default = NULL, store = T)
 The value (if present) for the current test-taker (or the default value)
 }
 \description{
-Get (i.e., load / retrieve) a value for a particular test-taker
+`getValueForTestTaker` can be used in a custom navigation
+             function to load data for the current session.
+}
+\examples{
+# default
+value <- getValueForTestTaker(session, "current-item")
 }

@@ -11,4 +11,7 @@ shinyApp(assessmentOutput(pool = item_pool,
                           overwrite=T),
          renderAssessment)
 
+print(getwd())
 
+unlink("_mydata", recursive = T, force = T)
+unlink("_mywww", recursive = T, force = T)

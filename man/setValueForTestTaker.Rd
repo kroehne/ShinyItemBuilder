@@ -13,6 +13,14 @@ setValueForTestTaker(session, name, value)
 
 \item{value}{Value to store.}
 }
+\value{
+The value (if present) for the current test-taker (or the default value)
+}
 \description{
-Set (i.e., save, store) a value for a particular test-taker
+`getValueForTestTaker` can be used in a custom navigation
+             function to store data for the current session.
+}
+\examples{
+# default
+setValueForTestTaker(session, "current-item",1)
 }

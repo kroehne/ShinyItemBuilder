@@ -1,11 +1,20 @@
 # server_renderAssessment.R
 
+#' @title Render assessment content
+#' @description Function to be passed as argument to 'shinyApp(server=...)'
+#' @param input Input.
+#' @param output Output
+#' @param session Session.
+#' @return code to be used as argument to the function 'shinyApp(server=...)'
 #' @import shiny
 #' @importFrom jsonlite fromJSON
 #' @importFrom jsonlite toJSON
 #' @importFrom utils zip
+#' @export
+#' @examples
+#' # default
+#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"), config = getConfig(), overwrite=T), renderAssessment)
 
-#'
 renderAssessment <- function(input, output, session){
 
   output$frame <- renderUI({

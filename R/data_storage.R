@@ -1,12 +1,17 @@
 # data_storage.R
 
-#' Get (i.e., load / retrieve) a value for a particular test-taker
-#'
+#' @title Get (i.e., load / retrieve) a value for a particular test-taker
+#' @description `getValueForTestTaker` can be used in a custom navigation
+#'              function to load data for the current session.
 #' @param session The shiny session object.
 #' @param name Name of the value.
 #' @param default Default value.
 #' @param store Should the value be stored, if the default is used?
 #' @return The value (if present) for the current test-taker (or the default value)
+#' @export
+#' @examples
+#' # default
+#' value <- getValueForTestTaker(session, "current-item")
 
 getValueForTestTaker <- function(session, name, default=NULL, store=T){
   shinyassess_internal_create_or_load_session(session)
@@ -21,11 +26,17 @@ getValueForTestTaker <- function(session, name, default=NULL, store=T){
   }
 }
 
-#' Set (i.e., save, store) a value for a particular test-taker
-#'
+#' @title Set (i.e., save, store) a value for a particular test-taker
+#' @description `getValueForTestTaker` can be used in a custom navigation
+#'              function to store data for the current session.
 #' @param session The shiny session object.
 #' @param name Name of the value.
 #' @param value Value to store.
+#' @return The value (if present) for the current test-taker (or the default value)
+#' @export
+#' @examples
+#' # default
+#' setValueForTestTaker(session, "current-item",1)
 
 setValueForTestTaker <- function(session, name, value){
   runtime.data[[session$userData$cbasession]][[name]] <<- value

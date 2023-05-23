@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_config.R
 \name{getConfig}
 \alias{getConfig}
-\title{Get configuration object (currently a list) with examples}
+\title{Get configuration object}
 \usage{
 getConfig(
   WindowTitle = "MyAssessment",
@@ -36,8 +36,15 @@ getConfig(
 \item{maintenancePassword}{Password to access data online (no access possible if not defined).}
 }
 \value{
-The value (if present) for the current test-taker (or the default value)
+config object (list)
 }
 \description{
-Get configuration object (currently a list) with examples
+`getConfig` returns a config object required to use ShinyItemBuilder.
+}
+\details{
+The returned object is a list that contains the different configurations  for an assessment using ShinyItemBuilder.
+}
+\examples{
+# default
+conf <- getConfig()
 }

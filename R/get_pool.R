@@ -1,13 +1,12 @@
 ## get_pool.R
 
-#' Get example item pool for demonstration purposes
-#'
-#' tbd
-#'
-#' @return A object (currently: data.frame) that stores the information about
-#' the item pool.
+#' @title Get example item pool
+#' @description Get example item pool for demonstration purposes using items included in the ShinyItemBuilder package for demonstration purposes
+#' @param name Name of the example item pool (currently: "demo01").
+#' @return config object (list)
 #' @export
 #' @examples
+#' # default
 #' pool <- getDemoPool("demo01")
 
 getDemoPool <- function(name="demo01"){
@@ -24,15 +23,16 @@ getDemoPool <- function(name="demo01"){
   s
 }
 
-
-#' Get item pool for an assessment with ShinyItemBuilder
-#'
-#' tbd
-#'
-#' @return A object (currently: data.frame) that stores the information about
-#' the item pool.
+#' @title Get item pool
+#' @description Get item pool for an assessment with ShinyItemBuilder
+#' @param pathPath to a folder with CBA ItemBuilder project files.
+#' @param files List of files (i.e., path and file names) of CBA ItemBuilder project files.
+#' @param tasks List of tasks (need to have the same length as files).
+#' @param scope Scope (either single string or list of the same length as files / tasks).
+#' @return config object (list)
 #' @export
 #' @examples
+#' # default
 #' pool <- getPool(path="../")
 
 
@@ -66,6 +66,7 @@ getPool <- function(path=NULL,files=NULL,tasks=NULL,scope=NULL){
 #getpool("C:/work/gitlab/testentwicklung-mathematik/Umsetzung/MSK_Items/Batch_1/msk_b1_a/")
 
 
+### Internal Functions ####
 
 
 shinyassess_internal_get_pool_from_folder <- function(path, pool=NULL){

@@ -1,5 +1,17 @@
 # ui_assessmentOutput.R
 
+#' @title Create assessment output
+#' @description Function to be passed as argument to 'shinyApp(ui=...)'
+#' @param pool Pool
+#' @param config Config
+#' @param overwrite T/F
+#' @return code to be used as argument to the function 'shinyApp(ui=...)'
+#' @import shiny
+#' @export
+#' @examples
+#' # default
+#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"), config = getConfig(), overwrite=T), renderAssessment)
+
 assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
   if (is.null(pool) || is.null(config)){
@@ -71,6 +83,8 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
   )
 
 }
+
+### Internal Functions ####
 
 
 shinyassess_internal_prepare_execution_environment <- function (pool,config){

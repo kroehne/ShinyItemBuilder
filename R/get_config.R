@@ -1,14 +1,8 @@
 # get_config.R
 
-#'  Get configuration object
-#'
-#' @description
-#' `getConfig` returns a config object required to use ShinyItemBuilder.
-#'
-#' @details
-#' The returned object is a list that contains the different configurations
-#' for an assessment using ShinyItemBuilder.
-#'
+#' @title Get configuration object
+#' @description `getConfig` returns a config object required to use ShinyItemBuilder.
+#' @details The returned object is a list that contains the different configurations  for an assessment using ShinyItemBuilder.
 #' @param WindowTitle Title of the html browser window.
 #' @param Verbose Should the package provide log information to the console?
 #' @param WWWfolder Folder to store html/javascript files required to run the assessment
@@ -19,6 +13,10 @@
 #' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
 #' @return config object (list)
+#' @export
+#' @examples
+#' # default
+#' conf <- getConfig()
 
 getConfig <- function(WindowTitle="MyAssessment",
                       Verbose=TRUE,
@@ -144,11 +142,13 @@ getConfig <- function(WindowTitle="MyAssessment",
 
 }
 
+### Internal Functions ####
+
 dataModalDownloadDialog <- function(session, unvalidated = TRUE) {
   if (unvalidated){
     modalDialog(
-      title = paste0(assessment_env$config$WindowTitle,": Maintanance"),
-      passwordInput("downloadPassword", "Password", placeholder = 'Enter the *Maintanance Password*.'),
+      title = paste0(assessment_env$config$WindowTitle,": Maintenance"),
+      passwordInput("downloadPassword", "Password", placeholder = 'Enter the *Maintenance Password*.'),
       footer = tagList(
         actionButton("validatePassword","OK"),
         modalButton("Cancel")
@@ -157,7 +157,7 @@ dataModalDownloadDialog <- function(session, unvalidated = TRUE) {
   } else {
     nfiles <- length(list.files("data/"))
     modalDialog(
-      title = paste0(assessment_env$config$WindowTitle,": Maintanance"),
+      title = paste0(assessment_env$config$WindowTitle,": Maintenance"),
       p(paste0("Found ", nfiles, " data file(s).")),
       downloadButton("downloadData", "Download all data"),
       actionButton("deleteData","Delete all data"),
