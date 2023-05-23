@@ -1,5 +1,73 @@
 ## get_pool.R
 
+#' Get example item pool for demonstration purposes
+#'
+#' tbd
+#'
+#' @return A object (currently: data.frame) that stores the information about
+#' the item pool.
+#' @export
+#' @examples
+#' pool <- getDemoPool("demo01")
+
+getDemoPool <- function(name="demo01"){
+
+  f <- file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
+  s <- NULL
+
+  if (name=="demo01"){
+    s <- shinyassess_internal_get_pool_from_folder(path = file.path(f,name))
+  } else {
+    stop(paste0("A demo with the name '",name,"' is not available."))
+  }
+
+  s
+}
+
+
+#' Get item pool for an assessment with ShinyItemBuilder
+#'
+#' tbd
+#'
+#' @return A object (currently: data.frame) that stores the information about
+#' the item pool.
+#' @export
+#' @examples
+#' pool <- getPool(path="../")
+
+
+getPool <- function(path=NULL,files=NULL,tasks=NULL,scope=NULL){
+  if (is.null(path) && is.null(files)){
+    stop("Path to a folder with CBA ItemBuilder project files or a vector of files is required.")
+  }
+  if (is.null(files)){
+    s <- shinyassess_internal_get_pool_from_folder(path = path)
+  } else {
+    if (is.null(tasks)){
+      s <- shinyassess_internal_get_pool_from_list_of_files(path=path, files=files)
+    } else {
+      s <- shinyassess_internal_get_pool_from_list_of_files_and_tasks(path=path, files=files, tasks=tasks, scope=scope)
+    }
+  }
+}
+
+#getpool(files=c("HighlightingExample.zip","IBHandsonVersion96_Section3_3_2.zip","HighlightingExample.zip"),
+#           tasks=c("Task01","Task01","Task01"),
+#           scope=c("A","A","B"),
+#           path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
+
+
+#getpool(files=c("FSMTimerExample.zip", "HitdefinitionAndANDOr.zip"),
+#            path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
+
+#getpool(files=c("FSMTimerExample.zip", "HitdefinitionAndANDOr.zip"),
+#            path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
+
+#getpool("C:/work/gitlab/testentwicklung-mathematik/Umsetzung/MSK_Items/Batch_1/msk_b1_a/")
+
+
+
+
 shinyassess_internal_get_pool_from_folder <- function(path, pool=NULL){
   files <- list.files(path = path, pattern = "*.zip")
   for (f in files){
@@ -135,47 +203,3 @@ shinyassess_internal_get_pool_from_list_of_files_and_tasks <- function(files, ta
 #                                                               path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
 
 
-
-getPool <- function(path=NULL,files=NULL,tasks=NULL,scope=NULL){
-  if (is.null(path) && is.null(files)){
-    stop("Path to a folder with CBA ItemBuilder project files or a vector of files is required.")
-  }
-  if (is.null(files)){
-    s <- shinyassess_internal_get_pool_from_folder(path = path)
-  } else {
-    if (is.null(tasks)){
-      s <- shinyassess_internal_get_pool_from_list_of_files(path=path, files=files)
-    } else {
-      s <- shinyassess_internal_get_pool_from_list_of_files_and_tasks(path=path, files=files, tasks=tasks, scope=scope)
-    }
-  }
-}
-
-#getpool(files=c("HighlightingExample.zip","IBHandsonVersion96_Section3_3_2.zip","HighlightingExample.zip"),
-#           tasks=c("Task01","Task01","Task01"),
-#           scope=c("A","A","B"),
-#           path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
-
-
-#getpool(files=c("FSMTimerExample.zip", "HitdefinitionAndANDOr.zip"),
-#            path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
-
-#getpool(files=c("FSMTimerExample.zip", "HitdefinitionAndANDOr.zip"),
-#            path = "C:/work/github/CBAItemBuilderBook/ib/9_08/items/")
-
-#getpool("C:/work/gitlab/testentwicklung-mathematik/Umsetzung/MSK_Items/Batch_1/msk_b1_a/")
-
-
-getDemoPool <- function(name="demo01"){
-
-  f <- file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
-  s <- NULL
-
-  if (name=="demo01"){
-    s <- shinyassess_internal_get_pool_from_folder(path = file.path(f,name))
-  } else {
-    stop(paste0("A demo with the name '",name,"' is not available."))
-  }
-
- s
-}
