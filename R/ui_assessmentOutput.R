@@ -9,8 +9,10 @@
 #' @import shiny
 #' @export
 #' @examples
-#' # default
-#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"), config = getConfig(), overwrite=T), renderAssessment)
+#' \dontrun{
+#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"),
+#'    config = getConfig(), overwrite=T), renderAssessment)
+#' }
 
 assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 

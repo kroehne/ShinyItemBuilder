@@ -12,8 +12,11 @@
 #' @importFrom utils zip
 #' @export
 #' @examples
-#' # default
-#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"), config = getConfig(), overwrite=T), renderAssessment)
+#' \dontrun{
+#' shinyApp(assessmentOutput(pool = getDemoPool("demo01"),
+#'      config = getConfig(), overwrite=T),
+#'      renderAssessment)
+#' }
 
 renderAssessment <- function(input, output, session){
 

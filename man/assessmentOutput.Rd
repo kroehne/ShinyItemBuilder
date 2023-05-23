@@ -20,6 +20,8 @@ code to be used as argument to the function 'shinyApp(ui=...)'
 Function to be passed as argument to 'shinyApp(ui=...)'
 }
 \examples{
-# default
-shinyApp(assessmentOutput(pool = getDemoPool("demo01"), config = getConfig(), overwrite=T), renderAssessment)
+\dontrun{
+shinyApp(assessmentOutput(pool = getDemoPool("demo01"),
+   config = getConfig(), overwrite=T), renderAssessment)
+}
 }

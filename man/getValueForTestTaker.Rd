@@ -23,6 +23,7 @@ The value (if present) for the current test-taker (or the default value)
              function to load data for the current session.
 }
 \examples{
-# default
-value <- getValueForTestTaker(session, "current-item")
+\dontrun{
+  value <- getValueForTestTaker(session, "current-item")
+}
 }

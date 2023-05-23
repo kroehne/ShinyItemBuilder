@@ -7,13 +7,13 @@
 getPool(path = NULL, files = NULL, tasks = NULL, scope = NULL)
 }
 \arguments{
+\item{path}{Path to a folder with CBA ItemBuilder project files.}
+
 \item{files}{List of files (i.e., path and file names) of CBA ItemBuilder project files.}
 
 \item{tasks}{List of tasks (need to have the same length as files).}
 
 \item{scope}{Scope (either single string or list of the same length as files / tasks).}
-
-\item{pathPath}{to a folder with CBA ItemBuilder project files.}
 }
 \value{
 config object (list)

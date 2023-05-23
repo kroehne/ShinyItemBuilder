@@ -21,6 +21,7 @@ The value (if present) for the current test-taker (or the default value)
              function to store data for the current session.
 }
 \examples{
-# default
-setValueForTestTaker(session, "current-item",1)
+\dontrun{
+  setValueForTestTaker(session, "current-item",1)
+}
 }

@@ -10,8 +10,9 @@
 #' @return The value (if present) for the current test-taker (or the default value)
 #' @export
 #' @examples
-#' # default
-#' value <- getValueForTestTaker(session, "current-item")
+#' \dontrun{
+#'   value <- getValueForTestTaker(session, "current-item")
+#' }
 
 getValueForTestTaker <- function(session, name, default=NULL, store=T){
   shinyassess_internal_create_or_load_session(session)
@@ -35,8 +36,9 @@ getValueForTestTaker <- function(session, name, default=NULL, store=T){
 #' @return The value (if present) for the current test-taker (or the default value)
 #' @export
 #' @examples
-#' # default
-#' setValueForTestTaker(session, "current-item",1)
+#' \dontrun{
+#'   setValueForTestTaker(session, "current-item",1)
+#' }
 
 setValueForTestTaker <- function(session, name, value){
   runtime.data[[session$userData$cbasession]][[name]] <<- value
