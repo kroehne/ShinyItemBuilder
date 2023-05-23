@@ -16,7 +16,3 @@ setValueForTestTaker(session, name, value)
 \description{
 Set (i.e., save, store) a value for a particular test-taker
 }
-\examples{
-setValueForTestTaker(session, "FirstItem",1)
-setValueForTestTaker(session, "FirstItem",2)
-}

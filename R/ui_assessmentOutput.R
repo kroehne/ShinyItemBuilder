@@ -106,6 +106,8 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
   }
 }
 
+#' @importFrom utils unzip
+
 shinyassess_internal_prepare_www_folder <- function(pool,config){
 
   if(!dir.exists(config$WWWfolder)){

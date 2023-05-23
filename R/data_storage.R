@@ -7,9 +7,6 @@
 #' @param default Default value.
 #' @param store Should the value be stored, if the default is used?
 #' @return The value (if present) for the current test-taker (or the default value)
-#' @examples
-#' getValueForTestTaker(session, "FirstItem",1)
-#' getValueForTestTaker(session, "FirstItem",1, T)
 
 getValueForTestTaker <- function(session, name, default=NULL, store=T){
   shinyassess_internal_create_or_load_session(session)
@@ -29,9 +26,6 @@ getValueForTestTaker <- function(session, name, default=NULL, store=T){
 #' @param session The shiny session object.
 #' @param name Name of the value.
 #' @param value Value to store.
-#' @examples
-#' setValueForTestTaker(session, "FirstItem",1)
-#' setValueForTestTaker(session, "FirstItem",2)
 
 setValueForTestTaker <- function(session, name, value){
   runtime.data[[session$userData$cbasession]][[name]] <<- value

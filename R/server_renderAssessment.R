@@ -1,5 +1,8 @@
 # server_renderAssessment.R
 
+#' @import shiny
+#' @import jsonlite
+#' @import utils
 
 renderAssessment <- function(input, output, session){
 
@@ -38,7 +41,7 @@ renderAssessment <- function(input, output, session){
     },
     content = function(fname) {
       fs <- list.files(paste0(assessment_env$config$Datafolder,"/"))
-      zip(zipfile=fname, files=paste0(paste0(assessment_env$config$Datafolder,"/"),fs))
+      utils::zip(zipfile=fname, files=paste0(paste0(assessment_env$config$Datafolder,"/"),fs))
     },
     contentType = "application/zip"
   )

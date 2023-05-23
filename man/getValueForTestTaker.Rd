@@ -21,7 +21,3 @@ The value (if present) for the current test-taker (or the default value)
 \description{
 Get (i.e., load / retrieve) a value for a particular test-taker
 }
-\examples{
-getValueForTestTaker(session, "FirstItem",1)
-getValueForTestTaker(session, "FirstItem",1, T)
-}
