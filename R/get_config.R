@@ -1,28 +1,67 @@
 # get_config.R
 
-getConfig <- function(){
+#' Get configuration object (currently a list) with examples
+#'
+#' @param WindowTitle Title of the html browser window.
+#' @param Verbose Should the package provide log information to the console?
+#' @param WWWfolder Folder to store html/javascript files required to run the assessment
+#' @param Datafolder Folder to store data files for started/completed assessments
+#' @param posH Horizontal orientation (should be one of 'left', 'right' or 'center')
+#' @param posV Vertical orientation (should be one of 'top', 'bottom' or 'center')
+#' @param scaling Scaling of content (should be one of 'up', 'down', 'updown' or 'none')
+#' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
+#' @param maintenancePassword Password to access data online (no access possible if not defined).
+#' @return The value (if present) for the current test-taker (or the default value)
+
+getConfig <- function(WindowTitle="MyAssessment",
+                      Verbose=TRUE,
+                      WWWfolder="_mywww",
+                      Datafolder="_mydata",
+                      posH="center",
+                      posV = "center",
+                      scaling="updown",
+                      sessiontype = "sessionstorage",
+                      maintenancePassword = ""
+                      ){
 
   ret <- list()
 
-  ret$WindowTitle="MyAssessment"
-  ret$verbose=T
-  ret$end=function(){
-      showModal(modalDialog(
-      title = "You Answered all Items",
-      "Please close the browser / tab.",
-      footer = tagList()))
-  }
-  ret$WWWfolder="_mywww"
-  ret$Datafolder="_mydata"
+  # window title
+
+  ret$WindowTitle<-WindowTitle
+  ret$verbose<-Verbose
+
+  ret$WWWfolder<-WWWfolder
+  ret$Datafolder=Datafolder
 
   # visual presentation
 
-  ret$posH = "center"
-  ret$posV = "center"
-  ret$scaling = "updown"
+  if (is.na(match(posH,c("left","right","center")))){
+    stop("Parameter posH should be one of 'left', 'right' or 'center'.")
+  } else {
+    ret$posH <- posH
+  }
 
-  ret$sessiontype = "sessionstorage"
-  ret$session <- ""
+  if (is.na(match(posV,c("top","bottom","center")))){
+    stop("Parameter posV should be one of 'top', 'bottom' or 'center'.")
+  } else {
+    ret$posV <- posV
+  }
+
+  if (is.na(match(scaling,c("up","down","updown","none")))){
+    stop("Parameter scaling should be one of 'up', 'down', 'updown' or 'none'.")
+  } else {
+    ret$scaling <- scaling
+  }
+
+  # session storage
+
+  if (is.na(match(sessiontype,c("sessionstorage","cookie","localstorage","provided")))){
+    stop("Parameter sessiontype should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided'.")
+  } else {
+    ret$sessiontype <- sessiontype
+  }
+
 
   # end function
 
@@ -33,9 +72,18 @@ getConfig <- function(){
       footer = tagList(actionButton("ok", "Restart"))))
   }
 
-  #ret$end=function(session){
-  #  session$sendCustomMessage("shinyassess_redirect", "http://www.tagesschau.de/?1234")
+  #ret$end=function(){
+  #  showModal(modalDialog(
+  #    title = "You Answered all Items",
+  #    "Please close the browser / tab.",
+  #    footer = tagList()))
   #}
+
+  #ret$end=function(session){
+  #  session$sendCustomMessage("shinyassess_redirect", "http://www.any-url.com/?1234")
+  #}
+
+  # navigation function
 
   ret$navigation = function(pool, session, direction="NEXT"){
 
@@ -70,17 +118,20 @@ getConfig <- function(){
         }
       }
 
-      print(paste0("Navigation: Current Item = ", current_item))
       setValueForTestTaker(session, "current-item-index",current_item)
 
       current_item
     }
 
+  # menu function
+
   ret$menu = function(session,unvalidated=TRUE){
     showModal(dataModalDownloadDialog(session,unvalidated))
   }
 
-  ret$maintanancePassword <- "felix"
+  # maintenance password
+
+  ret$maintenancePassword = maintenancePassword
 
   ret
 

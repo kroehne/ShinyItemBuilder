@@ -1,9 +1,11 @@
 # server_renderAssessment.R
 
 #' @import shiny
-#' @import jsonlite
-#' @import utils
+#' @importFrom jsonlite fromJSON
+#' @importFrom jsonlite toJSON
+#' @importFrom utils zip
 
+#'
 renderAssessment <- function(input, output, session){
 
   output$frame <- renderUI({
@@ -15,8 +17,7 @@ renderAssessment <- function(input, output, session){
                 src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
                            "&posH=",assessment_env$config$posH,
                            "&posV=",assessment_env$config$posV,
-                           "&scaling=",assessment_env$config$scaling,
-                           "&session=",assessment_env$config$session ))
+                           "&scaling=",assessment_env$config$scaling))
 
   })
 
@@ -27,7 +28,8 @@ renderAssessment <- function(input, output, session){
 
   observeEvent(input$validatePassword, {
     if (!is.null(input$downloadPassword) && nzchar(input$downloadPassword) &&
-        input$downloadPassword == assessment_env$config$maintanancePassword) {
+        input$downloadPassword == assessment_env$config$maintenancePassword &&
+        assessment_env$config$maintenancePassword != "") {
 
       assessment_env$config$menu(session, FALSE)
     } else {
@@ -41,7 +43,7 @@ renderAssessment <- function(input, output, session){
     },
     content = function(fname) {
       fs <- list.files(paste0(assessment_env$config$Datafolder,"/"))
-      utils::zip(zipfile=fname, files=paste0(paste0(assessment_env$config$Datafolder,"/"),fs))
+      zip(zipfile=fname, files=paste0(paste0(assessment_env$config$Datafolder,"/"),fs))
     },
     contentType = "application/zip"
   )
@@ -54,7 +56,7 @@ renderAssessment <- function(input, output, session){
   })
 
   observeEvent(input$ibevents, {
-    e <- jsonlite::fromJSON(input$ibevents)
+    e <- fromJSON(input$ibevents)
     if (e$eventname == "loaded")
     {
       if (assessment_env$config$verbose)
@@ -74,7 +76,7 @@ renderAssessment <- function(input, output, session){
       else
       {
         session$sendCustomMessage("shinyassess_iframe_visibility","block")
-        session$sendCustomMessage("shinyassess_navigate_to", jsonlite::toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
+        session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
                                                                    task=assessment_env$pool[current_item,"Task"])))
 
@@ -118,7 +120,7 @@ renderAssessment <- function(input, output, session){
 
       if (current_item > 0)
       {
-        session$sendCustomMessage("shinyassess_navigate_to", jsonlite::toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
+        session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
                                                                    task=assessment_env$pool[current_item,"Task"])))
 
