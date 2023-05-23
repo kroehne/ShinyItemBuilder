@@ -1,6 +1,13 @@
 # get_config.R
 
-#' Get configuration object (currently a list) with examples
+#'  Get configuration object
+#'
+#' @description
+#' `getConfig` returns a config object required to use ShinyItemBuilder.
+#'
+#' @details
+#' The returned object is a list that contains the different configurations
+#' for an assessment using ShinyItemBuilder.
 #'
 #' @param WindowTitle Title of the html browser window.
 #' @param Verbose Should the package provide log information to the console?
@@ -11,7 +18,7 @@
 #' @param scaling Scaling of content (should be one of 'up', 'down', 'updown' or 'none')
 #' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
-#' @return The value (if present) for the current test-taker (or the default value)
+#' @return config object (list)
 
 getConfig <- function(WindowTitle="MyAssessment",
                       Verbose=TRUE,
