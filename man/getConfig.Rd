@@ -13,7 +13,8 @@ getConfig(
   posV = "center",
   scaling = "updown",
   sessiontype = "sessionstorage",
-  maintenancePassword = ""
+  maintenancePassword = "",
+  maintenanceQuery = "maintenance"
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ getConfig(
 \item{sessiontype}{Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )}
 
 \item{maintenancePassword}{Password to access data online (no access possible if not defined).}
+
+\item{maintenanceQuery}{Query string parameter name to access data online.}
 }
 \value{
 config object (list)
