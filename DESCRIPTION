@@ -8,6 +8,8 @@ Description: Digitally-based assessments that are created using CBA ItemBuilder 
 License: MIT
 Encoding: UTF-8
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.2.3
@@ -15,3 +17,4 @@ Imports:
     jsonlite,
     shiny,
     utils
+VignetteBuilder: knitr
