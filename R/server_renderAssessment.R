@@ -48,9 +48,7 @@ renderAssessment <- function(input, output, session){
                                "&posV=",assessment_env$config$posV,
                                "&scaling=",assessment_env$config$scaling,
                                "&session=",provided_session))
-
       }
-
 
     } else {
 
@@ -70,7 +68,7 @@ renderAssessment <- function(input, output, session){
 
   })
 
-  observeEvent(input$ok, {
+  observeEvent(input$endActionButtonOK, {
     session$sendCustomMessage("shinyassess_restart","new")
     removeModal()
   })
@@ -160,25 +158,32 @@ renderAssessment <- function(input, output, session){
       if (assessment_env$config$verbose)
         print(paste0("Info: Request next (",e$cbasession,")"))
 
-      if (!is.null(e$result)){
-        if (assessment_env$config$verbose){
 
+      if (!is.null(e$result)){
+
+        score <- shinyassess_internal_parse_ib_scoring(e$result)
+
+        if (assessment_env$config$verbose){
           print(paste0("Info: Item Score"))
-          print(shinyassess_internal_parse_ib_scoring(e$result))
+          print(score)
         }
+
+        assessment_env$config$score(assessment_env$pool, session, score)
+
+        runtime.data[[session$userData$cbasession]]$ResultData <<- rbind(runtime.data[[session$userData$cbasession]]$ResultData,cbind(Time = Sys.time(), Resultdata = e$result))
+
       }
 
       current_item <- assessment_env$config$navigation(assessment_env$pool, session, direction="NEXT")
-      print(current_item)
+
+      if (assessment_env$config$verbose)
+        print(paste0("Info: Function 'navigation' returned next item index =  ",current_item))
 
       if (current_item > 0)
       {
         session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
                                                                    task=assessment_env$pool[current_item,"Task"])))
-
-        print(paste0("Requested Item", current_item))
-
       }
       else
       {

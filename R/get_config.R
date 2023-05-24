@@ -75,7 +75,7 @@ getConfig <- function(WindowTitle="MyAssessment",
     showModal(modalDialog(
       title = "You Answered all Items",
       "Please close the browser / tab.",
-      footer = tagList(actionButton("ok", "Restart"))))
+      footer = tagList(actionButton("endActionButtonOK", "Restart"))))
   }
 
   #ret$end=function(){
@@ -93,7 +93,7 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   ret$navigation = function(pool, session, direction="NEXT"){
 
-      current_item <- getValueForTestTaker(session, "current-item-index", default=1, store = F)
+      current_item <- getValueForTestTaker(session, "current-item-in-pool", default=1, store = F)
       if (current_item==0  && direction=="START"){
         current_item <- 1 # start the assessment
       }
@@ -124,12 +124,27 @@ getConfig <- function(WindowTitle="MyAssessment",
         }
       }
 
-      setValueForTestTaker(session, "current-item-index",current_item)
+      setValueForTestTaker(session, "current-item-in-pool",current_item)
 
       current_item
-    }
+  }
 
 
+  # scoring function
+
+  ret$score=function(pool, session, score){
+    current_item <- getValueForTestTaker(session, "current-item-in-pool", default=1, store = F)
+    print(paste0("Item: ", current_item))
+
+    if (current_item<=0)
+      return()
+
+    print(pool[current_item,c("Project","Task")])
+    print("Score:")
+    print(score[score$Active, ])
+  }
+
+  # authentication functions
 
   ret$queryStringParameterName = "token"
 
@@ -157,6 +172,7 @@ getConfig <- function(WindowTitle="MyAssessment",
     }
     FALSE
   }
+
 
   # menu function
 
