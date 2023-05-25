@@ -70,20 +70,292 @@
 
     
     
+<p>This example shows how to use the package
+<code>ShinyItemBuilder</code> for an assessment using
+<em>Booklets</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ShinyItemBuilder</span><span class="op">)</span></span></code></pre></div>
+<p>For illustration purposes, the items which are included as
+<code>demo01</code> in the package <code>ShinyItemBuilder</code> are
+used. After calling <code>getDemoPool("demo01")</code> the object
+<code>item_pool</code> contains information about 6 CBA ItemBuilder
+<em>Tasks</em>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">item_pool</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getDemoPool.html">getDemoPool</a></span><span class="op">(</span><span class="st">"demo01"</span><span class="op">)</span></span>
-<span><span class="va">assessment_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getConfig.html">getConfig</a></span><span class="op">(</span>Verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="va">item_pool</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Project"</span>,<span class="st">"Task"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Project
+</th>
+<th style="text-align:left;">
+Task
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+SinglePageItems_00START.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+SinglePageItems_01SC.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+SinglePageItems_02MC.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+SinglePageItems_03TXT.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+SinglePageItems_04LIKERT.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+SinglePageItems_05END.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+</tbody>
+</table>
+<p>The idea of using a <em>Booklet Design</em> is that each test-taker
+is assigned to a booklet <span class="math inline">\(j\)</span> out of a
+all defined booklets <span class="math inline">\(J\)</span>. For
+simplicity, we illustrate this with <span class="math inline">\(J=2\)</span> different booklets:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">booklets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Booklet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,</span>
+<span>                       ItemIndex<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>To define the booklets, we refer to the items from the
+<code>item_pool</code>, taking the row name as <code>ItemIndex</code>.
+Hence, the goal is to have two booklets, one with items
+<code>01SC</code>, <code>02MC</code> and <code>05END</code> (Booklet
+<span class="math inline">\(j=1\)</span>) and one with items
+<code>03TXT</code>, <code>04LIKERT</code> and <code>05END</code>
+(Booklet <span class="math inline">\(j=2\)</span>):</p>
+<table class="table">
+<thead><tr>
+<th style="text-align:right;">
+Booklet
+</th>
+<th style="text-align:right;">
+ItemIndex
+</th>
+<th style="text-align:left;">
+Project
+</th>
+<th style="text-align:left;">
+Task
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+SinglePageItems_01SC.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+SinglePageItems_02MC.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SinglePageItems_05END.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+SinglePageItems_03TXT.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+SinglePageItems_04LIKERT.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+SinglePageItems_05END.zip
+</td>
+<td style="text-align:left;">
+task0
+</td>
+</tr>
+</tbody>
+</table>
+<p>To implement the booklet design, we need to overwrite the navigation
+function.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">assessment_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getConfig.html">getConfig</a></span><span class="op">(</span>Verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> </span></code></pre></div>
+<p>After calling <code><a href="../reference/getConfig.html">getConfig()</a></code>, the object
+<code>assessment_config</code> already contains the (default)
+implementation of the <code>navigation</code>-function:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">assessment_config</span><span class="op">$</span><span class="va">navigation</span></span>
+<span><span class="co">#&gt; function (pool, session, direction = "NEXT") </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt;     current_item &lt;- getValueForTestTaker(session, "current-item-in-pool", </span></span>
+<span><span class="co">#&gt;         default = 1, store = F)</span></span>
+<span><span class="co">#&gt;     if (current_item == 0 &amp;&amp; direction == "START") {</span></span>
+<span><span class="co">#&gt;         current_item &lt;- 1</span></span>
+<span><span class="co">#&gt;     }</span></span>
+<span><span class="co">#&gt;     else {</span></span>
+<span><span class="co">#&gt;         if (direction == "NEXT") {</span></span>
+<span><span class="co">#&gt;             if (current_item &gt;= dim(assessment_env$pool)[1]) {</span></span>
+<span><span class="co">#&gt;                 current_item &lt;- -1</span></span>
+<span><span class="co">#&gt;             }</span></span>
+<span><span class="co">#&gt;             else {</span></span>
+<span><span class="co">#&gt;                 current_item &lt;- current_item + 1</span></span>
+<span><span class="co">#&gt;             }</span></span>
+<span><span class="co">#&gt;         }</span></span>
+<span><span class="co">#&gt;         else if (direction == "PREVIOUS") {</span></span>
+<span><span class="co">#&gt;             if (current_item &gt; 0) {</span></span>
+<span><span class="co">#&gt;                 current_item &lt;- -1</span></span>
+<span><span class="co">#&gt;             }</span></span>
+<span><span class="co">#&gt;             else {</span></span>
+<span><span class="co">#&gt;             }</span></span>
+<span><span class="co">#&gt;         }</span></span>
+<span><span class="co">#&gt;         else if (direction == "CANCEL") {</span></span>
+<span><span class="co">#&gt;             current_item &lt;- -2</span></span>
+<span><span class="co">#&gt;         }</span></span>
+<span><span class="co">#&gt;     }</span></span>
+<span><span class="co">#&gt;     setValueForTestTaker(session, "current-item-in-pool", current_item)</span></span>
+<span><span class="co">#&gt;     current_item</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x555dad83a0e8&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x555dad840970&gt;</span></span></code></pre></div>
+<p>This function can be overwritten by assigning a new function
+<code>navigation = function(pool, session, direction="NEXT")</code> with
+the same signature. In this new function, we first define the booklets.
+In the next step, we create a variable <code>current_booklet</code> that
+stores the booklet assigned to the current test-taker.</p>
+<p>To achieve persistence, we use the function
+<code>getValueForTestTaker().</code> The following arguments are used:
+The first argument is the object <code>session</code> (i.e., the session
+variable with which the function <code>navigation</code> was called).
+The second argument <code>"current-booklet"</code> is a self-chosen name
+for the booklet variable. The third argument is the <code>default</code>
+value which should be used if there is no entry with the name
+<code>"current-booklet"</code> for this session yet. Here we use the R
+function <code>sample</code> to randomly select a booklet. Finally, we
+pass <code>TRUE</code> for the <code>store</code> argument to save the
+selected booklet for this session and not re-set it on the next
+call.</p>
+<p>The remaining part of the function is almost unchanged. The variable
+<code>current_item</code> refers to the row index of the current item in
+the <code>item_pool</code>. To initialize the <code>current_item</code>
+we use the first item defined for a particular booklet:
+<code>current_item &lt;- booklets[booklets$Booklet==current_booklet,"ItemIndex"][1]</code>.
+To update the <code>current_item</code> we first find the row of the
+current item in the <code>item_pool</code> as
+<code>current_item_index &lt;- which(booklets[booklets$Booklet==current_booklet,"ItemIndex"]==current_item)</code>,
+update the <code>current_item_index</code> according to the requested
+navigation <code>direction</code> and then store the
+<code>current_item</code> using the booklet design:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">assessment_config</span><span class="op">$</span><span class="va">navigation</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">pool</span>, <span class="va">session</span>, <span class="va">direction</span><span class="op">=</span><span class="st">"NEXT"</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  </span>
-<span>  <span class="va">current_booklet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getValueForTestTaker.html">getValueForTestTaker</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"current-booklet"</span>, </span>
-<span>                                          default<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>, store <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Booklet: "</span>, <span class="va">current_booklet</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="va">booklets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Booklet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,</span>
 <span>                         ItemIndex<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">6</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">current_booklet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getValueForTestTaker.html">getValueForTestTaker</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"current-booklet"</span>, </span>
+<span>                        default<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">booklets</span><span class="op">$</span><span class="va">Booklet</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>, store <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span>  </span>
 <span>  <span class="va">current_item</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getValueForTestTaker.html">getValueForTestTaker</a></span><span class="op">(</span><span class="va">session</span>, <span class="st">"current-item-in-pool"</span>, </span>
 <span>                                       default<span class="op">=</span><span class="fl">0</span>, </span>
@@ -123,6 +395,10 @@
 <span>  </span>
 <span>  <span class="va">current_item</span></span>
 <span><span class="op">}</span></span></code></pre></div>
+<p>The value <code>current_item &lt;- -1</code> is used to identify that
+the assessment was finished for the current test-taker (either because
+all items of the selected booklet were administered or because the
+assessment was canceled).</p>
   </main>
 </div>
 
