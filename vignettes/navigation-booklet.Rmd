@@ -14,24 +14,67 @@ knitr::opts_chunk$set(
 )
 ```
 
+This example shows how to use the package `ShinyItemBuilder` for an assessment using *Booklets*. 
+
 ```{r setup}
 library(ShinyItemBuilder)
 ```
 
-```{r default}
+For illustration purposes, the items which are included as `demo01` in the package `ShinyItemBuilder` are used. After calling `getDemoPool("demo01")` the object `item_pool` contains information about 6 CBA ItemBuilder *Tasks*:
+
+```{r default_item_pool, eval=F}
 item_pool <- getDemoPool("demo01")
+item_pool[,c("Project","Task")]
+```
+
+```{r default_item_pool_print, eval=T, echo=F}
+item_pool <- getDemoPool("demo01")
+knitr::kable(item_pool[,c("Project","Task")], format = "html",row.names = T,booktabs = T)
+```
+
+The idea of using a *Booklet Design* is that each test-taker is assigned to a booklet $j$ out of a all defined booklets $J$. For simplicity, we illustrate this with $J=2$ different booklets:
+
+```{r example_booklet}
+booklets <- data.frame(Booklet = c(1,1,1,2,2,2),
+                       ItemIndex=c(2,3,6,4,5,6))
+```
+
+To define the booklets, we refer to the items from the `item_pool`, taking the row name as `ItemIndex`. Hence, the goal is to have two booklets, one with items `01SC`, `02MC` and `05END` (Booklet $j=1$) and one with items  `03TXT`, `04LIKERT` and `05END` (Booklet $j=2$):
+
+```{r example_booklet_print, eval=T, echo=F}
+tab <- data.frame(Booklet=booklets$Booklet,
+                  ItemIndex=booklets$ItemIndex,
+                  Project=item_pool$Project[booklets$ItemIndex],
+                  Task=item_pool$Task[booklets$ItemIndex])
+
+knitr::kable(tab, format = "html",booktabs = T)
+```
+
+To implement the booklet design, we need to overwrite the navigation function. 
+
+```{r default_configuration}
 assessment_config <- getConfig(Verbose = T) 
 ```
 
+After calling `getConfig()`, the object `assessment_config` already contains the (default) implementation of the `navigation`-function:
+
+```{r default_navigation_print}
+assessment_config$navigation
+```
+This function can be overwritten by assigning a new function `navigation = function(pool, session, direction="NEXT")` with the same signature. In this new function, we first define the booklets. In the next step, we create a variable `current_booklet` that stores the booklet assigned to the current test-taker. 
+
+To achieve persistence, we use the function `getValueForTestTaker().` The following arguments are used: The first argument is the object `session` (i.e., the session variable with which the function `navigation` was called). The second argument `"current-booklet"` is a self-chosen name for the booklet variable. The third argument is the `default` value which should be used if there is no entry with the name `"current-booklet"` for this session yet. Here we use the R function `sample` to randomly select a booklet. Finally, we pass `TRUE` for the `store` argument to save the selected booklet for this session and not re-set it on the next call. 
+
+The remaining part of the function is almost unchanged. The variable `current_item` refers to the row index of the current item in the `item_pool`. To  initialize the `current_item` we use the first item defined for a particular booklet: `current_item <- booklets[booklets$Booklet==current_booklet,"ItemIndex"][1]`. To update the `current_item` we first find the row of the current item in the `item_pool` as `current_item_index <- which(booklets[booklets$Booklet==current_booklet,"ItemIndex"]==current_item)`, update the  `current_item_index` according to the requested navigation `direction` and then store the `current_item` using the booklet design: 
+
 ```{r custom_navigation_function}
 assessment_config$navigation = function(pool, session, direction="NEXT"){
-  
-  
-  current_booklet <- getValueForTestTaker(session, "current-booklet", 
-                                          default=sample(c(1,2),1), store = T)
-  print(paste0("Booklet: ", current_booklet))
+
   booklets <- data.frame(Booklet = c(1,1,1,2,2,2),
                          ItemIndex=c(2,3,6,4,5,6))
+  
+  current_booklet <- getValueForTestTaker(session, "current-booklet", 
+                        default=sample(unique(booklets$Booklet),1), store = T)
   
   current_item <- getValueForTestTaker(session, "current-item-in-pool", 
                                        default=0, 
@@ -73,3 +116,5 @@ assessment_config$navigation = function(pool, session, direction="NEXT"){
 }
 
 ```
+
+The value `current_item <- -1` is used to identify that the assessment was finished for the current test-taker (either because all items of the selected booklet were administered or because the assessment was canceled).
