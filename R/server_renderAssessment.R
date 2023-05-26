@@ -69,8 +69,8 @@ renderAssessment <- function(input, output, session){
   })
 
   observeEvent(input$endActionButtonOK, {
-    session$sendCustomMessage("shinyassess_restart","new")
     removeModal()
+    session$sendCustomMessage("shinyassess_restart","new")
   })
 
   observeEvent(input$validatePassword, {
@@ -95,15 +95,14 @@ renderAssessment <- function(input, output, session){
   )
 
   observeEvent(input$deleteData, {
+    removeModal(session)
     do.call(file.remove, list(list.files(paste0(assessment_env$config$Datafolder,"/"), full.names = TRUE)))
     runtime.data <<- list()
     session$sendCustomMessage("shinyassess_restart","new")
-    removeModal()
   })
 
   observeEvent(input$submitLoginOK, {
     session$sendCustomMessage("shinyassess_redirect", paste0(session$clientData$url,"?", assessment_env$config$queryStringParameterName,"=",input$queryStringParameter))
-    removeModal()
   })
 
   observeEvent(input$ibevents, {
@@ -161,16 +160,27 @@ renderAssessment <- function(input, output, session){
 
       if (!is.null(e$result)){
 
-        score <- shinyassess_internal_parse_ib_scoring(e$result)
+        score <- parse_ib_scoring(e$result)
 
         if (assessment_env$config$verbose){
           print(paste0("Info: Item Score"))
           print(score)
         }
 
-        assessment_env$config$score(assessment_env$pool, session, score)
+        current_item <- getValueForTestTaker(session, "current-item-in-pool", default=1, store = F)
+        if (current_item > 0){
 
-        runtime.data[[session$userData$cbasession]]$ResultData <<- rbind(runtime.data[[session$userData$cbasession]]$ResultData,cbind(Time = Sys.time(), Resultdata = e$result))
+          assessment_env$config$score(assessment_env$pool, session, score, current_item)
+
+          runtime.data[[session$userData$cbasession]]$ResultData <<- rbind(runtime.data[[session$userData$cbasession]]$ResultData,
+                                                                           cbind(Time = Sys.time(),
+                                                                                 Project =assessment_env$pool[current_item,"itemName"],
+                                                                                 Task=assessment_env$pool[current_item,"Task"],
+                                                                                 Scope=assessment_env$pool[current_item,"Scope"],
+                                                                                 Resultdata = e$result))
+        }
+
+
 
       }
 
@@ -183,7 +193,8 @@ renderAssessment <- function(input, output, session){
       {
         session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
-                                                                   task=assessment_env$pool[current_item,"Task"])))
+                                                                   task=assessment_env$pool[current_item,"Task"],
+                                                                   scope=assessment_env$pool[current_item,"Scope"])))
       }
       else
       {

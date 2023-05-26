@@ -16,8 +16,10 @@
 #' @return config object (list)
 #' @export
 #' @examples
-#' # default
-#' conf <- getConfig()
+#' \dontrun{
+#'  conf <- getConfig()
+#' }
+
 
 getConfig <- function(WindowTitle="MyAssessment",
                       Verbose=TRUE,
@@ -132,16 +134,13 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   # scoring function
 
-  ret$score=function(pool, session, score){
-    current_item <- getValueForTestTaker(session, "current-item-in-pool", default=1, store = F)
+  ret$score=function(pool, session, score, current_item){
+
     print(paste0("Item: ", current_item))
-
-    if (current_item<=0)
-      return()
-
     print(pool[current_item,c("Project","Task")])
     print("Score:")
     print(score[score$Active, ])
+
   }
 
   # authentication functions

@@ -1,0 +1,10 @@
+--- 
+output: html_document
+---
+
+
+``` {r}
+print(session$userData$cbasession)
+```
+
+

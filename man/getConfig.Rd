@@ -48,6 +48,7 @@ config object (list)
 The returned object is a list that contains the different configurations  for an assessment using ShinyItemBuilder.
 }
 \examples{
-# default
-conf <- getConfig()
+\dontrun{
+ conf <- getConfig()
+}
 }
