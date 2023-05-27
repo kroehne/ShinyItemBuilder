@@ -44,7 +44,7 @@
     <a class="dropdown-item" href="../articles/access.html">Use Custom `end`- and `login` - Functions to Controll Access</a>
     <a class="dropdown-item" href="../articles/booklets.html">Use Custom `navigation`-Function to Implement a Booklet Design</a>
     <a class="dropdown-item" href="../articles/feedback.html">Use Custom `end`-Function to Provide Immediate Feedback using Knitr</a>
-    <a class="dropdown-item" href="../articles/maintenance.html">Configure the Maintenance Dialog</a>
+    <a class="dropdown-item" href="../articles/maintenance.html">Use the Maintenance Dialog to Access Data</a>
   </div>
 </li>
 <li class="nav-item">
@@ -149,8 +149,8 @@ implementation of the <code>end</code>-function:</p>
 <span><span class="co">#&gt;     showModal(modalDialog(title = "You Answered all Items", "Please close the browser / tab.", </span></span>
 <span><span class="co">#&gt;         footer = tagList(actionButton("endActionButtonOK", "Restart"))))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x5556b4e33a58&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x5556b4e3bd68&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x561504ea2248&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x561504ea8440&gt;</span></span></code></pre></div>
 <p>This function can be overwritten by assigning a new function
 <code>end = function(session)</code> with the same signature. In this
 new function, we first load the data gathered for this session, stored

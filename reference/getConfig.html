@@ -27,7 +27,7 @@
     <a class="dropdown-item" href="../articles/access.html">Use Custom `end`- and `login` - Functions to Controll Access</a>
     <a class="dropdown-item" href="../articles/booklets.html">Use Custom `navigation`-Function to Implement a Booklet Design</a>
     <a class="dropdown-item" href="../articles/feedback.html">Use Custom `end`-Function to Provide Immediate Feedback using Knitr</a>
-    <a class="dropdown-item" href="../articles/maintenance.html">Configure the Maintenance Dialog</a>
+    <a class="dropdown-item" href="../articles/maintenance.html">Use the Maintenance Dialog to Access Data</a>
   </div>
 </li>
 <li class="nav-item">
@@ -64,7 +64,8 @@
 <span>  scaling <span class="op">=</span> <span class="st">"updown"</span>,</span>
 <span>  sessiontype <span class="op">=</span> <span class="st">"sessionstorage"</span>,</span>
 <span>  maintenancePassword <span class="op">=</span> <span class="st">""</span>,</span>
-<span>  maintenanceQuery <span class="op">=</span> <span class="st">"maintenance"</span></span>
+<span>  maintenanceQuery <span class="op">=</span> <span class="st">"maintenance"</span>,</span>
+<span>  maintenanceKey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"x"</span>, ctrl <span class="op">=</span> <span class="cn">T</span>, shift <span class="op">=</span> <span class="cn">F</span>, alt <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -108,6 +109,10 @@
 
 <dt>maintenanceQuery</dt>
 <dd><p>Query string parameter name to access data online.</p></dd>
+
+
+<dt>maintenanceKey</dt>
+<dd><p>Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)</p></dd>
 
 </dl></div>
     <div class="section level2">
