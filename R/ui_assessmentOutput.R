@@ -7,6 +7,7 @@
 #' @param overwrite T/F
 #' @return code to be used as argument to the function 'shinyApp(ui=...)'
 #' @import shiny
+#' @import base64enc
 #' @export
 #' @examples
 #' \dontrun{

@@ -14,7 +14,8 @@ getConfig(
   scaling = "updown",
   sessiontype = "sessionstorage",
   maintenancePassword = "",
-  maintenanceQuery = "maintenance"
+  maintenanceQuery = "maintenance",
+  maintenanceKey = list(key = "x", ctrl = T, shift = F, alt = F)
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ getConfig(
 \item{maintenancePassword}{Password to access data online (no access possible if not defined).}
 
 \item{maintenanceQuery}{Query string parameter name to access data online.}
+
+\item{maintenanceKey}{Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)}
 }
 \value{
 config object (list)

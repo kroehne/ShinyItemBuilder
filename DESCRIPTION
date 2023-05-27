@@ -16,5 +16,6 @@ RoxygenNote: 7.2.3
 Imports: 
     jsonlite,
     shiny,
-    utils
+    utils,
+    base64enc
 VignetteBuilder: knitr

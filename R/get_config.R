@@ -13,6 +13,7 @@
 #' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
 #' @param maintenanceQuery Query string parameter name to access data online.
+#' @param maintenanceKey Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)
 #' @return config object (list)
 #' @export
 #' @examples
@@ -29,7 +30,8 @@ getConfig <- function(WindowTitle="MyAssessment",
                       scaling="updown",
                       sessiontype = "sessionstorage",
                       maintenancePassword = "",
-                      maintenanceQuery = "maintenance"
+                      maintenanceQuery = "maintenance",
+                      maintenanceKey=list(key="x", ctrl=T, shift=F, alt=F)
                       ){
 
   ret <- list()
@@ -172,6 +174,15 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   ret$queryStringAdminParameterName = maintenanceQuery
   ret$maintenancePassword = maintenancePassword
+
+  if (typeof(maintenanceKey)!="list")
+    stop("Parameter maintenanceKey should be list with the elements 'key', 'alt', 'ctrl' and 'shift'.")
+
+  if (is.null(maintenanceKey[["key"]])||is.null(maintenanceKey[["alt"]])||
+      is.null(maintenanceKey[["ctrl"]])||is.null(maintenanceKey[["shift"]]))
+    stop("Parameter maintenanceKey should contain non-null values for all elements 'key', 'alt', 'ctrl' and 'shift'.")
+
+  ret$maintenanceKey = maintenanceKey
 
   ret
 

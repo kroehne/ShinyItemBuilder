@@ -10,6 +10,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom jsonlite toJSON
 #' @importFrom utils zip
+#' @importFrom utils URLencode
 #' @export
 #' @examples
 #' \dontrun{
@@ -47,6 +48,7 @@ renderAssessment <- function(input, output, session){
                                "&posH=",assessment_env$config$posH,
                                "&posV=",assessment_env$config$posV,
                                "&scaling=",assessment_env$config$scaling,
+                               "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))),
                                "&session=",provided_session))
       }
 
@@ -59,7 +61,8 @@ renderAssessment <- function(input, output, session){
                   src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
                              "&posH=",assessment_env$config$posH,
                              "&posV=",assessment_env$config$posV,
-                             "&scaling=",assessment_env$config$scaling))
+                             "&scaling=",assessment_env$config$scaling),
+                             "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))))
 
     }
   })

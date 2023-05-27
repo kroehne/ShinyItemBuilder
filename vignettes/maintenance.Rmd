@@ -1,8 +1,8 @@
 ---
-title: "Configure the Maintenance Dialog"
+title: "Use the Maintenance Dialog to Access Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Configure the Maintenance Dialog}
+  %\VignetteIndexEntry{Use the Maintenance Dialog to Access Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This example shows how to configure maintenance dialog. 
+This example shows how to configure maintenance dialog. It will be only accessible, if a custom (secret) password is defined. 
 
 ```{r example, eval=F}
 library(ShinyItemBuilder)
@@ -25,3 +25,5 @@ assessment_config <- getConfig(maintenancePassword = "secret")
 shinyApp(assessmentOutput(pool = item_pool, config = assessment_config,overwrite=T),
          renderAssessment)
 ```
+
+To access the maintenance dialog, a keyboard shortcut can be configured (default: `Ctrl` + `X`)
