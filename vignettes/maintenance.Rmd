@@ -1,0 +1,27 @@
+---
+title: "Configure the Maintenance Dialog"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Configure the Maintenance Dialog}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This example shows how to configure maintenance dialog. 
+
+```{r example, eval=F}
+library(ShinyItemBuilder)
+
+item_pool <- getDemoPool("demo01")
+assessment_config <- getConfig(maintenancePassword = "secret")
+
+shinyApp(assessmentOutput(pool = item_pool, config = assessment_config,overwrite=T),
+         renderAssessment)
+```

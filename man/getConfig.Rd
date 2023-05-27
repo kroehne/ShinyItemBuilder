@@ -6,7 +6,7 @@
 \usage{
 getConfig(
   WindowTitle = "MyAssessment",
-  Verbose = TRUE,
+  Verbose = FALSE,
   WWWfolder = "_mywww",
   Datafolder = "_mydata",
   posH = "center",

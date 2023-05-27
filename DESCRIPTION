@@ -1,10 +1,10 @@
 Package: ShinyItemBuilder
 Type: Package
-Title: Create CBA ItemBuilder Assessments using R/Shiny (ShinyItemBuilder)
+Title: Computer-Based Assessments using CBA ItemBuilder and R/Shiny
 Version: 0.1.0
 Author: Ulf Kroehne, Felix Wagner
 Maintainer: Ulf Kroehne <ulf@kroehne.de>
-Description: Digitally-based assessments that are created using CBA ItemBuilder items (http://cba.itembuilder.de) can be used as R/Shiny application using this package. 
+Description: Computer-based assessments (CBA) that are created using CBA ItemBuilder items can be used as a R/Shiny application for online or offline data collection. Multiple parts (created as CBA ItemBuilder tasks), booklet designs, multi-stage and adaptive testing as well as instant feedback are supported. The CBA ItemBuilder is a free authoring software for interactive items (see more at https://cba.itembuilder.de).
 License: MIT
 Encoding: UTF-8
 Suggests: 

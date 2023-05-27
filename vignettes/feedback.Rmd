@@ -1,8 +1,8 @@
 ---
-title: "Display Feedback using ShinyItemBuilder"
+title: "Use Custom `end`-Function to Provide Immediate Feedback using Knitr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Display Feedback using ShinyItemBuilder}
+  %\VignetteIndexEntry{Use Custom `end`-Function to Provide Immediate Feedback using Knitr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -20,9 +20,8 @@
 #'  conf <- getConfig()
 #' }
 
-
 getConfig <- function(WindowTitle="MyAssessment",
-                      Verbose=TRUE,
+                      Verbose=FALSE,
                       WWWfolder="_mywww",
                       Datafolder="_mydata",
                       posH="center",
@@ -79,17 +78,6 @@ getConfig <- function(WindowTitle="MyAssessment",
       "Please close the browser / tab.",
       footer = tagList(actionButton("endActionButtonOK", "Restart"))))
   }
-
-  #ret$end=function(){
-  #  showModal(modalDialog(
-  #    title = "You Answered all Items",
-  #    "Please close the browser / tab.",
-  #    footer = tagList()))
-  #}
-
-  #ret$end=function(session){
-  #  session$sendCustomMessage("shinyassess_redirect", "http://www.any-url.com/?1234")
-  #}
 
   # navigation function
 
@@ -149,23 +137,24 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   ret$login=function(session){
     showModal(modalDialog(
-    tags$h2('Please Enter a Valid Token and Press "OK".'),
-    textInput('queryStringParameter', ''),
-    footer=tagList(
-      actionButton('submitLoginOK', 'OK')
-    )
+      tags$h2('Login'),
+      tags$div('Please enter a valid token and press "OK".'),
+      textInput('queryStringParameter', ''),
+      footer=tagList(
+        actionButton('submitLoginOK', 'OK')
+      )
     ))
   }
 
   ret$custom_list_accounts <- sprintf("%03d", 0:99)
 
-  ret$validate=function(token_or_login=NULL, password=NULL){
+  ret$validate=function(token_or_login=NULL, password=NULL, config){
     if (is.null(token_or_login)||length(token_or_login)==0)
     {
       return (FALSE)
     }
     else {
-      if (!is.na(match(token_or_login,ret$custom_list_accounts))){
+      if (!is.na(match(token_or_login,config$custom_list_accounts))){
         return (TRUE)
       }
     }
@@ -201,7 +190,7 @@ dataModalDownloadDialog <- function(session, unvalidated = TRUE) {
       )
     )
   } else {
-    nfiles <- length(list.files("data/"))
+    nfiles <- length(list.files(paste0(assessment_env$config$Datafolder,"/")))
     modalDialog(
       title = paste0(assessment_env$config$WindowTitle,": Maintenance"),
       p(paste0("Found ", nfiles, " data file(s).")),

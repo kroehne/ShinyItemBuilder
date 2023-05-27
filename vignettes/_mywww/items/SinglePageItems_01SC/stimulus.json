@@ -1,0 +1,11 @@
+{
+  "runtimeCompatibilityVersion" : "9.9.0",
+  "itemName" : "SinglePageItems_01SC",
+  "itemWidth" : 1024,
+  "itemHeight" : 768,
+  "tasks" : [ "task0" ],
+  "resources" : [ ],
+  "externalResources" : [ ],
+  "dependencies" : [ ],
+  "variables" : [ ]
+}

@@ -15,7 +15,7 @@ Demo:
 ````
 install.packages("shiny")
 install.packages("remotes")
-remotes::install_github("kroehne/ShinyItemBuilder")
+remotes::install_github("kroehne/ShinyItemBuilder", build_vignettes = TRUE) 
 ````
 
 * Run the following code in R
@@ -56,3 +56,10 @@ shinyApp(assessmentOutput(pool = item_pool,
 This software is currently a proof-of-concept. 
 
 Find more information about the [CBA ItemBuilder](https://cba.itembuilder.de) at [cba.itembuilder.de](https://cba.itembuilder.de).
+
+To see provided vignettes run in R (or open view [online](https://kroehne.github.io/ShinyItemBuilder/articles/)): 
+
+````
+browseVignettes(package="ShinyItemBuilder")
+````
+

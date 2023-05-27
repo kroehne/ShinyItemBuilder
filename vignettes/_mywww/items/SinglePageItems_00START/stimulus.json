@@ -1,0 +1,15 @@
+{
+  "runtimeCompatibilityVersion" : "9.9.0",
+  "itemName" : "SinglePageItems_00START",
+  "itemWidth" : 1024,
+  "itemHeight" : 768,
+  "tasks" : [ "task0" ],
+  "resources" : [ {
+    "pathInZip" : "resources\\ExampleVideo.mp4",
+    "size" : 777229,
+    "type" : "video"
+  } ],
+  "externalResources" : [ ],
+  "dependencies" : [ ],
+  "variables" : [ ]
+}

@@ -1,8 +1,8 @@
 ---
-title: "Use Custom Navigation Function to Implement a Booklet Design"
+title: "Use Custom `navigation`-Function to Implement a Booklet Design"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use Custom Navigation Function to Implement a Booklet Design}
+  %\VignetteIndexEntry{Use Custom `navigation`-Function to Implement a Booklet Design}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

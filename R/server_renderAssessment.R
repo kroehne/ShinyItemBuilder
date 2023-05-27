@@ -38,7 +38,7 @@ renderAssessment <- function(input, output, session){
         if (assessment_env$config$verbose)
           print(paste0("Info: New Window, " , assessment_env$config$queryStringParameterName, "=", provided_session))
       }
-      if (!assessment_env$config$validate(provided_session)){
+      if (!assessment_env$config$validate(provided_session,assessment_env$config)){
         assessment_env$config$login()
       } else {
 
@@ -62,10 +62,6 @@ renderAssessment <- function(input, output, session){
                              "&scaling=",assessment_env$config$scaling))
 
     }
-
-
-
-
   })
 
   observeEvent(input$endActionButtonOK, {
@@ -179,9 +175,6 @@ renderAssessment <- function(input, output, session){
                                                                                  Scope=assessment_env$pool[current_item,"Scope"],
                                                                                  Resultdata = e$result))
         }
-
-
-
       }
 
       current_item <- assessment_env$config$navigation(assessment_env$pool, session, direction="NEXT")

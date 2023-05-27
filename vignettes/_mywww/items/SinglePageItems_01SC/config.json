@@ -1,0 +1,2208 @@
+{
+  "runtimeCompatibilityVersion" : "9.9.0",
+  "name" : "SinglePageItems_01SC",
+  "pages" : [ {
+    "name" : "page1",
+    "isRightToLeft" : false,
+    "closable" : true,
+    "content" : {
+      "type" : "CbaContainer",
+      "config" : {
+        "position" : {
+          "x" : 0,
+          "y" : 0,
+          "width" : 1024,
+          "height" : 768
+        },
+        "font" : {
+          "name" : "Segoe UI",
+          "size" : 11,
+          "alignmentHorizontal" : "left",
+          "bold" : false,
+          "italic" : false,
+          "underlined" : false
+        },
+        "color" : {
+          "text" : {
+            "default" : "rgba(0, 0, 0, 1)",
+            "disabled" : "rgba(167, 166, 170, 1)"
+          },
+          "background" : {
+            "default" : "rgba(255, 255, 255, 1)"
+          }
+        },
+        "border" : {
+          "style" : "none",
+          "width" : 0,
+          "radius" : 0,
+          "color" : {
+            "default" : "rgba(176, 176, 176, 1)",
+            "disabled" : "rgba(210,210,210,1)"
+          }
+        },
+        "transform" : { },
+        "state" : {
+          "disabled" : false,
+          "selected" : false,
+          "hidden" : false
+        },
+        "text" : { },
+        "image" : {
+          "displayMode" : "none"
+        },
+        "cursor" : {
+          "standard" : "auto"
+        },
+        "tabIndex" : -1,
+        "event" : { },
+        "classifiers" : [ ],
+        "link" : { },
+        "userDefinedId" : "$1075490900673199",
+        "pageEditId" : "_6rxQgFajEeuMhrHBi5UcKQ",
+        "trace" : {
+          "skipTrace" : false,
+          "type" : "Container"
+        },
+        "autoLayoutLayer" : "none",
+        "cssClassNames" : [ "Frame" ],
+        "cbaChildren" : [ {
+          "type" : "CbaContainer",
+          "config" : {
+            "position" : {
+              "x" : 0,
+              "y" : 0,
+              "width" : 1024,
+              "height" : 768
+            },
+            "font" : {
+              "name" : "Segoe UI",
+              "size" : 11,
+              "alignmentHorizontal" : "left",
+              "bold" : false,
+              "italic" : false,
+              "underlined" : false
+            },
+            "color" : {
+              "text" : {
+                "default" : "rgba(0, 0, 0, 1)",
+                "disabled" : "rgba(167, 166, 170, 1)"
+              },
+              "background" : {
+                "default" : "rgba(255, 255, 255, 1)"
+              }
+            },
+            "border" : {
+              "style" : "solid",
+              "width" : 5,
+              "radius" : 0,
+              "color" : {
+                "default" : "rgba(176, 176, 176, 1)",
+                "disabled" : "rgba(210,210,210,1)"
+              }
+            },
+            "transform" : { },
+            "state" : {
+              "disabled" : false,
+              "selected" : false,
+              "hidden" : false
+            },
+            "text" : { },
+            "image" : {
+              "displayMode" : "none"
+            },
+            "cursor" : {
+              "standard" : "auto"
+            },
+            "tabIndex" : -1,
+            "event" : { },
+            "classifiers" : [ ],
+            "link" : { },
+            "userDefinedId" : "$1075490900695900",
+            "pageEditId" : "_7iBjEFajEeuMhrHBi5UcKQ",
+            "trace" : {
+              "skipTrace" : false,
+              "type" : "Panel"
+            },
+            "autoLayoutLayer" : "none",
+            "cssClassNames" : [ "Panel" ],
+            "cbaChildren" : [ {
+              "type" : "CbaRichTextField",
+              "config" : {
+                "position" : {
+                  "x" : 40,
+                  "y" : 40,
+                  "width" : 940,
+                  "height" : 80
+                },
+                "font" : {
+                  "name" : "Segoe UI",
+                  "size" : 11,
+                  "alignmentHorizontal" : "left",
+                  "bold" : false,
+                  "italic" : false,
+                  "underlined" : false
+                },
+                "color" : {
+                  "text" : {
+                    "default" : "rgba(0, 0, 0, 1)",
+                    "disabled" : "rgba(167, 166, 170, 1)"
+                  },
+                  "background" : {
+                    "default" : "rgba(0,0,0,0)",
+                    "selected" : "rgba(0,0,0,0)"
+                  }
+                },
+                "border" : {
+                  "style" : "none",
+                  "width" : 0,
+                  "radius" : 0,
+                  "color" : {
+                    "default" : "rgba(176, 176, 176, 1)",
+                    "disabled" : "rgba(210,210,210,1)"
+                  }
+                },
+                "transform" : { },
+                "state" : {
+                  "disabled" : false,
+                  "selected" : false,
+                  "hidden" : false
+                },
+                "text" : { },
+                "image" : {
+                  "displayMode" : "none"
+                },
+                "cursor" : {
+                  "standard" : "default"
+                },
+                "tabIndex" : -1,
+                "event" : { },
+                "classifiers" : [ ],
+                "link" : { },
+                "userDefinedId" : "$1075490900699700",
+                "pageEditId" : "_Bh404H7rEeyyIeqTXigQ6A",
+                "trace" : {
+                  "skipTrace" : false,
+                  "type" : "RichTextField"
+                },
+                "autoLayoutLayer" : "none",
+                "cssClassNames" : [ "HTMLTextField" ],
+                "highlightText" : false,
+                "toggleType" : "none",
+                "stylesMap" : {
+                  "HIGHLIGHT" : {
+                    "backgroundColor" : "rgba(255, 204, 102, 1)"
+                  },
+                  "fontname_0_Arial" : {
+                    "fontFamily" : "Arial"
+                  },
+                  "fontsize_0_39" : {
+                    "fontSize" : "39px"
+                  },
+                  "fontcolor_0_rgba_0__0__0__1_" : {
+                    "color" : "rgba(0, 0, 0, 1)"
+                  }
+                },
+                "value" : {
+                  "blocks" : [ {
+                    "key" : "_0",
+                    "text" : "Single-Choice Task ",
+                    "type" : "cbaAlignLeft",
+                    "depth" : 0,
+                    "inlineStyleRanges" : [ {
+                      "offset" : 0,
+                      "length" : 19,
+                      "style" : "fontname_0_Arial"
+                    }, {
+                      "offset" : 0,
+                      "length" : 19,
+                      "style" : "fontsize_0_39"
+                    }, {
+                      "offset" : 0,
+                      "length" : 19,
+                      "style" : "fontcolor_0_rgba_0__0__0__1_"
+                    } ],
+                    "entityRanges" : [ ],
+                    "data" : { }
+                  } ],
+                  "entityMap" : { }
+                },
+                "contentModifiers" : [ ]
+              }
+            }, {
+              "type" : "CbaRichTextField",
+              "config" : {
+                "position" : {
+                  "x" : 40,
+                  "y" : 140,
+                  "width" : 940,
+                  "height" : 80
+                },
+                "font" : {
+                  "name" : "Segoe UI",
+                  "size" : 11,
+                  "alignmentHorizontal" : "left",
+                  "bold" : false,
+                  "italic" : false,
+                  "underlined" : false
+                },
+                "color" : {
+                  "text" : {
+                    "default" : "rgba(0, 0, 0, 1)",
+                    "disabled" : "rgba(167, 166, 170, 1)"
+                  },
+                  "background" : {
+                    "default" : "rgba(0,0,0,0)",
+                    "selected" : "rgba(0,0,0,0)"
+                  }
+                },
+                "border" : {
+                  "style" : "none",
+                  "width" : 0,
+                  "radius" : 0,
+                  "color" : {
+                    "default" : "rgba(176, 176, 176, 1)",
+                    "disabled" : "rgba(210,210,210,1)"
+                  }
+                },
+                "transform" : { },
+                "state" : {
+                  "disabled" : false,
+                  "selected" : false,
+                  "hidden" : false
+                },
+                "text" : { },
+                "image" : {
+                  "displayMode" : "none"
+                },
+                "cursor" : {
+                  "standard" : "default"
+                },
+                "tabIndex" : -1,
+                "event" : { },
+                "classifiers" : [ ],
+                "link" : { },
+                "userDefinedId" : "$1075490900702799",
+                "pageEditId" : "_N_m50H7rEeyyIeqTXigQ6A",
+                "trace" : {
+                  "skipTrace" : false,
+                  "type" : "RichTextField"
+                },
+                "autoLayoutLayer" : "none",
+                "cssClassNames" : [ "HTMLTextField" ],
+                "highlightText" : false,
+                "toggleType" : "none",
+                "stylesMap" : {
+                  "HIGHLIGHT" : {
+                    "backgroundColor" : "rgba(255, 204, 102, 1)"
+                  },
+                  "fontname_0_Arial" : {
+                    "fontFamily" : "Arial"
+                  },
+                  "fontsize_0_26" : {
+                    "fontSize" : "26px"
+                  },
+                  "fontcolor_0_rgba_0__0__0__1_" : {
+                    "color" : "rgba(0, 0, 0, 1)"
+                  },
+                  "fontstyle_0_ITALIC" : {
+                    "fontStyle" : "italic"
+                  }
+                },
+                "value" : {
+                  "blocks" : [ {
+                    "key" : "_0",
+                    "text" : "Select the option that answers the following question:",
+                    "type" : "cbaAlignLeft",
+                    "depth" : 0,
+                    "inlineStyleRanges" : [ {
+                      "offset" : 0,
+                      "length" : 54,
+                      "style" : "fontname_0_Arial"
+                    }, {
+                      "offset" : 0,
+                      "length" : 54,
+                      "style" : "fontsize_0_26"
+                    }, {
+                      "offset" : 0,
+                      "length" : 54,
+                      "style" : "fontcolor_0_rgba_0__0__0__1_"
+                    } ],
+                    "entityRanges" : [ ],
+                    "data" : { }
+                  }, {
+                    "key" : "_1",
+                    "text" : "",
+                    "type" : "cbaAlignLeft",
+                    "depth" : 0,
+                    "inlineStyleRanges" : [ ],
+                    "entityRanges" : [ ],
+                    "data" : { }
+                  }, {
+                    "key" : "_2",
+                    "text" : "Which answer is correct?",
+                    "type" : "cbaAlignLeft",
+                    "depth" : 0,
+                    "inlineStyleRanges" : [ {
+                      "offset" : 0,
+                      "length" : 24,
+                      "style" : "fontname_0_Arial"
+                    }, {
+                      "offset" : 0,
+                      "length" : 24,
+                      "style" : "fontsize_0_26"
+                    }, {
+                      "offset" : 0,
+                      "length" : 24,
+                      "style" : "fontcolor_0_rgba_0__0__0__1_"
+                    }, {
+                      "offset" : 0,
+                      "length" : 24,
+                      "style" : "fontstyle_0_ITALIC"
+                    } ],
+                    "entityRanges" : [ ],
+                    "data" : { }
+                  } ],
+                  "entityMap" : { }
+                },
+                "contentModifiers" : [ ]
+              }
+            }, {
+              "type" : "CbaButton",
+              "config" : {
+                "position" : {
+                  "x" : 780,
+                  "y" : 660,
+                  "width" : 200,
+                  "height" : 60
+                },
+                "font" : {
+                  "name" : "Arial",
+                  "size" : 26,
+                  "alignmentHorizontal" : "center",
+                  "bold" : false,
+                  "italic" : false,
+                  "underlined" : false
+                },
+                "color" : {
+                  "text" : {
+                    "default" : "rgba(255, 255, 255, 1)",
+                    "selected" : "rgba(255, 255, 255, 1)",
+                    "visited" : "rgba(255, 255, 255, 1)",
+                    "disabled" : "rgba(167, 166, 170, 1)"
+                  },
+                  "background" : {
+                    "default" : "rgba(50, 100, 200, 1)"
+                  }
+                },
+                "border" : {
+                  "style" : "outset",
+                  "width" : 1,
+                  "radius" : 2,
+                  "color" : {
+                    "default" : "rgba(176, 176, 176, 1)",
+                    "disabled" : "rgba(210,210,210,1)"
+                  }
+                },
+                "transform" : { },
+                "state" : {
+                  "disabled" : false,
+                  "selected" : false,
+                  "hidden" : false
+                },
+                "text" : {
+                  "label" : "Next"
+                },
+                "image" : {
+                  "displayMode" : "none"
+                },
+                "cursor" : {
+                  "standard" : "auto"
+                },
+                "tabIndex" : -1,
+                "event" : { },
+                "classifiers" : [ ],
+                "link" : { },
+                "userDefinedId" : "$1075490900705799",
+                "pageEditId" : "_QszN8H7tEeyyIeqTXigQ6A",
+                "trace" : {
+                  "skipTrace" : false,
+                  "type" : "Button"
+                },
+                "autoLayoutLayer" : "none",
+                "cssClassNames" : [ "Button" ],
+                "highlight" : "none",
+                "selectionHandlerType" : "next_task",
+                "toggleType" : "none"
+              }
+            }, {
+              "type" : "CbaContainer",
+              "config" : {
+                "position" : {
+                  "x" : 40,
+                  "y" : 260,
+                  "width" : 940,
+                  "height" : 360
+                },
+                "font" : {
+                  "name" : "Segoe UI",
+                  "size" : 11,
+                  "alignmentHorizontal" : "left",
+                  "bold" : false,
+                  "italic" : false,
+                  "underlined" : false
+                },
+                "color" : {
+                  "text" : {
+                    "default" : "rgba(0, 0, 0, 1)",
+                    "disabled" : "rgba(167, 166, 170, 1)"
+                  },
+                  "background" : {
+                    "default" : "rgba(255, 255, 255, 1)"
+                  }
+                },
+                "border" : {
+                  "style" : "none",
+                  "width" : 0,
+                  "radius" : 0,
+                  "color" : {
+                    "default" : "rgba(176, 176, 176, 1)",
+                    "disabled" : "rgba(210,210,210,1)"
+                  }
+                },
+                "transform" : { },
+                "state" : {
+                  "disabled" : false,
+                  "selected" : false,
+                  "hidden" : false
+                },
+                "text" : { },
+                "image" : {
+                  "displayMode" : "none"
+                },
+                "cursor" : {
+                  "standard" : "auto"
+                },
+                "tabIndex" : -1,
+                "event" : { },
+                "classifiers" : [ ],
+                "link" : { },
+                "userDefinedId" : "$1077823963661700",
+                "pageEditId" : "_RtyssH70EeyyIeqTXigQ6A",
+                "trace" : {
+                  "skipTrace" : false,
+                  "type" : "Container"
+                },
+                "autoLayoutLayer" : "none",
+                "cssClassNames" : [ "RadioButtonGroup" ],
+                "cbaChildren" : [ {
+                  "type" : "CbaRadioButton",
+                  "config" : {
+                    "position" : {
+                      "x" : 20,
+                      "y" : 20,
+                      "width" : 900,
+                      "height" : 60
+                    },
+                    "font" : {
+                      "name" : "Arial",
+                      "size" : 26,
+                      "alignmentHorizontal" : "left",
+                      "bold" : false,
+                      "italic" : false,
+                      "underlined" : false
+                    },
+                    "color" : {
+                      "text" : {
+                        "default" : "rgba(0, 0, 0, 1)",
+                        "disabled" : "rgba(167, 166, 170, 1)"
+                      },
+                      "background" : {
+                        "default" : "rgba(255, 255, 255, 1)"
+                      }
+                    },
+                    "border" : {
+                      "style" : "none",
+                      "width" : 0,
+                      "radius" : 0,
+                      "color" : {
+                        "default" : "rgba(176, 176, 176, 1)",
+                        "disabled" : "rgba(210,210,210,1)"
+                      }
+                    },
+                    "transform" : { },
+                    "state" : {
+                      "disabled" : false,
+                      "selected" : false,
+                      "hidden" : false
+                    },
+                    "text" : {
+                      "label" : "Option A"
+                    },
+                    "image" : {
+                      "displayMode" : "none"
+                    },
+                    "cursor" : {
+                      "standard" : "auto"
+                    },
+                    "tabIndex" : -1,
+                    "event" : { },
+                    "classifiers" : [ ],
+                    "link" : { },
+                    "userDefinedId" : "a",
+                    "pageEditId" : "_afZFMH70EeyyIeqTXigQ6A",
+                    "trace" : {
+                      "skipTrace" : false,
+                      "type" : "RadioButton"
+                    },
+                    "autoLayoutLayer" : "none",
+                    "cssClassNames" : [ "RadioButton", "a" ],
+                    "textWrap" : false,
+                    "selectGroupMember" : {
+                      "controllerPathId" : "/page=page1",
+                      "groupName" : "/page=page1/index=0/index=3"
+                    },
+                    "label" : {
+                      "distance" : 30,
+                      "position" : "right"
+                    },
+                    "controlIconSize" : 30
+                  }
+                }, {
+                  "type" : "CbaRadioButton",
+                  "config" : {
+                    "position" : {
+                      "x" : 20,
+                      "y" : 100,
+                      "width" : 900,
+                      "height" : 60
+                    },
+                    "font" : {
+                      "name" : "Arial",
+                      "size" : 26,
+                      "alignmentHorizontal" : "left",
+                      "bold" : false,
+                      "italic" : false,
+                      "underlined" : false
+                    },
+                    "color" : {
+                      "text" : {
+                        "default" : "rgba(0, 0, 0, 1)",
+                        "disabled" : "rgba(167, 166, 170, 1)"
+                      },
+                      "background" : {
+                        "default" : "rgba(255, 255, 255, 1)"
+                      }
+                    },
+                    "border" : {
+                      "style" : "none",
+                      "width" : 0,
+                      "radius" : 0,
+                      "color" : {
+                        "default" : "rgba(176, 176, 176, 1)",
+                        "disabled" : "rgba(210,210,210,1)"
+                      }
+                    },
+                    "transform" : { },
+                    "state" : {
+                      "disabled" : false,
+                      "selected" : false,
+                      "hidden" : false
+                    },
+                    "text" : {
+                      "label" : "Option B"
+                    },
+                    "image" : {
+                      "displayMode" : "none"
+                    },
+                    "cursor" : {
+                      "standard" : "auto"
+                    },
+                    "tabIndex" : -1,
+                    "event" : { },
+                    "classifiers" : [ ],
+                    "link" : { },
+                    "userDefinedId" : "b",
+                    "pageEditId" : "_uv2GoH70EeyyIeqTXigQ6A",
+                    "trace" : {
+                      "skipTrace" : false,
+                      "type" : "RadioButton"
+                    },
+                    "autoLayoutLayer" : "none",
+                    "cssClassNames" : [ "RadioButton", "b" ],
+                    "textWrap" : false,
+                    "selectGroupMember" : {
+                      "controllerPathId" : "/page=page1",
+                      "groupName" : "/page=page1/index=0/index=3"
+                    },
+                    "label" : {
+                      "distance" : 30,
+                      "position" : "right"
+                    },
+                    "controlIconSize" : 30
+                  }
+                }, {
+                  "type" : "CbaRadioButton",
+                  "config" : {
+                    "position" : {
+                      "x" : 20,
+                      "y" : 180,
+                      "width" : 900,
+                      "height" : 60
+                    },
+                    "font" : {
+                      "name" : "Arial",
+                      "size" : 26,
+                      "alignmentHorizontal" : "left",
+                      "bold" : false,
+                      "italic" : false,
+                      "underlined" : false
+                    },
+                    "color" : {
+                      "text" : {
+                        "default" : "rgba(0, 0, 0, 1)",
+                        "disabled" : "rgba(167, 166, 170, 1)"
+                      },
+                      "background" : {
+                        "default" : "rgba(255, 255, 255, 1)"
+                      }
+                    },
+                    "border" : {
+                      "style" : "none",
+                      "width" : 0,
+                      "radius" : 0,
+                      "color" : {
+                        "default" : "rgba(176, 176, 176, 1)",
+                        "disabled" : "rgba(210,210,210,1)"
+                      }
+                    },
+                    "transform" : { },
+                    "state" : {
+                      "disabled" : false,
+                      "selected" : false,
+                      "hidden" : false
+                    },
+                    "text" : {
+                      "label" : "Option C*"
+                    },
+                    "image" : {
+                      "displayMode" : "none"
+                    },
+                    "cursor" : {
+                      "standard" : "auto"
+                    },
+                    "tabIndex" : -1,
+                    "event" : { },
+                    "classifiers" : [ ],
+                    "link" : { },
+                    "userDefinedId" : "c",
+                    "pageEditId" : "_vSOa8H70EeyyIeqTXigQ6A",
+                    "trace" : {
+                      "skipTrace" : false,
+                      "type" : "RadioButton"
+                    },
+                    "autoLayoutLayer" : "none",
+                    "cssClassNames" : [ "RadioButton", "c" ],
+                    "textWrap" : false,
+                    "selectGroupMember" : {
+                      "controllerPathId" : "/page=page1",
+                      "groupName" : "/page=page1/index=0/index=3"
+                    },
+                    "label" : {
+                      "distance" : 30,
+                      "position" : "right"
+                    },
+                    "controlIconSize" : 30
+                  }
+                }, {
+                  "type" : "CbaRadioButton",
+                  "config" : {
+                    "position" : {
+                      "x" : 20,
+                      "y" : 260,
+                      "width" : 900,
+                      "height" : 60
+                    },
+                    "font" : {
+                      "name" : "Arial",
+                      "size" : 26,
+                      "alignmentHorizontal" : "left",
+                      "bold" : false,
+                      "italic" : false,
+                      "underlined" : false
+                    },
+                    "color" : {
+                      "text" : {
+                        "default" : "rgba(0, 0, 0, 1)",
+                        "disabled" : "rgba(167, 166, 170, 1)"
+                      },
+                      "background" : {
+                        "default" : "rgba(255, 255, 255, 1)"
+                      }
+                    },
+                    "border" : {
+                      "style" : "none",
+                      "width" : 0,
+                      "radius" : 0,
+                      "color" : {
+                        "default" : "rgba(176, 176, 176, 1)",
+                        "disabled" : "rgba(210,210,210,1)"
+                      }
+                    },
+                    "transform" : { },
+                    "state" : {
+                      "disabled" : false,
+                      "selected" : false,
+                      "hidden" : false
+                    },
+                    "text" : {
+                      "label" : "Option D"
+                    },
+                    "image" : {
+                      "displayMode" : "none"
+                    },
+                    "cursor" : {
+                      "standard" : "auto"
+                    },
+                    "tabIndex" : -1,
+                    "event" : { },
+                    "classifiers" : [ ],
+                    "link" : { },
+                    "userDefinedId" : "d",
+                    "pageEditId" : "_1pLV8H70EeyyIeqTXigQ6A",
+                    "trace" : {
+                      "skipTrace" : false,
+                      "type" : "RadioButton"
+                    },
+                    "autoLayoutLayer" : "none",
+                    "cssClassNames" : [ "RadioButton", "d" ],
+                    "textWrap" : false,
+                    "selectGroupMember" : {
+                      "controllerPathId" : "/page=page1",
+                      "groupName" : "/page=page1/index=0/index=3"
+                    },
+                    "label" : {
+                      "distance" : 30,
+                      "position" : "right"
+                    },
+                    "controlIconSize" : 30
+                  }
+                } ]
+              }
+            } ]
+          }
+        } ],
+        "selectGroups" : [ {
+          "name" : "/page=page1/index=0",
+          "blockSelectionChanges" : true,
+          "enforceSingleSelect" : true,
+          "allowDeselect" : true
+        }, {
+          "name" : "/page=page1/index=0/index=3",
+          "blockSelectionChanges" : false,
+          "enforceSingleSelect" : true,
+          "allowDeselect" : false
+        } ],
+        "propagationGroups" : [ {
+          "name" : "/page=page1/index=0",
+          "memberIndexPaths" : [ ]
+        }, {
+          "name" : "/page=page1/index=0/index=3",
+          "memberIndexPaths" : [ "/page=page1/index=0/index=3/index=0", "/page=page1/index=0/index=3/index=1", "/page=page1/index=0/index=3/index=2", "/page=page1/index=0/index=3/index=3" ]
+        } ]
+      }
+    }
+  } ],
+  "valueMaps" : [ ],
+  "variables" : [ ],
+  "tasks" : [ {
+    "name" : "task0",
+    "withEditContextMenu" : false,
+    "initialPage" : "page1",
+    "itemWidth" : 1024,
+    "itemHeight" : 768,
+    "traceVariableValues" : false,
+    "cssStyles" : "",
+    "itemHighlightColor" : "rgba(255, 204, 102, 1)",
+    "highlightColors" : [ ],
+    "namedCalculations" : [ {
+      "name" : "hit.RawA",
+      "calculation" : {
+        "operator" : "getSelected",
+        "params" : [ {
+          "name" : "absoluteUserDefId",
+          "value" : "/pageAreaType=main/pageAreaName=standard/id=a"
+        } ]
+      }
+    }, {
+      "name" : "hitText.RawA",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.RawA",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawA"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.RawA",
+      "calculation" : "RawResponse"
+    }, {
+      "name" : "hit.RawB",
+      "calculation" : {
+        "operator" : "getSelected",
+        "params" : [ {
+          "name" : "absoluteUserDefId",
+          "value" : "/pageAreaType=main/pageAreaName=standard/id=b"
+        } ]
+      }
+    }, {
+      "name" : "hitText.RawB",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.RawB",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawB"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.RawB",
+      "calculation" : "RawResponse"
+    }, {
+      "name" : "hit.RawC",
+      "calculation" : {
+        "operator" : "getSelected",
+        "params" : [ {
+          "name" : "absoluteUserDefId",
+          "value" : "/pageAreaType=main/pageAreaName=standard/id=c"
+        } ]
+      }
+    }, {
+      "name" : "hitText.RawC",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.RawC",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawC"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.RawC",
+      "calculation" : "RawResponse"
+    }, {
+      "name" : "hit.RawD",
+      "calculation" : {
+        "operator" : "getSelected",
+        "params" : [ {
+          "name" : "absoluteUserDefId",
+          "value" : "/pageAreaType=main/pageAreaName=standard/id=d"
+        } ]
+      }
+    }, {
+      "name" : "hitText.RawD",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.RawD",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawD"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.RawD",
+      "calculation" : "RawResponse"
+    }, {
+      "name" : "hit.ScoreWrong",
+      "calculation" : {
+        "operator" : "or",
+        "params" : [ {
+          "name" : "left",
+          "value" : {
+            "operator" : "or",
+            "params" : [ {
+              "name" : "left",
+              "value" : {
+                "operator" : "getSelected",
+                "params" : [ {
+                  "name" : "absoluteUserDefId",
+                  "value" : "/pageAreaType=main/pageAreaName=standard/id=a"
+                } ]
+              }
+            }, {
+              "name" : "right",
+              "value" : {
+                "operator" : "getSelected",
+                "params" : [ {
+                  "name" : "absoluteUserDefId",
+                  "value" : "/pageAreaType=main/pageAreaName=standard/id=b"
+                } ]
+              }
+            } ]
+          }
+        }, {
+          "name" : "right",
+          "value" : {
+            "operator" : "getSelected",
+            "params" : [ {
+              "name" : "absoluteUserDefId",
+              "value" : "/pageAreaType=main/pageAreaName=standard/id=d"
+            } ]
+          }
+        } ]
+      }
+    }, {
+      "name" : "hitText.ScoreWrong",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.ScoreWrong",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreWrong"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.ScoreWrong",
+      "calculation" : "ScoredResponse"
+    }, {
+      "name" : "hit.ScoreCorrect",
+      "calculation" : {
+        "operator" : "getSelected",
+        "params" : [ {
+          "name" : "absoluteUserDefId",
+          "value" : "/pageAreaType=main/pageAreaName=standard/id=c"
+        } ]
+      }
+    }, {
+      "name" : "hitText.ScoreCorrect",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.ScoreCorrect",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreCorrect"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.ScoreCorrect",
+      "calculation" : "ScoredResponse"
+    }, {
+      "name" : "hit.RawOR",
+      "calculation" : {
+        "operator" : "and",
+        "params" : [ {
+          "name" : "left",
+          "value" : {
+            "operator" : "and",
+            "params" : [ {
+              "name" : "left",
+              "value" : {
+                "operator" : "and",
+                "params" : [ {
+                  "name" : "left",
+                  "value" : {
+                    "operator" : "not",
+                    "params" : [ {
+                      "name" : "value",
+                      "value" : {
+                        "operator" : "getSelected",
+                        "params" : [ {
+                          "name" : "absoluteUserDefId",
+                          "value" : "/pageAreaType=main/pageAreaName=standard/id=a"
+                        } ]
+                      }
+                    } ]
+                  }
+                }, {
+                  "name" : "right",
+                  "value" : {
+                    "operator" : "not",
+                    "params" : [ {
+                      "name" : "value",
+                      "value" : {
+                        "operator" : "getSelected",
+                        "params" : [ {
+                          "name" : "absoluteUserDefId",
+                          "value" : "/pageAreaType=main/pageAreaName=standard/id=b"
+                        } ]
+                      }
+                    } ]
+                  }
+                } ]
+              }
+            }, {
+              "name" : "right",
+              "value" : {
+                "operator" : "not",
+                "params" : [ {
+                  "name" : "value",
+                  "value" : {
+                    "operator" : "getSelected",
+                    "params" : [ {
+                      "name" : "absoluteUserDefId",
+                      "value" : "/pageAreaType=main/pageAreaName=standard/id=c"
+                    } ]
+                  }
+                } ]
+              }
+            } ]
+          }
+        }, {
+          "name" : "right",
+          "value" : {
+            "operator" : "not",
+            "params" : [ {
+              "name" : "value",
+              "value" : {
+                "operator" : "getSelected",
+                "params" : [ {
+                  "name" : "absoluteUserDefId",
+                  "value" : "/pageAreaType=main/pageAreaName=standard/id=d"
+                } ]
+              }
+            } ]
+          }
+        } ]
+      }
+    }, {
+      "name" : "hitText.RawOR",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.RawOR",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawOR"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.RawOR",
+      "calculation" : "RawResponse"
+    }, {
+      "name" : "hit.ScoreOR",
+      "calculation" : {
+        "operator" : "and",
+        "params" : [ {
+          "name" : "left",
+          "value" : {
+            "operator" : "and",
+            "params" : [ {
+              "name" : "left",
+              "value" : {
+                "operator" : "and",
+                "params" : [ {
+                  "name" : "left",
+                  "value" : {
+                    "operator" : "not",
+                    "params" : [ {
+                      "name" : "value",
+                      "value" : {
+                        "operator" : "getSelected",
+                        "params" : [ {
+                          "name" : "absoluteUserDefId",
+                          "value" : "/pageAreaType=main/pageAreaName=standard/id=a"
+                        } ]
+                      }
+                    } ]
+                  }
+                }, {
+                  "name" : "right",
+                  "value" : {
+                    "operator" : "not",
+                    "params" : [ {
+                      "name" : "value",
+                      "value" : {
+                        "operator" : "getSelected",
+                        "params" : [ {
+                          "name" : "absoluteUserDefId",
+                          "value" : "/pageAreaType=main/pageAreaName=standard/id=b"
+                        } ]
+                      }
+                    } ]
+                  }
+                } ]
+              }
+            }, {
+              "name" : "right",
+              "value" : {
+                "operator" : "not",
+                "params" : [ {
+                  "name" : "value",
+                  "value" : {
+                    "operator" : "getSelected",
+                    "params" : [ {
+                      "name" : "absoluteUserDefId",
+                      "value" : "/pageAreaType=main/pageAreaName=standard/id=c"
+                    } ]
+                  }
+                } ]
+              }
+            } ]
+          }
+        }, {
+          "name" : "right",
+          "value" : {
+            "operator" : "not",
+            "params" : [ {
+              "name" : "value",
+              "value" : {
+                "operator" : "getSelected",
+                "params" : [ {
+                  "name" : "absoluteUserDefId",
+                  "value" : "/pageAreaType=main/pageAreaName=standard/id=d"
+                } ]
+              }
+            } ]
+          }
+        } ]
+      }
+    }, {
+      "name" : "hitText.ScoreOR",
+      "calculation" : ""
+    }, {
+      "name" : "hitWeighted.ScoreOR",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreOR"
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "hitClass.ScoreOR",
+      "calculation" : "ScoredResponse"
+    }, {
+      "name" : "hitsAccumulated",
+      "calculation" : {
+        "operator" : "add",
+        "params" : [ {
+          "name" : "paramsArray",
+          "value" : [ {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.RawA"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.RawB"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.RawC"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.RawD"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.ScoreWrong"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.ScoreCorrect"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.RawOR"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitWeighted.ScoreOR"
+            } ]
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "hitsCount",
+      "calculation" : {
+        "operator" : "add",
+        "params" : [ {
+          "name" : "paramsArray",
+          "value" : [ {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.RawA"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.RawB"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.RawC"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.RawD"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.ScoreWrong"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.ScoreCorrect"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.RawOR"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          }, {
+            "operator" : "ifThenElse",
+            "params" : [ {
+              "name" : "if",
+              "value" : {
+                "operator" : "evaluateNamedCalculation",
+                "params" : [ {
+                  "name" : "calculationName",
+                  "value" : "hit.ScoreOR"
+                } ]
+              }
+            }, {
+              "name" : "then",
+              "value" : 1
+            }, {
+              "name" : "else",
+              "value" : 0
+            } ]
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "missesAccumulated",
+      "calculation" : 0
+    }, {
+      "name" : "missesCount",
+      "calculation" : 0
+    }, {
+      "name" : "classHitWeighted.ScoredResponse",
+      "calculation" : {
+        "operator" : "ifGuard",
+        "params" : [ {
+          "name" : "branches",
+          "value" : [ {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreWrong"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.ScoreWrong"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreCorrect"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.ScoreCorrect"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreOR"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.ScoreOR"
+              } ]
+            }
+          }, {
+            "guard" : true,
+            "branch" : 0
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classFirstActiveHit.ScoredResponse",
+      "calculation" : {
+        "operator" : "ifGuard",
+        "params" : [ {
+          "name" : "branches",
+          "value" : [ {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreWrong"
+              } ]
+            },
+            "branch" : "ScoreWrong"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreCorrect"
+              } ]
+            },
+            "branch" : "ScoreCorrect"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.ScoreOR"
+              } ]
+            },
+            "branch" : "ScoreOR"
+          }, {
+            "guard" : true,
+            "branch" : ""
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classHitWeighted.RawResponse",
+      "calculation" : {
+        "operator" : "ifGuard",
+        "params" : [ {
+          "name" : "branches",
+          "value" : [ {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawA"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.RawA"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawB"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.RawB"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawC"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.RawC"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawD"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.RawD"
+              } ]
+            }
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawOR"
+              } ]
+            },
+            "branch" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hitWeighted.RawOR"
+              } ]
+            }
+          }, {
+            "guard" : true,
+            "branch" : 0
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classFirstActiveHit.RawResponse",
+      "calculation" : {
+        "operator" : "ifGuard",
+        "params" : [ {
+          "name" : "branches",
+          "value" : [ {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawA"
+              } ]
+            },
+            "branch" : "RawA"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawB"
+              } ]
+            },
+            "branch" : "RawB"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawC"
+              } ]
+            },
+            "branch" : "RawC"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawD"
+              } ]
+            },
+            "branch" : "RawD"
+          }, {
+            "guard" : {
+              "operator" : "evaluateNamedCalculation",
+              "params" : [ {
+                "name" : "calculationName",
+                "value" : "hit.RawOR"
+              } ]
+            },
+            "branch" : "RawOR"
+          }, {
+            "guard" : true,
+            "branch" : ""
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classResult.ScoredResponse",
+      "calculation" : {
+        "operator" : "and",
+        "params" : [ {
+          "name" : "paramsArray",
+          "value" : [ {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreWrong"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreCorrect"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreOR"
+            } ]
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classResult.RawResponse",
+      "calculation" : {
+        "operator" : "and",
+        "params" : [ {
+          "name" : "paramsArray",
+          "value" : [ {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawA"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawB"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawC"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawD"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawOR"
+            } ]
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classMaxWeighted",
+      "calculation" : {
+        "operator" : "max",
+        "params" : [ {
+          "name" : "paramsArray",
+          "value" : [ {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classHitWeighted.ScoredResponse"
+            } ]
+          }, {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classHitWeighted.RawResponse"
+            } ]
+          } ]
+        } ]
+      }
+    }, {
+      "name" : "classMaxName",
+      "calculation" : {
+        "operator" : "maxNamed",
+        "params" : [ {
+          "name" : "ScoredResponse",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classHitWeighted.ScoredResponse"
+            } ]
+          }
+        }, {
+          "name" : "RawResponse",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classHitWeighted.RawResponse"
+            } ]
+          }
+        } ]
+      }
+    }, {
+      "name" : "totalResult",
+      "calculation" : {
+        "operator" : "ifThenElse",
+        "params" : [ {
+          "name" : "if",
+          "value" : {
+            "operator" : "and",
+            "params" : [ {
+              "name" : "left",
+              "value" : {
+                "operator" : "greaterEqual",
+                "params" : [ {
+                  "name" : "left",
+                  "value" : {
+                    "operator" : "evaluateNamedCalculation",
+                    "params" : [ {
+                      "name" : "calculationName",
+                      "value" : "hitsCount"
+                    } ]
+                  }
+                }, {
+                  "name" : "right",
+                  "value" : 1
+                } ]
+              }
+            }, {
+              "name" : "right",
+              "value" : {
+                "operator" : "lessEqual",
+                "params" : [ {
+                  "name" : "left",
+                  "value" : {
+                    "operator" : "evaluateNamedCalculation",
+                    "params" : [ {
+                      "name" : "calculationName",
+                      "value" : "missesCount"
+                    } ]
+                  }
+                }, {
+                  "name" : "right",
+                  "value" : 0
+                } ]
+              }
+            } ]
+          }
+        }, {
+          "name" : "then",
+          "value" : 1
+        }, {
+          "name" : "else",
+          "value" : 0
+        } ]
+      }
+    }, {
+      "name" : "nbUserInteractions",
+      "calculation" : {
+        "operator" : "nbUserInteractions",
+        "params" : [ ]
+      }
+    }, {
+      "name" : "nbUserInteractionsTotal",
+      "calculation" : {
+        "operator" : "nbUserInteractionsTotal",
+        "params" : [ ]
+      }
+    }, {
+      "name" : "firstReactionTime",
+      "calculation" : {
+        "operator" : "firstReactionTime",
+        "params" : [ ]
+      }
+    }, {
+      "name" : "firstReactionTimeTotal",
+      "calculation" : {
+        "operator" : "firstReactionTimeTotal",
+        "params" : [ ]
+      }
+    }, {
+      "name" : "taskExecutionTime",
+      "calculation" : {
+        "operator" : "taskExecutionTime",
+        "params" : [ ]
+      }
+    }, {
+      "name" : "taskExecutionTimeTotal",
+      "calculation" : {
+        "operator" : "taskExecutionTimeTotal",
+        "params" : [ ]
+      }
+    } ],
+    "scoreResult" : {
+      "attributes" : {
+        "resultText" : "",
+        "executionTimeStamp" : {
+          "operator" : "currentTimestamp",
+          "params" : [ ]
+        },
+        "nbInteractionsTotal" : {
+          "operator" : "nbUserInteractionsTotal",
+          "params" : [ ]
+        },
+        "nbInteractions" : {
+          "operator" : "nbUserInteractions",
+          "params" : [ ]
+        },
+        "reactionTimeTotal" : {
+          "operator" : "firstReactionTimeTotal",
+          "params" : [ ]
+        },
+        "reactionTime" : {
+          "operator" : "firstReactionTime",
+          "params" : [ ]
+        },
+        "execTimeTotal" : {
+          "operator" : "taskExecutionTimeTotal",
+          "params" : [ ]
+        },
+        "execTime" : {
+          "operator" : "taskExecutionTime",
+          "params" : [ ]
+        },
+        "scoreStatus" : "AUTOMATIC",
+        "classScoringModeHit" : "firstActive",
+        "classScoringModeMiss" : "accumulatedWeights",
+        "nbHits" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "hitsCount"
+          } ]
+        },
+        "nbMisses" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "missesCount"
+          } ]
+        },
+        "hitWeight" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "hitsAccumulated"
+          } ]
+        },
+        "missWeight" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "missesAccumulated"
+          } ]
+        },
+        "creditClass" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "classMaxName"
+          } ]
+        },
+        "creditWeight" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "classMaxWeighted"
+          } ]
+        },
+        "result" : {
+          "operator" : "evaluateNamedCalculation",
+          "params" : [ {
+            "name" : "calculationName",
+            "value" : "totalResult"
+          } ]
+        },
+        "name" : "task0"
+      },
+      "lists" : [ {
+        "name" : "hitList",
+        "elements" : [ {
+          "name" : "RawA",
+          "class" : "RawResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawA"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.RawA"
+            } ]
+          }
+        }, {
+          "name" : "RawB",
+          "class" : "RawResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawB"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.RawB"
+            } ]
+          }
+        }, {
+          "name" : "RawC",
+          "class" : "RawResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawC"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.RawC"
+            } ]
+          }
+        }, {
+          "name" : "RawD",
+          "class" : "RawResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawD"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.RawD"
+            } ]
+          }
+        }, {
+          "name" : "ScoreWrong",
+          "class" : "ScoredResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreWrong"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.ScoreWrong"
+            } ]
+          }
+        }, {
+          "name" : "ScoreCorrect",
+          "class" : "ScoredResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreCorrect"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.ScoreCorrect"
+            } ]
+          }
+        }, {
+          "name" : "RawOR",
+          "class" : "RawResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.RawOR"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.RawOR"
+            } ]
+          }
+        }, {
+          "name" : "ScoreOR",
+          "class" : "ScoredResponse",
+          "weight" : 1,
+          "result" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hit.ScoreOR"
+            } ]
+          },
+          "resultText" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "hitText.ScoreOR"
+            } ]
+          }
+        } ]
+      }, {
+        "name" : "missList",
+        "elements" : [ ]
+      }, {
+        "name" : "hitClassList",
+        "elements" : [ {
+          "name" : "ScoredResponse",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classFirstActiveHit.ScoredResponse"
+            } ]
+          }
+        }, {
+          "name" : "RawResponse",
+          "value" : {
+            "operator" : "evaluateNamedCalculation",
+            "params" : [ {
+              "name" : "calculationName",
+              "value" : "classFirstActiveHit.RawResponse"
+            } ]
+          }
+        } ]
+      }, {
+        "name" : "missClassList",
+        "elements" : [ ]
+      } ]
+    }
+  } ],
+  "usedResources" : {
+    "resources" : [ ],
+    "externalResources" : [ ]
+  },
+  "dependencies" : [ ]
+}
