@@ -134,36 +134,38 @@ shinyassess_internal_prepare_www_folder <- function(pool,config){
     dir.create(file.path(config$WWWfolder,"items"))
   }
 
-  for (i in 1:dim(pool)[1]){
-    if(!dir.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"]))){
-      dir.create(file.path(config$WWWfolder,"items",pool[i,"itemName"]))
+  uniqueProjects <- unique(pool[,c("FullPath","itemName","Project")])
+
+  for (i in 1:dim(uniqueProjects)[1]){
+    if(!dir.exists(file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"]))){
+      dir.create(file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"]))
     }
 
-    unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
+    unzip(uniqueProjects[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"]),files=c("config.json","internal.json","stimulus.json"))
 
-    fn <- unzip(pool[i,"FullPath"],list=T)
+    fn <- unzip(uniqueProjects[i,"FullPath"],list=T)
 
     if (length(fn[startsWith(fn$Name, "resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
+      unzip(uniqueProjects[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"]),files=fn[startsWith(fn$Name, "resources/"),"Name"])
     }
 
     if (length(fn[startsWith(fn$Name, "external-resources/"),"Name"])>0){
-      unzip(pool[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",pool[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
+      unzip(uniqueProjects[i,"FullPath"],exdir=file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"]),files=fn[startsWith(fn$Name, "external-resources/"),"Name"])
     }
 
-    if (!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"config.json"))){
-      cat(paste0("File 'config.json' not found in item '", pool[i,"Project"], "' not found.\n"))
+    if (!file.exists(file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"],"config.json"))){
+      cat(paste0("File 'config.json' not found in item '", uniqueProjects[i,"Project"], "' not found.\n"))
       stop()
-    } else if (!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"internal.json"))){
-      cat(paste0("File 'internal.json' not found in item '", pool[i,"Project"], "' not found.\n"))
+    } else if (!file.exists(file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"],"internal.json"))){
+      cat(paste0("File 'internal.json' not found in item '", uniqueProjects[i,"Project"], "' not found.\n"))
       stop()
-    } else if(!file.exists(file.path(config$WWWfolder,"items",pool[i,"itemName"],"stimulus.json"))){
-      cat(paste0("File 'stimulus.json' not found in item '", pool[i,"Project"], "' not found.\n"))
+    } else if(!file.exists(file.path(config$WWWfolder,"items",uniqueProjects[i,"itemName"],"stimulus.json"))){
+      cat(paste0("File 'stimulus.json' not found in item '", uniqueProjects[i,"Project"], "' not found.\n"))
       stop()
     }
 
     if (config$verbose){
-      cat(paste0("Prepared CBA ItemBuilder Project File '",pool[i,"Project"], "'.\n"))
+      cat(paste0("Prepared CBA ItemBuilder Project File '",uniqueProjects[i,"Project"], "'.\n"))
     }
 
   }

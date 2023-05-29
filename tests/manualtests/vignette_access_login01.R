@@ -1,6 +1,7 @@
 # vignette_access_login01.R
 
 library(ShinyItemBuilder)
+library(shiny)
 
 item_pool <- getDemoPool("demo01")
 assessment_config <- getConfig(sessiontype="provided")
@@ -16,14 +17,17 @@ assessment_config$login=function(session){
   ))
 }
 
-assessment_config$validate=function(token_or_login=NULL, password=NULL){
-  custom_list_accounts <- c("A","B","C")
+assessment_config$custom_list_accounts <- c("A","B","C")
+
+assessment_config$validate=function(token_or_login=NULL, password=NULL, config=NULL){
+
+
   if (is.null(token_or_login)||length(token_or_login)==0)
   {
     return (FALSE)
   }
   else {
-    if (!is.na(match(token_or_login,custom_list_accounts))){
+    if (!is.na(match(token_or_login,config$custom_list_accounts))){
       return (TRUE)
     }
   }

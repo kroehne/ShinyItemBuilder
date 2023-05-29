@@ -15,7 +15,7 @@
 #' }
 
 getValueForTestTaker <- function(session, name, default=NULL, store=T){
-  shinyassess_internal_create_or_load_session(session)
+
   if (exists(name, runtime.data[[session$userData$cbasession]])){
     runtime.data[[session$userData$cbasession]][[name]]
   }

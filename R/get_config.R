@@ -126,11 +126,6 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   ret$score=function(pool, session, score, current_item){
 
-    print(paste0("Item: ", current_item))
-    print(pool[current_item,c("Project","Task")])
-    print("Score:")
-    print(score[score$Active, ])
-
   }
 
   # authentication functions

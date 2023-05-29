@@ -18,6 +18,8 @@ getDemoPool <- function(name="demo01"){
     s <- shinyassess_internal_get_pool_from_folder(path = file.path(f,name))
   } else if (name=="demo02"){
     s <- shinyassess_internal_get_pool_from_folder(path = file.path(f,name))
+  } else if (name=="demo03"){
+    s <- shinyassess_internal_get_pool_from_folder(path = file.path(f,name))
   } else {
     stop(paste0("A demo with the name '",name,"' is not available."))
   }

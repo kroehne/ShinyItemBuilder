@@ -37,9 +37,9 @@ renderAssessment <- function(input, output, session){
       if (!base::is.null(query[[assessment_env$config$queryStringParameterName]])) {
         provided_session <- base_extract_parameter(query, assessment_env$config$queryStringParameterName)
         if (assessment_env$config$verbose)
-          print(paste0("Info: New Window, " , assessment_env$config$queryStringParameterName, "=", provided_session))
+          print(paste0("Info: New Window, ", assessment_env$config$queryStringParameterName, "=", provided_session))
       }
-      if (!assessment_env$config$validate(provided_session,assessment_env$config)){
+      if (!assessment_env$config$validate(provided_session, config=assessment_env$config)){
         assessment_env$config$login()
       } else {
 
@@ -108,10 +108,14 @@ renderAssessment <- function(input, output, session){
     e <- fromJSON(input$ibevents)
     if (e$eventname == "loaded")
     {
+      session$sendCustomMessage("shinyassess_iframe_visibility","none")
+
       if (assessment_env$config$verbose)
         print(paste0("Info: Player loaded (",e$cbasession,")"))
 
       session$userData$cbasession=e$cbasession
+
+      shinyassess_internal_create_or_load_session(session)
 
       current_item <- assessment_env$config$navigation(assessment_env$pool, session, direction="START")
 
@@ -119,7 +123,6 @@ renderAssessment <- function(input, output, session){
         print(paste0("Info: Current Item for '",e$cbasession,"': ", current_item))
 
       if (current_item == -1){
-        session$sendCustomMessage("shinyassess_iframe_visibility","none")
         assessment_env$config$end(session)
       }
       else

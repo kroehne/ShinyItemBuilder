@@ -1,0 +1,247 @@
+---
+title: "Use Custom `catR`-Package for Adaptive Testing"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use Custom `catR`-Package for Adaptive Testing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+ 
+This example shows how to use the packages `catR` and `ShinyItemBuilder` to implement an adaptive test. We will use the tasks provided as `demo03`.
+
+By default, `ShinyItemBuilder` is configured to give access to anyone that knows the URL.
+
+```{r configuration_01, eval=FALSE}
+library(shiny)
+library(ShinyItemBuilder)
+
+item_pool <- getDemoPool("demo03")
+item_pool <- item_pool[1:20,]       # Currently only 20 Tasks are defined in 'ImageCat.zip'
+
+assessment_config <- getConfig(Verbose = T)
+```
+
+#### Prepare ItemPool
+
+For adaptive testing, item parameters are required. For demonstration purposes we use random item parameters provided for the example.
+
+```{r configuration_02, eval=FALSE}
+library(openxlsx)
+
+# read item parameter from excel file
+
+assessment_config$itemPoolDescription <- read.xlsx(
+  file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/demo03/pool.xlsx"))
+
+it.parameters <- assessment_config$itemPoolDescription[,c("A","B","C","D")]
+it.parameters <- it.parameters[1:20,]  # Currently only 20 Tasks are defined in 'ImageCat.zip'
+
+assessment_config$bank <- it.parameters
+```
+
+Note that the item bank (i.e., the IRT item parameters) are stored in the configuration as `assessment_config$bank`. 
+ 
+#### Define Termination Criterion
+
+In this example we use the package `catR`. The package expects a list that defines stop criteria (see `?catR::checkStopRule` for details).
+
+```{r configuration_03, eval=FALSE}
+library(catR)
+
+assessment_config$stop <- list(rule = c("length", "precision"), thr = c(10, 0.1))
+
+```
+
+#### Define Scoring
+
+The CBA ItemBuilder tasks used in this example for adaptive testing are created in the following way. Each item is implemented as separate task. Each task contains one class `ScoredResponse` with the hit-names `Item{ItemNumber}Correct`, `Item{ItemNumber}Wrong` and `Item{ItemNumber}Missing`. 
+
+For adaptive testing with dichotomous IRT models, we need the response variable as $1$ (solved) or $0$ (not solved). Hence, we define a custom `score` function that assigns the value $1$ to the variable `solved_current_item` if the (active) hit name contains the word `Correct`:
+
+```{r configuration_04, eval=FALSE}
+assessment_config$score=function(pool, session, score, current_item){
+
+  # Score response
+
+  solved_current_item <- ifelse(length(grep("Correct",score[score$Active,1]))>0,1,0)
+
+  # Store score and item in history
+
+  history_items  <- getValueForTestTaker(session, "history-items",default=list(), store = F)
+  setValueForTestTaker(session, "history-items", append(history_items, current_item))
+
+  history_scores  <- getValueForTestTaker(session, "history-scores",default=list(), store = F)
+  setValueForTestTaker(session, "history-scores", append(history_scores, solved_current_item))
+
+}
+```
+
+Note that the function `score` is also used to store the history of all selected items and scores.
+
+#### Adaptive Algorithm
+
+The adaptive algorithm is entirely implemented in the `navigation`-function provided to `ShinyItemBuilder` as part of the configuration. In the first part of the function, the history is loaded. 
+
+If the `current_item==0` (i.e., `navigation` is called the first time), the first item is selected using the function `nextItem()` of the `catR`-package (see `?nextItem` for details).
+
+If the function `navigation` is called during the test (i.e., if already responses are observed), the functions `thetaEst()` and `semTheta()` of the `catR`-package are used to estimate the ability and the corresponding standard error. For later use, the estimated parameters are stored in the history. 
+
+Finally, the function `checkStopRule()` is used to check the termination criteria. Only if none of the criteria is reached, the function `nextItem()` is used again to select the next item. 
+
+```{r configuration_05, eval=FALSE}
+assessment_config$navigation = function(pool, session, direction="NEXT"){
+
+  # Load history
+  
+  current_item <- getValueForTestTaker(session, "current-item-in-pool", default=1, store = F)
+  history_items  <- as.numeric(unlist(getValueForTestTaker(session, "history-items",default=list(), store = F)))
+  history_scores  <- as.numeric(unlist(getValueForTestTaker(session, "history-scores",default=list(), store = F)))
+
+  if ((current_item==0  && direction=="START")||
+      (length(history_items) ==0)){
+
+    # Select first item
+
+    res <- nextItem(assessment_config$bank, theta=0, randomesque = 5, random.seed=1)
+    current_item <- as.numeric(res$name)
+
+    if (assessment_config$verbose)
+      print(paste0("Selected first item: ", current_item))
+  }
+  else
+  {
+    if (direction=="NEXT"){
+
+      # Estimate theta
+
+      th <- thetaEst(rbind(assessment_config$bank[history_items,]), history_scores, method = "WL")
+      se <- semTheta(th, rbind(assessment_config$bank[history_items,]), history_scores, method = "ML")
+
+      # Store history
+
+      history_th  <- getValueForTestTaker(session, "history-theta",default=list(), store = F)
+      setValueForTestTaker(session, "history-theta", append(history_th, th))
+      history_se  <- getValueForTestTaker(session, "history-se",default=list(), store = F)
+      setValueForTestTaker(session, "history-se", append(history_se, se))
+
+      if (assessment_config$verbose)
+        print(paste0("Updated interrim estimate: theta = ", round(th,3), " (se = ", round(se,3), ")"))
+
+      # Check test termination
+
+      check <- checkStopRule(th = th, se = se, N = length(history_items),
+                             stop = assessment_config$stop)
+
+      if (check$decision)
+      {
+        current_item <- -1 # end the assessment
+      }
+      else
+      {
+        if (assessment_config$verbose)
+          print(paste0("Items excluded for item selection: ", paste0(history_items, collapse = ";")))
+
+        # Select next item
+
+        res <- nextItem(assessment_config$bank, theta=th, out = history_items)
+        current_item <- as.numeric(res$name)
+
+        if (assessment_config$verbose)
+          print(paste0("Selected item for step ", length(history_items)+1, ": ", current_item))
+      }
+    }
+    else if (direction=="PREVIOUS"){
+      # ignore
+    }
+    else if (direction=="CANCEL"){
+      current_item <- -2 # pause the assessment
+    }
+  }
+
+  setValueForTestTaker(session, "current-item-in-pool",current_item)
+
+  current_item
+}
+```
+
+#### Show CAT Results
+
+To show the results of the adaptive test, the following `end` function can be used to show a plot with all administered items, the theta-history and the final ability estimate. 
+
+```{r configuration_06, eval=FALSE}
+assessment_config$end <- function(session) {
+
+  data <- runtime.data[[session$userData$cbasession]]
+  a <- NULL
+  for (d in 1:dim(data$ResultData)[1]){
+    s <- parse_ib_scoring(data$ResultData[d,"Resultdata"])
+    a <- rbind(a,cbind(Project=data$ResultData[d,"Project"],
+                       Task=data$ResultData[d,"Task"],
+                       Scope=data$ResultData[d,"Scope"],
+                       s[s$Active,c("Name","ResultText")]))
+  }
+
+  history_items  <- as.numeric(unlist(getValueForTestTaker(session, "history-items",default=list(), store = F)))
+  history_scores  <- as.numeric(unlist(getValueForTestTaker(session, "history-scores",default=list(), store = F)))
+  history_th  <- as.numeric(unlist(getValueForTestTaker(session, "history-theta",default=list(), store = F)))
+  history_se  <- as.numeric(unlist(getValueForTestTaker(session, "history-se",default=list(), store = F)))
+
+  template <- '---
+    output: html_document
+    ---
+    
+    ``` {r, echo=F}
+    history_b <- assessment_config$bank[history_items,"B"]
+    plot(c(1,length(history_items)+1),c(-4,4),type="n",bty="n",xlab="Step (Test length)",ylab="Theta",
+         main=paste0("Estimated Ability: ", round(history_th[length(history_th)],2), " (SE ", round(history_se[length(history_se)],2), ")"))
+    arrows(x0=1:length(history_items), y0=history_th-history_se, x1=1:length(history_items), y1=history_th+history_se,
+           code=3, angle=90, length=0.05, col="gray")
+    points(1:length(history_items), history_th,type="l")
+    points(1:length(history_items), history_b,type="p", pch=history_scores+1)
+    legend("topleft",inset=0.1,pch=c(1,2),c("not solved","solved"),bty="n")
+     ```
+'
+ write(template, file=paste0(session$userData$cbasession,".rmd"), append = FALSE)
+
+  tmpfile <- rmarkdown::render(paste0(session$userData$cbasession,".rmd"))
+  b64 <- base64enc::dataURI(file = tmpfile, mime = "text/html")
+
+  if (file.exists(tmpfile))
+    file.remove(tmpfile)
+
+  if (file.exists(paste0(session$userData$cbasession,".rmd")))
+    file.remove(paste0(session$userData$cbasession,".rmd"))
+
+  showModal(modalDialog(
+    title = "Feedback",
+    footer = tagList(actionButton("endActionButtonOK", "Restart")),
+    renderUI({
+      tags$iframe(src=b64, height=400, width=550, frameBorder=0)
+    }),
+  ), session)
+}
+```
+
+#### Start the Test
+
+After defining `item_pool` and `assessment_config`, the Shiny app is started using the following call:
+
+```{r configuration_07, eval=FALSE}
+shinyApp(assessmentOutput(pool = item_pool,
+                          config = assessment_config,overwrite=T),
+         renderAssessment)
+```
+
+
+#### About the Example Test
+
+The example item `ImageCAT.zip` contains images from the following resource: 
+
+Jungjohann, J., Lutz, S., Barwasser, A., & Gebhardt, M. (2021). Bildkarten für Unterricht und Förderung. https://epub.uni-regensburg.de/49355/1/2021_Jungjohann%20et%20al_Bildkarten_fuer_Unterricht_Foerderung.pdf
