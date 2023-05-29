@@ -118,6 +118,14 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
   writeLines(paste0('{"tasks": [', paste0('{"item": "', pool$itemName, '", "task":"', pool$Task, '", "scope":"' , pool$Scope, '"}', collapse = ",") , '] }'), fileConn)
   close(fileConn)
 
+  if(!dir.exists(file.path(config$WWWfolder,"controller"))){
+    dir.create(file.path(config$WWWfolder,"controller"))
+  }
+
+  fileConn<-file(paste0(config$WWWfolder,"/controller/config.json"))
+  writeLines(paste0('{ "mathJaxCdnUrl": "math-jax unknown", "itemSize": { "height": ', max(pool$itemHeight), ', "width": ', max(pool$itemWidth), ' }, "players": [ { "playerId": "A", "runtimeVersion": "9.9.0", "frameContentFile": "frameContent_9_9_0.html" } ], "showPlayerInfo": false }'), fileConn)
+  close(fileConn)
+
   if (config$verbose){
     cat(paste0("Preparation completed.\n"))
   }

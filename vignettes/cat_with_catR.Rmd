@@ -1,8 +1,8 @@
 ---
-title: "Use Custom `catR`-Package for Adaptive Testing"
+title: "Use `catR`-Package for Adaptive Testing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use Custom `catR`-Package for Adaptive Testing}
+  %\VignetteIndexEntry{Use `catR`-Package for Adaptive Testing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
