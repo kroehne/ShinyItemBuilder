@@ -202,6 +202,8 @@ dataModalDownloadDialog <- function(session, unvalidated = TRUE) {
       p(paste0("Found ", nfiles, " data file(s).")),
       downloadButton("downloadData", "Download all data"),
       actionButton("deleteData","Delete all data"),
+      hr(),
+      actionButton("endActionButtonOK","Restart current session"),
       footer = tagList(
         modalButton("Close")
       )
