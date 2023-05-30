@@ -10,11 +10,12 @@ The [CBA ItemBuilder](https://cba.itembuilder.de) is an authoring tool for desig
 
 Demo: 
 
-* Install the packages `shiny`, `remotes` and `ShinyItemBuilder` by executing the following lines in R:
+* Install the packages `shiny`, `remotes`, `knitr` and `ShinyItemBuilder` by executing the following lines in R:
 
 ````
 install.packages("shiny")
 install.packages("remotes")
+install.packages("kntir")
 remotes::install_github("kroehne/ShinyItemBuilder", build_vignettes = TRUE) 
 ````
 
