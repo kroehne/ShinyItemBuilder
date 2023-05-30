@@ -72,10 +72,11 @@
 <p><a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a> is a technology to create web applications using R. Packages and functions from R can be executed on the server side. R/Shiny requires special Shiny servers, such as an account on <a href="https://shinyapps.io/" class="external-link">ShinyApps.io</a> or a prepared server using, for instance, <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a> or <a href="https://posit.co/download/shiny-server/" class="external-link">Shiny Server</a>.</p>
 <p>Demo:</p>
 <ul>
-<li>Install the packages <code>shiny</code>, <code>remotes</code> and <code>ShinyItemBuilder</code> by executing the following lines in R:</li>
+<li>Install the packages <code>shiny</code>, <code>remotes</code>, <code>knitr</code> and <code>ShinyItemBuilder</code> by executing the following lines in R:</li>
 </ul>
 <pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"kntir"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kroehne/ShinyItemBuilder"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre>
 <ul>
 <li>Run the following code in R</li>
