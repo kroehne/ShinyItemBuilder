@@ -70,6 +70,7 @@
 <p>The R project <code>ShinyItemBuilder</code> can be used to implement computer-based assessments using the <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> and <a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a>.</p>
 <p>The <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> is an authoring tool for designing and implementing simple and complex items for computer-based assessments (CBA) that can be used without a particular knowledge in a specific programming language (such as, for instance, JavaScript).</p>
 <p><a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a> is a technology to create web applications using R. Packages and functions from R can be executed on the server side. R/Shiny requires special Shiny servers, such as an account on <a href="https://shinyapps.io/" class="external-link">ShinyApps.io</a> or a prepared server using, for instance, <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a> or <a href="https://posit.co/download/shiny-server/" class="external-link">Shiny Server</a>.</p>
+<p>R/Shiny application can also be run locally directly from R.</p>
 <p>Demo:</p>
 <ul>
 <li>Install the packages <code>shiny</code>, <code>remotes</code>, <code>knitr</code> and <code>ShinyItemBuilder</code> by executing the following lines in R:</li>
@@ -108,6 +109,7 @@
 <span>                          overwrite<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, </span>
 <span>         <span class="va">renderAssessment</span><span class="op">)</span></span>
 <span> </span></code></pre>
+<p>Multiple assessment components (items, instruction pages, etc.) can be used as individual CBA ItemBuilder Project Files (and Tasks). The order can be customized in the R-object <code>item_pool</code>, or a separate function to navigate between tasks is provided as part of the <code>assessment_config</code> configuration.</p>
 <p>This software is currently a proof-of-concept.</p>
 <p>Find more information about the <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> at <a href="https://cba.itembuilder.de" class="external-link">cba.itembuilder.de</a>.</p>
 <p>To see provided vignettes run in R (or open view <a href="https://kroehne.github.io/ShinyItemBuilder/articles/" class="external-link">online</a>):</p>
