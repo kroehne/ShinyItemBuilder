@@ -8,6 +8,8 @@ The [CBA ItemBuilder](https://cba.itembuilder.de) is an authoring tool for desig
 
 [R](https://www.r-project.org/)/[Shiny](https://shiny.posit.co/) is a technology to create web applications using R. Packages and functions from R can be executed on the server side. R/Shiny requires special Shiny servers, such as an account on [ShinyApps.io](https://shinyapps.io/) or a prepared server using, for instance, [ShinyProxy](https://www.shinyproxy.io/) or [Shiny Server](https://posit.co/download/shiny-server/). 
 
+R/Shiny application can also be run locally directly from R. 
+
 Demo: 
 
 * Install the packages `shiny`, `remotes`, `knitr` and `ShinyItemBuilder` by executing the following lines in R:
@@ -53,6 +55,8 @@ shinyApp(assessmentOutput(pool = item_pool,
          renderAssessment)
  
 ````
+
+Multiple assessment components (items, instruction pages, etc.) can be used as individual CBA ItemBuilder Project Files (and Tasks). The order can be customized in the R-object `item_pool`, or a separate function to navigate between tasks is provided as part of the `assessment_config` configuration. 
 
 This software is currently a proof-of-concept. 
 
