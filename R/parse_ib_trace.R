@@ -1,14 +1,19 @@
 # parse_ib_trace.R
 
-shinyassess_internal_parse_ib_trace <- function(session, e){
- 
-  if (assessment_env$config$verbose){
-    tmp <- jsonlite::fromJSON(e$trace)
-    print(tmp$logEntriesList[,c("entryId","timestamp","type")])
-  }
-     
-  cbind(Time = Sys.time(), Tracedata = e$trace)
-         
+#' @title Parse CBA ItemBuilder Trace JSON
+#' @description `parse_ib_trace` converts the JSON to a data.frame
+#' @details The returned object returns a data.frame containing the trace data provided as JSON.
+#' @param tracejson Trace JSON as provided by the CBA ItemBuilder runtime.
+#' @return data frame with all hits and result texts
+#' @examples
+#' \dontrun{
+#'  demo <- parse_ib_trace(json)
+#' }
+
+parse_ib_trace <- function(tracejson){
+
+  jsonlite::fromJSON(tracejson)
+
 }
 
- 
+

@@ -1,0 +1,45 @@
+---
+title: "Use Custom `trace`-Functions to Inspect Log Events"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use Custom `trace`-Functions to Inspect Log Events}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+ 
+This example shows how to use the package `ShinyItemBuilder` with a custom `trace`-function, to show log events live in the R console window, while interacting with a CBA ItemBuilder task. We will use the item provided as `demo03`.
+
+```{r login_configuration_01, eval=FALSE}
+library(shiny)
+library(ShinyItemBuilder)
+
+item_pool <- getDemoPool(name="demo02")
+assessment_config <- getConfig()
+
+assessment_config$trace <- function(pool, session, item, e){
+
+  tmp <- jsonlite::fromJSON(e$trace)
+  for (i in 1:dim(tmp$logEntriesList)[1]){
+    d <- names(tmp$logEntriesList$details[i,])[!is.na(tmp$logEntriesList$details[i,])]
+    cat(paste0("Type: ", tmp$logEntriesList[i,"type"], "\n",
+               "Time: ", lubridate::seconds(ymd_hms(tmp$logEntriesList[i,"timestamp"])), "\n",
+               "Details: ", length(d), " Attributes \n\n"))
+
+  }
+
+}
+
+shinyApp(assessmentOutput(pool = item_pool,
+         config = assessment_config,
+         overwrite=T),
+         renderAssessment)
+
+
+```

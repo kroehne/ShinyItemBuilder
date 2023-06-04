@@ -140,7 +140,11 @@ renderAssessment <- function(input, output, session){
       if (assessment_env$config$verbose)
         print(paste0("Info: Trace data provided (",e$cbasession,")"))
 
-      runtime.data[[session$userData$cbasession]]$TraceData <<- rbind(runtime.data[[session$userData$cbasession]]$TraceData,shinyassess_internal_parse_ib_trace(session,e))
+      if (!is.null(assessment_env$config$trace))
+        assessment_env$config$trace(assessment_env$pool, session, current_item, e)
+
+      runtime.data[[session$userData$cbasession]]$TraceData <<- rbind(runtime.data[[session$userData$cbasession]]$TraceData,
+                                                                      cbind(Time = Sys.time(), Tracedata = e$trace))
 
       shinyassess_internal_save_session(session)
     }

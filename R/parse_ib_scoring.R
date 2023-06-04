@@ -28,13 +28,6 @@ parse_ib_scoring <- function(scoringjson){
     }
   }
 
-  #d <- data.frame(cbind(Name=names(a),Active=a,ResultText=rt,Type=ht))
-
-  #d <- data.frame(cbind(Name=unlist(names(a)),
-  #                      Active=as.logical(unlist(a)),
-  #                      ResultText=unlist(rt),
-  #                      Type=unlist(ht)))
-
   d <- data.frame(Name=unlist(names(a)),
                   Active=as.logical(unlist(a)),
                   ResultText=unlist(rt),
