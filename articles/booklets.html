@@ -45,6 +45,7 @@
     <a class="dropdown-item" href="../articles/booklets.html">Use Custom `navigation`-Function to Implement a Booklet Design</a>
     <a class="dropdown-item" href="../articles/cat_with_catR.html">Use `catR`-Package for Adaptive Testing</a>
     <a class="dropdown-item" href="../articles/feedback.html">Use Custom `end`-Function to Provide Immediate Feedback using Knitr</a>
+    <a class="dropdown-item" href="../articles/inspect_log_events.html">Use Custom `trace`-Functions to Inspect Log Events</a>
     <a class="dropdown-item" href="../articles/maintenance.html">Use the Maintenance Dialog to Access Data</a>
   </div>
 </li>
@@ -325,8 +326,8 @@ implementation of the <code>navigation</code>-function:</p>
 <span><span class="co">#&gt;     setValueForTestTaker(session, "current-item-in-pool", current_item)</span></span>
 <span><span class="co">#&gt;     current_item</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x558c4eefd838&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x558c4ef06868&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x563cd809c360&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x563cd809f640&gt;</span></span></code></pre></div>
 <p>This function can be overwritten by assigning a new function
 <code>navigation = function(pool, session, direction="NEXT")</code> with
 the same signature. In this new function, we first define the booklets.
