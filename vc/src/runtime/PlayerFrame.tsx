@@ -51,8 +51,10 @@ export default function PlayerFrame( props: {
         ref={frameRef}
         style={
           { 
-            width: props.itemWidth + 'px',
-            height: props.itemHeight + 'px'
+            width: '100%',
+            height: '100%'
+            // width: props.itemWidth + 'px',
+            // height: props.itemHeight + 'px'
           }
         }
         title='PlayerFrame'

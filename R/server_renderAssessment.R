@@ -45,9 +45,9 @@ renderAssessment <- function(input, output, session){
 
         tags$iframe(id="myiframe", class="myiframe", style="width: 100%; height: 100vh; transform: scale(1); display: inline; transform-origin: 0px 0px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: none; margin: 0; padding: 0; overflow: hidden",
                     src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
-                               "&posH=",assessment_env$config$posH,
-                               "&posV=",assessment_env$config$posV,
-                               "&scaling=",assessment_env$config$scaling,
+                               "&alignmentHorizontal=",assessment_env$config$posH,
+                               "&alignmentVertical=",assessment_env$config$posV,
+                               "&scalingMode=",assessment_env$config$scaling,
                                "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))),
                                "&session=",provided_session))
       }
@@ -59,9 +59,9 @@ renderAssessment <- function(input, output, session){
 
       tags$iframe(id="myiframe", class="myiframe", style="width: 100%; height: 100vh; transform: scale(1); display: inline; transform-origin: 0px 0px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: none; margin: 0; padding: 0; overflow: hidden",
                   src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
-                             "&posH=",assessment_env$config$posH,
-                             "&posV=",assessment_env$config$posV,
-                             "&scaling=",assessment_env$config$scaling),
+                             "&alignmentHorizontal=",assessment_env$config$posH,
+                             "&alignmentVertical=",assessment_env$config$posV,
+                             "&scalingMode=",assessment_env$config$scaling),
                              "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))))
 
     }

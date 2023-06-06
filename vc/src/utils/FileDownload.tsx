@@ -59,6 +59,26 @@ export function downloadItemConfig(itemName : string) : Promise<ItemConfiguratio
   );
 }
 
+
+export function extractScalingConfigurationFromQuery() :ScalingConfiguration{
+  let sc :any = {scalingMode: "scale-up-down", alignmentHorizontal: "center", alignmentVertical: "center"};
+  if(window.document.location.search.length){
+    try {
+      document.location.search
+      .replace('?', '')
+      .split('&')
+      .forEach((a) => {
+        let tmp = a.split('=');
+        if(tmp.length==2 && ["scalingMode", "alignmentHorizontal", "alignmentVertical"].indexOf(tmp[0])>=0)
+          sc[tmp[0]] = tmp[1];
+      });
+    } catch (error) {
+      console.error("error parsing scaling configuration: " + error);
+    }
+  }
+  return sc as ScalingConfiguration;
+}
+
 /**
  * The content of the assessment configuration file.
  */
@@ -105,6 +125,13 @@ export interface PlayerConfiguration {
   runtimeVersion: string,
   frameContentFile: string,
 }
+
+export interface ScalingConfiguration {
+  scalingMode: string, 
+  alignmentHorizontal: string, 
+  alignmentVertical: string
+}
+
 
 // ----------------- private stuff --------------------------------------------------------------
 

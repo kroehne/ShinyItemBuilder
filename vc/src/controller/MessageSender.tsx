@@ -36,6 +36,7 @@ export function sendMessageToTaskPlayer(targetWindow : MessageEventSource, paylo
     { eventType: 'setTaskSequencer', targetWindowType: 'parent', targetOrigin: string} |
     { eventType: 'setSwitchAvailability', request: 'nextTask' | 'previousTask' | 'cancelTask', value: boolean} |
     { eventType: 'setSwitchAvailability', request: 'goToTask', scope: string, item?: string, task: string, value: boolean} |
+    { eventType: 'setScalingConfiguration', scalingMode: string, alignmentHorizontal: string, alignmentVertical: string} | 
     // task state control
     { eventType: 'getTasksState'} |
     { eventType: 'clearTasksState' } |
@@ -48,7 +49,7 @@ export function sendMessageToTaskPlayer(targetWindow : MessageEventSource, paylo
     { eventType: 'setHeaderButtons', headerButtons: HeaderButtonDescription[]} |
     { eventType: 'setMenuCarousels', course: string[], scopes: HeaderMenuScopeDescription[]} |
     // developer mode control
-    { eventType: 'activateDebuggingWindows', scoreHotKey: string, traceHotKey: string, statemachineHotKey: string} 
+    { eventType: 'activateDebuggingWindows', scoreHotKey: string, traceHotKey: string, statemachineHotKey: string}
   ) 
 {
   targetWindow.postMessage(JSON.stringify(payload), { targetOrigin: '*'});

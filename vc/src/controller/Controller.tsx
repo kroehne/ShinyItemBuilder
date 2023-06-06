@@ -6,7 +6,9 @@ import {
   LogTransmissionConfiguration, 
   AssessmentConfiguration, 
   downloadAssessmentConfig, 
-  downloadItemConfig 
+  ScalingConfiguration,
+  extractScalingConfigurationFromQuery,
+  downloadItemConfig,
 } from "../utils/FileDownload"; 
 import TaskSequencer, { Decision } from "./TaskSequencer";
 import { TaskIdentification } from "../utils/FileDownload";
@@ -149,11 +151,12 @@ export function configureMessageReceiver(
     playerCatalog.doToAll((targetWindow: MessageEventSource) => setUserId("DEPP", targetWindow));
     playerCatalog.doToAll((targetWindow: MessageEventSource) => setTaskSequencer(targetWindow));
     downloadAssessmentConfig()
-      .then((configuration) => {
+    .then((configuration) => {
         if (configuration.tasks.length < 1) {
           throw new Error(`No tasks declared in assessment configuration ${configuration}`);
         }
         taskSequencer.initialize(configuration, playerCatalog);
+        playerCatalog.doToAll((targetWindow: MessageEventSource) => setScalingConfiguration(targetWindow, extractScalingConfigurationFromQuery()));      
         loadItemsAndStartFirstTask(configuration, controllerConfig.mathJaxCdnUrl, playerCatalog, itemCatalog, taskSequencer);        
       })       
       .catch((error) => {
@@ -411,7 +414,14 @@ function findCompatiblePlayerAndStartTask(
 
 
 /**
- * Establish ourselves as task sequencer in CBA runtime.
+* Establish ourselves as task sequencer in CBA runtime.
+ */
+function setScalingConfiguration(targetWindow: MessageEventSource, sc :ScalingConfiguration) {
+  sendMessageToTaskPlayer(targetWindow, {eventType: 'setScalingConfiguration', ...sc})
+}
+
+/**
+* Establish ourselves as task sequencer in CBA runtime.
  */
 function setTaskSequencer(targetWindow: MessageEventSource) {
   sendMessageToTaskPlayer(targetWindow, {eventType: 'setTaskSequencer', targetOrigin: window.location.origin, targetWindowType: 'parent'})

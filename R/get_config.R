@@ -27,7 +27,7 @@ getConfig <- function(WindowTitle="MyAssessment",
                       Datafolder="_mydata",
                       posH="center",
                       posV = "center",
-                      scaling="updown",
+                      scaling="scale-up-down",
                       sessiontype = "sessionstorage",
                       maintenancePassword = "",
                       maintenanceQuery = "maintenance",
@@ -58,8 +58,8 @@ getConfig <- function(WindowTitle="MyAssessment",
     ret$posV <- posV
   }
 
-  if (is.na(match(scaling,c("up","down","updown","none")))){
-    stop("Parameter scaling should be one of 'up', 'down', 'updown' or 'none'.")
+  if (is.na(match(scaling,c("scale-up","scale-down","scale-up-down","no-scaling")))){
+    stop("Parameter scaling should be one of 'scale-up', 'scale-down', 'scale-up-down' or 'no-scaling'.")
   } else {
     ret$scaling <- scaling
   }
