@@ -11,7 +11,7 @@ getConfig(
   Datafolder = "_mydata",
   posH = "center",
   posV = "center",
-  scaling = "updown",
+  scaling = "scale-up-down",
   sessiontype = "sessionstorage",
   maintenancePassword = "",
   maintenanceQuery = "maintenance",
@@ -31,7 +31,7 @@ getConfig(
 
 \item{posV}{Vertical orientation (should be one of 'top', 'bottom' or 'center')}
 
-\item{scaling}{Scaling of content (should be one of 'up', 'down', 'updown' or 'none')}
+\item{scaling}{Scaling of content (should be one of 'scale-up', 'scale-down', 'scale-up-down' or 'no-scaling')}
 
 \item{sessiontype}{Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )}
 
