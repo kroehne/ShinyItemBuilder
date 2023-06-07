@@ -9,7 +9,7 @@
 #' @param Datafolder Folder to store data files for started/completed assessments
 #' @param posH Horizontal orientation (should be one of 'left', 'right' or 'center')
 #' @param posV Vertical orientation (should be one of 'top', 'bottom' or 'center')
-#' @param scaling Scaling of content (should be one of 'up', 'down', 'updown' or 'none')
+#' @param scaling Scaling of content (should be one of 'scale-up', 'scale-down', 'scale-up-down' or 'no-scaling')
 #' @param sessiontype Session storage (should be one of 'sessionstorage', 'cookie', 'localstorage' or 'provided' )
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
 #' @param maintenanceQuery Query string parameter name to access data online.
