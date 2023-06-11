@@ -7,6 +7,9 @@ on:
 jobs:
   Node-Build-EE:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write    
+    
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,7 +33,7 @@ jobs:
         working-directory: ./vc
         
       - name: Push EE
-        run: git push
+        uses: stefanzweifel/git-auto-commit-action@v4
 
       - name: Trigger "R-CMD-check"
         uses: peter-evans/repository-dispatch@v2
