@@ -11,7 +11,7 @@
 
 getDemoPool <- function(name="demo01"){
 
-  f <- file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
+  f <- file.path(system.file("ib", package = "ShinyItemBuilder"), "/")
   s <- NULL
 
   if (name=="demo01"){

@@ -29,7 +29,7 @@ assessment_config$trace <- function(pool, session, item, e){
   for (i in 1:dim(tmp$logEntriesList)[1]){
     d <- names(tmp$logEntriesList$details[i,])[!is.na(tmp$logEntriesList$details[i,])]
     cat(paste0("Type: ", tmp$logEntriesList[i,"type"], "\n",
-               "Time: ", lubridate::seconds(ymd_hms(tmp$logEntriesList[i,"timestamp"])), "\n",
+               "Time: ", lubridate::seconds(lubridate::ymd_hms(tmp$logEntriesList[i,"timestamp"])), "\n",
                "Details: ", length(d), " Attributes \n\n"))
 
   }

@@ -23,9 +23,9 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
   shinyassess_internal_initialize_storage()
 
-  assessment_env$eesource = file.path(system.file("static", package = "ShinyItemBuilder"), "EE_App_Output/")
-  assessment_env$jssource = file.path(system.file("static", package = "ShinyItemBuilder"), "ShinyAssessJS/")
-  assessment_env$ibsource = file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/")
+  assessment_env$eesource = file.path(system.file("ee", package = "ShinyItemBuilder"), "/")
+  assessment_env$jssource = file.path(system.file("js", package = "ShinyItemBuilder"), "/")
+  assessment_env$ibsource = file.path(system.file("ib", package = "ShinyItemBuilder"), "/")
   assessment_env$pool = pool
   assessment_env$config = config
 

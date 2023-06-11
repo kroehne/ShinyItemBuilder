@@ -4,7 +4,6 @@ library(ShinyItemBuilder)
 library(shiny)
 
 item_pool <- getDemoPool("demo01")
-item_pool <- item_pool[c(2,3,4),]
 assessment_config <- getConfig(Verbose = T)
 
 assessment_config$navigation = function(pool, session, direction="NEXT"){
