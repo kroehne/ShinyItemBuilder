@@ -31,7 +31,10 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: ./vc
-        
+      
+      - name: Override NODE option
+        run: echo "NODE_OPTIONS=" >> $GITHUB_ENV
+                
       - name: Push EE
         uses: stefanzweifel/git-auto-commit-action@v4
 
