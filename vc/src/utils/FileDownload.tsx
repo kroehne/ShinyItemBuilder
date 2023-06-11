@@ -69,7 +69,7 @@ export function extractScalingConfigurationFromQuery() :ScalingConfiguration{
       .split('&')
       .forEach((a) => {
         let tmp = a.split('=');
-        if(tmp.length==2 && ["scalingMode", "alignmentHorizontal", "alignmentVertical"].indexOf(tmp[0])>=0)
+        if(tmp.length===2 && ["scalingMode", "alignmentHorizontal", "alignmentVertical"].indexOf(tmp[0])>=0)
           sc[tmp[0]] = tmp[1];
       });
     } catch (error) {

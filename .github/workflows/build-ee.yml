@@ -26,7 +26,7 @@ jobs:
         working-directory: ./vc
  
       - name: Build
-        run: CI=false npm run build
+        run: npm run build
         working-directory: ./vc
         
       - name: Push EE
