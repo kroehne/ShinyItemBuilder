@@ -76,10 +76,13 @@
 <ul>
 <li>Install the packages <code>shiny</code>, <code>remotes</code>, <code>knitr</code> and <code>ShinyItemBuilder</code> by executing the following lines in R:</li>
 </ul>
-<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"kntir"</span><span class="op">)</span></span>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"knitr"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kroehne/ShinyItemBuilder"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre>
+<div class="figure">
+<img src="./img/install.gif" alt=""><p class="caption">installation</p>
+</div>
 <ul>
 <li>Run the following code in R</li>
 </ul>
@@ -96,6 +99,9 @@
 <span>                          overwrite<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, </span>
 <span>         <span class="va">renderAssessment</span><span class="op">)</span></span>
 <span> </span></code></pre>
+<div class="figure">
+<img src="./img/demo01.gif" alt=""><p class="caption">demo01</p>
+</div>
 <p>To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder <code>items</code> and run the following code in R:</p>
 <pre><code><span><span class="co"># app.R</span></span>
 <span></span>
