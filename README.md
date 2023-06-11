@@ -15,13 +15,16 @@ Demo:
 * Install the packages `shiny`, `remotes`, `knitr` and `ShinyItemBuilder` by executing the following lines in R:
 
 ````
-install.packages("shiny")
 install.packages("remotes")
-install.packages("kntir")
+install.packages("shiny")
+install.packages("knitr")
 remotes::install_github("kroehne/ShinyItemBuilder", build_vignettes = TRUE) 
 ````
 
+![installation](./img/install.gif)
+
 * Run the following code in R
+
 ````
 # app.R
 
@@ -37,6 +40,9 @@ shinyApp(assessmentOutput(pool = item_pool,
          renderAssessment)
  
 ````
+
+![demo01](./img/demo01.gif)
+
 
 To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder `items` and run the following code in R: 
 

@@ -7,3 +7,5 @@
 ^.github$
 ^.*\.map$
 ^LICENSE\.md$
+^README.md$
+^img$
