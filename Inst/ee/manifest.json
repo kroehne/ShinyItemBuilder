@@ -1,0 +1,15 @@
+{
+  "short_name": "EE Basics",
+  "name": "Minimal CBA execution environment",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "65x65",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
