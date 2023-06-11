@@ -17,7 +17,10 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-      
+ 
+      - name: Override NODE option
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+ 
       - name: Dependecies
         run: npm ci
         working-directory: ./vc
