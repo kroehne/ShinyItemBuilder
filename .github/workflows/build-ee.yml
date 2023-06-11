@@ -1,11 +1,11 @@
-name: Build EE4ShinyItemBuilder
+name: Build EE4ShinyItemBuilder (1)
 
 on:
   push:
     branches: [ "main" ]  
 
 jobs:
-  EE4ShinyItemBuilder:
+  Node-Build-EE:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,3 +31,9 @@ jobs:
         
       - name: Push EE
         run: git push
+
+      - name: Trigger "R-CMD-check"
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: ee-updated
+        

@@ -1,10 +1,6 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master, patch-for-cran]
+  repository_dispatch:
+    types: [ee-updated]
 
 name: R-CMD-check
 
@@ -51,3 +47,9 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+
+      - name: Trigger "pkgdown"
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: package-checked
+          
