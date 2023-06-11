@@ -1,4 +1,4 @@
-name: CI
+name: Build EE4ShinyItemBuilder
 
 on:
   push:
@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  Docker:
+  EE4ShinyItemBuilder:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
       
       - name: setup git config
         run: |
@@ -27,5 +27,5 @@ jobs:
         run: npm run build
         working-directory: ./vc
         
-      - name: Push new version
+      - name: Push EE
         run: git push
