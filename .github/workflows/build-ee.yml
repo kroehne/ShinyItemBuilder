@@ -2,8 +2,7 @@ name: Build EE4ShinyItemBuilder
 
 on:
   push:
-    branches: [ "main" ] 
-  workflow_dispatch:
+    branches: [ "main" ]  
 
 jobs:
   EE4ShinyItemBuilder:
@@ -12,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       
       - name: setup git config
         run: |
