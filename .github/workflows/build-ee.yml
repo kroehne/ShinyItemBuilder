@@ -42,4 +42,8 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           event-type: ee-updated
-        
+
+      - name: Trigger "pkgdown"
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: package-checked

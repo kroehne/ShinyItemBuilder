@@ -47,9 +47,4 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-
-      - name: Trigger "pkgdown"
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          event-type: package-checked
           
