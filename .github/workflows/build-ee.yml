@@ -22,7 +22,7 @@ jobs:
         run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
  
       - name: Dependecies
-        run: npm ci
+        run: npm install
         working-directory: ./vc
  
       - name: Build
