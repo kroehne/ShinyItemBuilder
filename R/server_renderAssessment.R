@@ -31,8 +31,7 @@ renderAssessment <- function(input, output, session){
       else
         assessment_env$config$menu(session, TRUE)
     }
-
-    if (assessment_env$config$sessiontype=="provided"){
+    else if (assessment_env$config$sessiontype=="provided"){
       provided_session <- ""
       if (!base::is.null(query[[assessment_env$config$queryStringParameterName]])) {
         provided_session <- base_extract_parameter(query, assessment_env$config$queryStringParameterName)

@@ -43,6 +43,9 @@ shinyApp(assessmentOutput(pool = item_pool,
 
 ![demo01](./img/demo01.gif)
 
+* If you don't see the item, try to use the option "Run External":
+
+![demo02](./img/demo02.gif)
 
 To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder `items` and run the following code in R: 
 
@@ -63,6 +66,8 @@ shinyApp(assessmentOutput(pool = item_pool,
 ````
 
 Multiple assessment components (items, instruction pages, etc.) can be used as individual CBA ItemBuilder Project Files (and Tasks). The order can be customized in the R-object `item_pool`, or a separate function to navigate between tasks is provided as part of the `assessment_config` configuration. 
+
+<hr/>
 
 This software is currently a proof-of-concept. 
 
