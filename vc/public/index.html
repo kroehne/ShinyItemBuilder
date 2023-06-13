@@ -28,6 +28,9 @@
               else if (_data?.eventType == "taskSwitchRequest"){
                 parent.postMessage(JSON.stringify( {'eventname':'taskSwitchRequest','cbasession': cbasession, 'request': JSON.stringify(_data?.request)}),'*');
               }			
+              else if (_data?.eventType == "getTasksStateReturn"){
+                parent.postMessage(JSON.stringify( {'eventname':'task-state','cbasession': cbasession, 'state': JSON.stringify(_data?.state)}),'*');
+              }			
               else {
                 console.log("Un-processed Event:");
                 console.log(event);			

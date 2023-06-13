@@ -8,6 +8,7 @@ import {
   downloadAssessmentConfig, 
   ScalingConfiguration,
   extractScalingConfigurationFromQuery,
+  extractUserIdFromQuery,
   downloadItemConfig,
 } from "../utils/FileDownload"; 
 import TaskSequencer, { Decision } from "./TaskSequencer";
@@ -148,7 +149,7 @@ export function configureMessageReceiver(
       targetWindowType: "parent"
     });    
     sendMessageToTaskPlayer(sendingWindow, {eventType: 'setTraceContextId', contextId: buildTraceContextId()});
-    playerCatalog.doToAll((targetWindow: MessageEventSource) => setUserId("DEPP", targetWindow));
+    playerCatalog.doToAll((targetWindow: MessageEventSource) => setUserId(extractUserIdFromQuery("session"), targetWindow));
     playerCatalog.doToAll((targetWindow: MessageEventSource) => setTaskSequencer(targetWindow));
     downloadAssessmentConfig()
     .then((configuration) => {

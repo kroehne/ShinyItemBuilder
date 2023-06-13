@@ -62,23 +62,13 @@ export function downloadItemConfig(itemName : string) : Promise<ItemConfiguratio
 
 export function extractScalingConfigurationFromQuery() :ScalingConfiguration{
   let sc :any = {scalingMode: "scale-up-down", alignmentHorizontal: "center", alignmentVertical: "center"};
-  if(window.document.location.search.length){
-    try {
-      document.location.search
-      .replace('?', '')
-      .split('&')
-      .forEach((a) => {
-        let tmp = a.split('=');
-        if(tmp.length===2 && ["scalingMode", "alignmentHorizontal", "alignmentVertical"].indexOf(tmp[0])>=0)
-          sc[tmp[0]] = tmp[1];
-      });
-    } catch (error) {
-      console.error("error parsing scaling configuration: " + error);
-    }
-  }
-  return sc as ScalingConfiguration;
+  return {...sc, ...extractFromQuery(["scalingMode", "alignmentHorizontal", "alignmentVertical"])};
 }
 
+export function extractUserIdFromQuery(_q :string) :string{
+  let q = _q.length ? _q : "session";
+  return extractFromQuery([q])[q] ?? "default";
+}
 /**
  * The content of the assessment configuration file.
  */
@@ -147,6 +137,25 @@ function sendJsonDownloadRequest(filename : string) : Promise<any> {
     xhttp.open('GET', filename, true);
     xhttp.send();
   });
+}
+
+function extractFromQuery(params :Array<string>){
+  let result :any = {};
+  if(window.document.location.search.length){
+    try {
+      document.location.search
+      .replace('?', '')
+      .split('&')
+      .forEach((a) => {
+        let tmp = a.split('=');
+        if(tmp.length==2 && params.indexOf(tmp[0])>=0)
+          result[tmp[0]] = tmp[1];
+      });
+    } catch (error) {
+      console.error("error parsing query string: " + error);
+    }
+  }
+  return result;
 }
 
 /**
