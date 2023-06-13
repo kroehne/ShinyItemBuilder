@@ -148,7 +148,7 @@ function extractFromQuery(params :Array<string>){
       .split('&')
       .forEach((a) => {
         let tmp = a.split('=');
-        if(tmp.length==2 && params.indexOf(tmp[0])>=0)
+        if(tmp.length===2 && params.indexOf(tmp[0])>=0)
           result[tmp[0]] = tmp[1];
       });
     } catch (error) {
