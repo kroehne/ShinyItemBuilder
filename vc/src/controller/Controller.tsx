@@ -117,6 +117,10 @@ export function configureMessageReceiver(
     processShinyTaskSwitchRequest({item: requestDetails.item, task: requestDetails.task, scope: requestDetails.scope} as TaskIdentification, itemCatalog, playerCatalog);
   });
 
+  messageReceiver.setTraceLogListener((source: MessageEventSource, metaData: string, logEntriesList: string[]) => {
+    sendMessageToTaskPlayer(source, { eventType: 'getTasksState'});
+  })
+
   messageReceiver.setShinyPreloadStateListener((sendingWindow: MessageEventSource, requestDetails: any) => {
 
     const nextTask = !!requestDetails?.item ? requestDetails.item as TaskIdentification : taskSequencer.firstTask()?.firstTask;

@@ -11,18 +11,23 @@
       //forward player-postmessages to shiny
 
       window.addEventListener('message', (event) => {
+
           if(!!parent && parent !== window && event.source !== parent){
                   
               let _data = JSON.parse(event.data)
+
               if(_data?.eventType == "itemsLoadedInPlayer"){      
                 parent.postMessage(JSON.stringify( {'eventname':'loaded','cbasession': cbasession}),'*');
+
+                const keydownHandler = (event) => {
+                    // console.log(event);
+                    if (event.ctrlKey && event.key === 'x') {
+                      parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
+                    }        
+                }
                 document.querySelectorAll("iframe").forEach(i => {
-                    i.contentWindow.document.addEventListener("keydown", (event) => {
-                        // console.log(event);
-                        if (event.ctrlKey && event.key === 'x') {
-                          parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
-                        }        
-                    });
+                    i.contentWindow.document.removeEventListener("keydown", keydownHandler);
+                    i.contentWindow.document.addEventListener("keydown", keydownHandler);
                 })                
               }
               else if(_data?.eventType == "traceLogTransmission"){
@@ -45,7 +50,8 @@
               }
           }
       });
-    
+
+
       // get query string parameter (https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript)
 
       var shinyconfig = {};

@@ -57,35 +57,36 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
 
     htmlOutput("frame")  ,
 
-    tags$script(HTML( "window.addEventListener('message', (e) => {
-    Shiny.onInputChange('ibevents', e.data, {priority: 'event'});
-   });")) ,
+    tags$script(HTML("
+      window.addEventListener('message', (e) => {
+         Shiny.onInputChange('ibevents', e.data, {priority: 'event'});
+      });
+    ")) ,
 
-    tags$script(
-      "Shiny.addCustomMessageHandler('shinyassess_navigate_to', function(params) {
-      let iframe = document.getElementById('myiframe');
-      iframe.contentWindow.postMessage({type: 'navigate_to', request: params}, window.location.origin);
-    });
-    Shiny.addCustomMessageHandler('shinyassess_iframe_visibility', function(params) {
-      let iframe = document.getElementById('myiframe');
-      iframe.style.display = params;
-    });
-    Shiny.addCustomMessageHandler('shinyassess_restart', function(params) {
-       let iframe = document.getElementById('myiframe');
-       document.cookie = '';
-       localStorage.setItem( 'session', '');
-       sessionStorage.setItem('session','');
-       iframe.contentWindow.location.reload();
-    });
-    Shiny.addCustomMessageHandler('shinyassess_redirect', function(message) {
-      window.location = message;
-    });
-    Shiny.addCustomMessageHandler('shinyassess_load_state', function(params) {
-      let iframe = document.getElementById('myiframe');
-      iframe.contentWindow.postMessage({type: 'preload_state', request: params}, window.location.origin);
-    });
+    tags$script("
+      Shiny.addCustomMessageHandler('shinyassess_navigate_to', function(params) {
+        let iframe = document.getElementById('myiframe');
+        iframe.contentWindow.postMessage({type: 'navigate_to', request: params}, window.location.origin);
+      });
+      Shiny.addCustomMessageHandler('shinyassess_iframe_visibility', function(params) {
+        let iframe = document.getElementById('myiframe');
+        iframe.style.display = params;
+      });
+      Shiny.addCustomMessageHandler('shinyassess_restart', function(params) {
+         let iframe = document.getElementById('myiframe');
+         document.cookie = '';
+         localStorage.setItem( 'session', '');
+         sessionStorage.setItem('session','');
+         iframe.contentWindow.location.reload();
+      });
+      Shiny.addCustomMessageHandler('shinyassess_redirect', function(message) {
+        window.location = message;
+      });
+      Shiny.addCustomMessageHandler('shinyassess_load_state', function(params) {
+        let iframe = document.getElementById('myiframe');
+        iframe.contentWindow.postMessage({type: 'preload_state', request: params}, window.location.origin);
+      });
     ")
-
 
   )
 
