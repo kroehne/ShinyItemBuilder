@@ -127,10 +127,22 @@ renderAssessment <- function(input, output, session){
       else
       {
         session$sendCustomMessage("shinyassess_iframe_visibility","block")
-        session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
-                                                                   item=assessment_env$pool[current_item,"itemName"],
-                                                                   task=assessment_env$pool[current_item,"Task"])))
+        current_item_list = list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
+                                        item=assessment_env$pool[current_item,"itemName"],
+                                        task=assessment_env$pool[current_item,"Task"],
+                                        scope=assessment_env$pool[current_item,"Scope"])
 
+        if(!is.null(runtime.data[[session$userData$cbasession]]$TaskState)){
+
+          if (assessment_env$config$verbose)
+            print(paste0("Info: Trying to preload task state for '",e$cbasession,"'"))
+
+          session$sendCustomMessage("shinyassess_load_state", toJSON(list(state=runtime.data[[session$userData$cbasession]]$TaskState, item=current_item_list), auto_unbox = TRUE))
+        }
+        else
+        {
+          session$sendCustomMessage("shinyassess_navigate_to", toJSON(current_item_list, auto_unbox = TRUE))
+        }
       }
 
     }
@@ -196,20 +208,31 @@ renderAssessment <- function(input, output, session){
         session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
                                                                    task=assessment_env$pool[current_item,"Task"],
-                                                                   scope=assessment_env$pool[current_item,"Scope"])))
+                                                                   scope=assessment_env$pool[current_item,"Scope"]), auto_unbox = TRUE))
       }
       else
       {
         session$sendCustomMessage("shinyassess_iframe_visibility","none")
         assessment_env$config$end(session)
       }
-
     }
+
     else if (e$eventname == "taskSwitchRequest")
     {
       if (assessment_env$config$verbose)
         print(paste0("Info: taskSwitchRequest (",e$cbasession,", ",e$request, ")"))
     }
+
+    else if (e$eventname == "task-state")
+    {
+      if (assessment_env$config$verbose)
+        print(paste0("Info: task-state (",e$cbasession,")"))
+
+      runtime.data[[session$userData$cbasession]]$TaskState <<- fromJSON(e$state)
+      shinyassess_internal_save_session(session)
+
+    }
+
     else if (e$eventname == "test-administrator-menu")
     {
       if (assessment_env$config$verbose)

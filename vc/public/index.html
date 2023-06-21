@@ -15,7 +15,15 @@
                   
               let _data = JSON.parse(event.data)
               if(_data?.eventType == "itemsLoadedInPlayer"){      
-                parent.postMessage(JSON.stringify( {'eventname':'loaded','cbasession': cbasession}),'*');			  
+                parent.postMessage(JSON.stringify( {'eventname':'loaded','cbasession': cbasession}),'*');
+                document.querySelectorAll("iframe").forEach(i => {
+                    i.contentWindow.document.addEventListener("keydown", (event) => {
+                        // console.log(event);
+                        if (event.ctrlKey && event.key === 'x') {
+                          parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
+                        }        
+                    });
+                })                
               }
               else if(_data?.eventType == "traceLogTransmission"){
                 parent.postMessage(JSON.stringify( {'eventname':'trace','cbasession': cbasession, 'trace': JSON.stringify(_data?.traceLogData)}),'*');
@@ -118,14 +126,6 @@
             sessionStorage.setItem('session',cbasession); 
         }    
       }
-
-      document.addEventListener('keydown', function(event) {
-        // test administrator menu 
-        console.log("key: " + event.key);
-        if (event.ctrlKey && event.key === 'x') {
-          parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
-        }
-      });
 
   </script>
   </head>

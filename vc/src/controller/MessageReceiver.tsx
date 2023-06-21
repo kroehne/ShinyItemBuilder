@@ -22,6 +22,7 @@ export default class MessageReceiver {
   private taskSwitchRequestListener : ((source: MessageEventSource, request: RequestType, requestDetails?: TaskRequestDetails) => void) | 'noListener' = 'noListener'; 
   
   private shinyTaskSwitchRequestListener : ((source: MessageEventSource, requestDetails: ShinySwitchRequest) => void) | 'noListener' = 'noListener'; 
+  private shinyPreloadStateListener : ((source: MessageEventSource, requestDetails: any) => void) | 'noListener' = 'noListener'; 
 
   /**
    * Start to receive messages.
@@ -77,6 +78,10 @@ export default class MessageReceiver {
     this.shinyTaskSwitchRequestListener = listener;
   }
 
+  public setShinyPreloadStateListener(listener: (source: MessageEventSource, requestDetails: any) => void) : void {
+    this.shinyPreloadStateListener = listener;
+  }
+
   private processMessageEvent(event : MessageEvent<any>) : void {
     const { origin, data, source } = event;
 
@@ -91,9 +96,19 @@ export default class MessageReceiver {
     }
 
     //assume it's a PM from shiny
-    if(source === window.parent && typeof data === "object" && this.shinyTaskSwitchRequestListener !== "noListener"){
+    if(source === window.parent && typeof data === "object"){
       // console.log(data);
-      this.shinyTaskSwitchRequestListener(source, data as ShinySwitchRequest);
+      if(!data.type)
+        return;
+
+      if(data.type === "navigate_to" && this.shinyTaskSwitchRequestListener !== "noListener"){
+        this.shinyTaskSwitchRequestListener(source, data.request as ShinySwitchRequest);
+      }
+
+      else if(data.type === "preload_state" && this.shinyPreloadStateListener !== "noListener"){
+        this.shinyPreloadStateListener(source, data.request);
+      }
+
       return;
     }
 
@@ -193,8 +208,8 @@ export interface GetTaskReturn {
 }
 
 export interface ShinySwitchRequest {
-  item: [string], 
-  runtime: [string], 
-  task: [string],
-  scope?: [string]
+  item: string, 
+  runtime: string, 
+  task: string,
+  scope?: string
 }

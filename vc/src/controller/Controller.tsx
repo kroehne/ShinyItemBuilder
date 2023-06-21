@@ -113,8 +113,37 @@ export function configureMessageReceiver(
   })
 
   messageReceiver.setShinyTaskSwitchRequestListener((sendingWindow: MessageEventSource, requestDetails: ShinySwitchRequest) => {
-    requestDetails.scope = requestDetails.scope ? requestDetails.scope : ["A"];
-    processShinyTaskSwitchRequest({item: requestDetails.item[0], task: requestDetails.task[0], scope: requestDetails.scope[0]} as TaskIdentification, itemCatalog, playerCatalog);
+    requestDetails.scope = requestDetails?.scope ? requestDetails.scope : "Default";
+    processShinyTaskSwitchRequest({item: requestDetails.item, task: requestDetails.task, scope: requestDetails.scope} as TaskIdentification, itemCatalog, playerCatalog);
+  });
+
+  messageReceiver.setShinyPreloadStateListener((sendingWindow: MessageEventSource, requestDetails: any) => {
+
+    const nextTask = !!requestDetails?.item ? requestDetails.item as TaskIdentification : taskSequencer.firstTask()?.firstTask;
+    if(!nextTask)
+      return;
+    
+    const targetItemVersion = itemCatalog.getVersion(nextTask.item);
+    if (targetItemVersion === undefined) {
+      console.warn(`Received task switch request to unknown item ${nextTask.item}. We ignored the request.`);
+      return;
+    }
+  
+    // const compatiblePlayer = getCompatiblePlayer(advisedPlayerId, targetItemVersion, {id: sendingPlayerId, frameWindow: sendingWindow}, playerCatalog);
+    const compatiblePlayer = playerCatalog.findCompatiblePlayer(targetItemVersion);
+    if (compatiblePlayer === undefined) {
+      console.warn(`Received task switch request to item ${nextTask.item} with version ${targetItemVersion} and could not find a compatible task player. We ignored the request.`);
+      return;
+    }
+
+    playerCatalog.doToAll((targetWindow: MessageEventSource) =>  stopTask(targetWindow));
+    // playerCatalog.doToAll((targetWindow: MessageEventSource) =>  sendMessageToTaskPlayer(targetWindow, {eventType: 'preloadTasksState', state: requestDetails?.state}));
+    // stopTask(compatiblePlayer.frameWindow);
+    sendMessageToTaskPlayer(compatiblePlayer.frameWindow, {eventType: 'preloadTasksState', state: requestDetails?.state});
+
+    playerCatalog.show(compatiblePlayer.id);
+    startTask(nextTask, compatiblePlayer.frameWindow);
+
   });
 
   // What to do once login is finished: Download configuration, set up everything, and start first task.

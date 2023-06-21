@@ -64,7 +64,7 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     tags$script(
       "Shiny.addCustomMessageHandler('shinyassess_navigate_to', function(params) {
       let iframe = document.getElementById('myiframe');
-      iframe.contentWindow.postMessage(params, window.location.origin);
+      iframe.contentWindow.postMessage({type: 'navigate_to', request: params}, window.location.origin);
     });
     Shiny.addCustomMessageHandler('shinyassess_iframe_visibility', function(params) {
       let iframe = document.getElementById('myiframe');
@@ -79,6 +79,10 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
     });
     Shiny.addCustomMessageHandler('shinyassess_redirect', function(message) {
       window.location = message;
+    });
+    Shiny.addCustomMessageHandler('shinyassess_load_state', function(params) {
+      let iframe = document.getElementById('myiframe');
+      iframe.contentWindow.postMessage({type: 'preload_state', request: params}, window.location.origin);
     });
     ")
 
