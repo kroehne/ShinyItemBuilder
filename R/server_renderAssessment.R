@@ -47,7 +47,7 @@ renderAssessment <- function(input, output, session){
                                "&alignmentHorizontal=",assessment_env$config$posH,
                                "&alignmentVertical=",assessment_env$config$posV,
                                "&scalingMode=",assessment_env$config$scaling,
-                               "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))),
+                               "&maintenance=",utils::URLencode(jsonlite::toJSON(assessment_env$config$maintenanceKey, auto_unbox = TRUE)),
                                "&session=",provided_session))
       }
 
@@ -61,7 +61,7 @@ renderAssessment <- function(input, output, session){
                              "&alignmentHorizontal=",assessment_env$config$posH,
                              "&alignmentVertical=",assessment_env$config$posV,
                              "&scalingMode=",assessment_env$config$scaling),
-                             "&maintenance=",utils::URLencode(jsonlite::toJSON(list(key="x", ctrl=T, shift=F, alt=F))))
+                             "&maintenance=",utils::URLencode(jsonlite::toJSON(assessment_env$config$maintenanceKey, auto_unbox = TRUE)))
 
     }
   })
