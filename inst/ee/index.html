@@ -6,12 +6,21 @@
                   
               let _data = JSON.parse(event.data)
 
-              if(_data?.eventType == "itemsLoadedInPlayer"){      
+              if(_data?.eventType == "itemsLoadedInPlayer"){
                 parent.postMessage(JSON.stringify( {'eventname':'loaded','cbasession': cbasession}),'*');
+                let maintenanceKeys = {ctrl:true, alt:false, shift:false, key:"x"};
+                let tmp = extractFromQuery(["maintenance"]);
+                if(Object.keys(tmp).length){
+                  try {
+                    maintenanceKeys = JSON.parse(decodeURI(tmp["maintenance"]));
+                  } catch (error) {
+                    console.error("error parsing maintenance keys");
+                  }
+                }
 
                 const keydownHandler = (event) => {
                     // console.log(event);
-                    if (event.ctrlKey && event.key === 'x') {
+                    if ((event.ctrlKey && maintenanceKeys.ctrl || event.altKey && maintenanceKeys.alt || event.shiftKey && maintenanceKeys.shift) && event.key === maintenanceKeys.key) {
                       parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
                     }        
                 }
@@ -93,6 +102,25 @@
         }
         return decodeURI(dc.substring(begin + prefix.length, end));
       } 
+
+      function extractFromQuery(params){
+        let result = {};
+        if(window.document.location.search.length){
+          try {
+            document.location.search
+            .replace('?', '')
+            .split('&')
+            .forEach((a) => {
+              let tmp = a.split('=');
+              if(tmp.length===2 && params.indexOf(tmp[0])>=0)
+                result[tmp[0]] = tmp[1];
+            });
+          } catch (error) {
+            console.error("error parsing query string: " + error);
+          }
+        }
+        return result;
+      }
 
       var cbasession = "";
       if (shinyconfig ['sessiontype'] == "cookie" || shinyconfig ['sessiontype'] == null){
