@@ -67,7 +67,8 @@
 <span>  sessiontype <span class="op">=</span> <span class="st">"sessionstorage"</span>,</span>
 <span>  maintenancePassword <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  maintenanceQuery <span class="op">=</span> <span class="st">"maintenance"</span>,</span>
-<span>  maintenanceKey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"x"</span>, ctrl <span class="op">=</span> <span class="cn">T</span>, shift <span class="op">=</span> <span class="cn">F</span>, alt <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span>  maintenanceKey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>key <span class="op">=</span> <span class="st">"x"</span>, ctrl <span class="op">=</span> <span class="cn">T</span>, shift <span class="op">=</span> <span class="cn">F</span>, alt <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,</span>
+<span>  clearPreviousTaskState <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -115,6 +116,10 @@
 
 <dt>maintenanceKey</dt>
 <dd><p>Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)</p></dd>
+
+
+<dt>clearPreviousTaskState</dt>
+<dd><p>If your test doesn't allow backward navigation, let Itembuilder's runtime flush previous task states when navigating forward</p></dd>
 
 </dl></div>
     <div class="section level2">
