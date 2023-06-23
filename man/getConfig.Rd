@@ -15,7 +15,8 @@ getConfig(
   sessiontype = "sessionstorage",
   maintenancePassword = "",
   maintenanceQuery = "maintenance",
-  maintenanceKey = list(key = "x", ctrl = T, shift = F, alt = F)
+  maintenanceKey = list(key = "x", ctrl = T, shift = F, alt = F),
+  clearPreviousTaskState = TRUE
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ getConfig(
 \item{maintenanceQuery}{Query string parameter name to access data online.}
 
 \item{maintenanceKey}{Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)}
+
+\item{clearPreviousTaskState}{If your test doesn't allow backward navigation, let Itembuilder's runtime flush previous task states when navigating forward}
 }
 \value{
 config object (list)

@@ -205,10 +205,12 @@ renderAssessment <- function(input, output, session){
 
       if (current_item > 0)
       {
+
         session$sendCustomMessage("shinyassess_navigate_to", toJSON(list(runtime=assessment_env$pool[current_item,"runtimeCompatibilityVersion"],
                                                                    item=assessment_env$pool[current_item,"itemName"],
                                                                    task=assessment_env$pool[current_item,"Task"],
-                                                                   scope=assessment_env$pool[current_item,"Scope"]), auto_unbox = TRUE))
+                                                                   scope=assessment_env$pool[current_item,"Scope"],
+                                                                   clearState=assessment_env$config$clearPreviousTaskState), auto_unbox = TRUE))
       }
       else
       {

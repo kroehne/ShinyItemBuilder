@@ -23,6 +23,7 @@ export default class MessageReceiver {
   
   private shinyTaskSwitchRequestListener : ((source: MessageEventSource, requestDetails: ShinySwitchRequest) => void) | 'noListener' = 'noListener'; 
   private shinyPreloadStateListener : ((source: MessageEventSource, requestDetails: any) => void) | 'noListener' = 'noListener'; 
+  private shinyClearStateListener : ((source: MessageEventSource) => void) | 'noListener' = 'noListener'; 
 
   /**
    * Start to receive messages.
@@ -211,5 +212,6 @@ export interface ShinySwitchRequest {
   item: string, 
   runtime: string, 
   task: string,
-  scope?: string
+  scope?: string,
+  clearState?: boolean
 }

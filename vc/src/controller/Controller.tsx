@@ -114,7 +114,7 @@ export function configureMessageReceiver(
 
   messageReceiver.setShinyTaskSwitchRequestListener((sendingWindow: MessageEventSource, requestDetails: ShinySwitchRequest) => {
     requestDetails.scope = requestDetails?.scope ? requestDetails.scope : "Default";
-    processShinyTaskSwitchRequest({item: requestDetails.item, task: requestDetails.task, scope: requestDetails.scope} as TaskIdentification, itemCatalog, playerCatalog);
+    processShinyTaskSwitchRequest({item: requestDetails.item, task: requestDetails.task, scope: requestDetails.scope} as TaskIdentification, itemCatalog, playerCatalog, requestDetails?.clearState);
   });
 
   messageReceiver.setTraceLogListener((source: MessageEventSource, metaData: string, logEntriesList: string[]) => {
@@ -276,7 +276,8 @@ function processTaskSwitchRequest(
 function processShinyTaskSwitchRequest(
   nextTask: TaskIdentification,  
   itemCatalog: ItemCatalog, 
-  playerCatalog: PlayerCatalog) : void 
+  playerCatalog: PlayerCatalog,
+  clearState: boolean | undefined) : void 
 {
   console.log(nextTask);
   const targetItemVersion = itemCatalog.getVersion(nextTask.item);
@@ -296,6 +297,9 @@ function processShinyTaskSwitchRequest(
   playerCatalog.doToAll(targetWindow => {
     stopTask(targetWindow);
   });
+  if(!!clearState){
+    playerCatalog.doToAll((targetWindow: MessageEventSource) =>  sendMessageToTaskPlayer(targetWindow, { eventType: 'clearTasksState'}));
+  }
   playerCatalog.show(compatiblePlayer.id);
   startTask(nextTask, compatiblePlayer.frameWindow);
   return;

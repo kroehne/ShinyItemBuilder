@@ -14,6 +14,7 @@
 #' @param maintenancePassword Password to access data online (no access possible if not defined).
 #' @param maintenanceQuery Query string parameter name to access data online.
 #' @param maintenanceKey Keyboard shortcut to access the maintenance dialog (provide a list in the following form: `list(key="X", ctrl=T, shift=F, alt=F)`)
+#' @param clearPreviousTaskState If your test doesn't allow backward navigation, let Itembuilder's runtime flush previous task states when navigating forward
 #' @return config object (list)
 #' @export
 #' @examples
@@ -31,7 +32,8 @@ getConfig <- function(WindowTitle="MyAssessment",
                       sessiontype = "sessionstorage",
                       maintenancePassword = "",
                       maintenanceQuery = "maintenance",
-                      maintenanceKey=list(key="x", ctrl=T, shift=F, alt=F)
+                      maintenanceKey=list(key="x", ctrl=T, shift=F, alt=F),
+                      clearPreviousTaskState=TRUE
                       ){
 
   ret <- list()
@@ -178,6 +180,8 @@ getConfig <- function(WindowTitle="MyAssessment",
     stop("Parameter maintenanceKey should contain non-null values for all elements 'key', 'alt', 'ctrl' and 'shift'.")
 
   ret$maintenanceKey = maintenanceKey
+
+  ret$clearPreviousTaskState = clearPreviousTaskState
 
   ret
 
