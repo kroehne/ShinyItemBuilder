@@ -42,10 +42,7 @@
               }			
               else if (_data?.eventType == "getTasksStateReturn"){
                 parent.postMessage(JSON.stringify( {'eventname':'task-state','cbasession': cbasession, 'state': JSON.stringify(_data?.state)}),'*');
-              }	
-			  else if (_data?.eventType == "requestShinyResponse"){
-				parent.postMessage(JSON.stringify( {'eventname':'requestShinyResponse','cbasession': cbasession, 'data': JSON.stringify(_data)}),'*');
-			  }
+              }			
               else {
                 console.log("Un-processed Event:");
                 console.log(event);			
