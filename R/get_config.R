@@ -130,6 +130,12 @@ getConfig <- function(WindowTitle="MyAssessment",
 
   }
 
+  # interactive response
+
+  ret$interactive=function(session, json){
+
+  }
+
   # authentication functions
 
   ret$queryStringParameterName = "token"

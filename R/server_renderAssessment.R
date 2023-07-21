@@ -60,8 +60,8 @@ renderAssessment <- function(input, output, session){
                   src=paste0("./ee/index.html?sessiontype=",assessment_env$config$sessiontype,
                              "&alignmentHorizontal=",assessment_env$config$posH,
                              "&alignmentVertical=",assessment_env$config$posV,
-                             "&scalingMode=",assessment_env$config$scaling),
-                             "&maintenance=",utils::URLencode(jsonlite::toJSON(assessment_env$config$maintenanceKey, auto_unbox = TRUE)))
+                             "&scalingMode=",assessment_env$config$scaling,
+                             "&maintenance=",utils::URLencode(jsonlite::toJSON(assessment_env$config$maintenanceKey, auto_unbox = TRUE))))
 
     }
   })
@@ -241,6 +241,10 @@ renderAssessment <- function(input, output, session){
         print(paste0("Info: Test-administrator-menu requested (",e$cbasession,")"))
 
       assessment_env$config$menu(session)
+    }
+    else if (e$eventname == "requestShinyResponse")
+    {
+      assessment_env$config$interactive(session, e)
     }
     else {
       print(paste0("Warning: Command not recognized -- ", e))

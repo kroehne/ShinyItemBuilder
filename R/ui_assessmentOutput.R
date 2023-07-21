@@ -86,6 +86,11 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
         let iframe = document.getElementById('myiframe');
         iframe.contentWindow.postMessage({type: 'preload_state', request: params}, window.location.origin);
       });
+      Shiny.addCustomMessageHandler('shinyassess_process_response', function(params) {
+        let iframe = document.getElementById('myiframe').contentDocument.querySelector('iframe');
+        console.log(iframe);
+        iframe.contentDocument.querySelector('iframe'). contentWindow.postMessage({type: 'shiny_response', response: params}, '*');
+      });
     ")
 
   )
