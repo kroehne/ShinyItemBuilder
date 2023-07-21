@@ -88,8 +88,7 @@ assessmentOutput <- function(pool = NULL,config = NULL, overwrite=F){
       });
       Shiny.addCustomMessageHandler('shinyassess_process_response', function(params) {
         let iframe = document.getElementById('myiframe').contentDocument.querySelector('iframe');
-        console.log(iframe);
-        iframe.contentDocument.querySelector('iframe'). contentWindow.postMessage({type: 'shiny_response', response: params}, '*');
+        iframe.contentDocument.querySelector('iframe').contentWindow.postMessage({type: 'shiny_response', response: params}, '*');
       });
     ")
 

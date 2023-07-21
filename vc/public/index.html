@@ -29,7 +29,6 @@
                 }
 
                 const keydownHandler = (event) => {
-                    // console.log(event);
                     if ((event.ctrlKey && maintenanceKeys.ctrl || event.altKey && maintenanceKeys.alt || event.shiftKey && maintenanceKeys.shift) && event.key === maintenanceKeys.key) {
                       parent.postMessage(JSON.stringify({'eventname':'test-administrator-menu','cbasession': cbasession}),'*');
                     }        
@@ -52,7 +51,10 @@
               }			
               else if (_data?.eventType == "getTasksStateReturn"){
                 parent.postMessage(JSON.stringify( {'eventname':'task-state','cbasession': cbasession, 'state': JSON.stringify(_data?.state)}),'*');
-              }			
+              }		
+			  else if (_data?.eventType == "requestShinyResponse"){
+				parent.postMessage(JSON.stringify( {'eventname':'requestShinyResponse','cbasession': cbasession, 'data': JSON.stringify(_data)}),'*');
+			  }			  
               else {
                 console.log("Un-processed Event:");
                 console.log(event);			
