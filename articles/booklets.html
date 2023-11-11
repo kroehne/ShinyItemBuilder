@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ShinyItemBuilder</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,7 @@
     <a class="dropdown-item" href="../articles/access.html">Use Custom `end`- and `login` - Functions to Controll Access</a>
     <a class="dropdown-item" href="../articles/booklets.html">Use Custom `navigation`-Function to Implement a Booklet Design</a>
     <a class="dropdown-item" href="../articles/cat_with_catR.html">Use `catR`-Package for Adaptive Testing</a>
+    <a class="dropdown-item" href="../articles/datastorage.html">Options for Persistent Data Storage</a>
     <a class="dropdown-item" href="../articles/feedback.html">Use Custom `end`-Function to Provide Immediate Feedback using Knitr</a>
     <a class="dropdown-item" href="../articles/inspect_log_events.html">Use Custom `trace`-Functions to Inspect Log Events</a>
     <a class="dropdown-item" href="../articles/maintenance.html">Use the Maintenance Dialog to Access Data</a>
@@ -326,8 +327,8 @@ implementation of the <code>navigation</code>-function:</p>
 <span><span class="co">#&gt;     setValueForTestTaker(session, "current-item-in-pool", current_item)</span></span>
 <span><span class="co">#&gt;     current_item</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x56295c694d60&gt;</span></span>
-<span><span class="co">#&gt; &lt;environment: 0x56295c697b70&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;bytecode: 0x55cd1fc30678&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: 0x55cd1fc39658&gt;</span></span></code></pre></div>
 <p>This function can be overwritten by assigning a new function
 <code>navigation = function(pool, session, direction="NEXT")</code> with
 the same signature. In this new function, we first define the booklets.
