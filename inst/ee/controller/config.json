@@ -1,5 +1,5 @@
 {
-    "traceLogTransmissionXXX": { 
+    "traceLogTransmissionXXX": {
             "transmitUrl": "http://localhost:8101/ee4cba-api/trace",
             "interval": 2000,
             "httpTimeout": 10000
@@ -10,7 +10,7 @@
         "width": 1024
     },
     "players": [
-       { "playerId": "A", "runtimeVersion": "9.9.0", "frameContentFile": "frameContent_9_9_0.html" }
+       { "playerId": "A", "runtimeVersion": "10.0.0", "frameContentFile": "frameContent_10_0_0.html" }
     ],
     "showPlayerInfo": false
 }
