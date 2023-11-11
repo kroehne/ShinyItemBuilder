@@ -105,6 +105,12 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
     cat(paste0("Start preparing execution environment.\n"))
   }
 
+  print(pool)
+
+  if (length(unique(pool$runtimeCompatibilityVersion))>1){
+    cat(paste0("Warning: Multiple runtime versions: ", unique(pool$runtimeCompatibilityVersion)))
+  }
+
   #fn <- list.files(assessment_env$jssource)
   #for (f in fn){
   #  file.copy(file.path(assessment_env$jssource,f), config$WWWfolder, recursive=TRUE)
@@ -131,8 +137,11 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
     dir.create(file.path(config$WWWfolder,"controller"))
   }
 
+  rt <- unique(pool$runtimeCompatibilityVersion)
+  pid <- LETTERS[1:length(rt)]
+
   fileConn<-file(paste0(config$WWWfolder,"/controller/config.json"))
-  writeLines(paste0('{ "mathJaxCdnUrl": "math-jax unknown", "itemSize": { "height": ', max(pool$itemHeight), ', "width": ', max(pool$itemWidth), ' }, "players": [ { "playerId": "A", "runtimeVersion": "9.9.0", "frameContentFile": "frameContent_9_9_0.html" } ], "showPlayerInfo": false }'), fileConn)
+  writeLines(paste0('{ "mathJaxCdnUrl": "math-jax unknown", "itemSize": { "height": ', max(pool$itemHeight), ', "width": ', max(pool$itemWidth), ' }, "players": [ ' , paste0('{ "playerId": "', pid ,'", "runtimeVersion": "', rt, '", "frameContentFile": "frameContent_', gsub(".","_",rt,fixed=T), '.html" }', collapse = ","), ' ], "showPlayerInfo": false }'), fileConn)
   close(fileConn)
 
   if (config$verbose){
