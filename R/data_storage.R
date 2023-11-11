@@ -60,9 +60,19 @@ shinyassess_internal_create_or_load_session <- function (session){
 
     if (file.exists(paste0(assessment_env$config$Datafolder, "/",session$userData$cbasession,".RDS" ))){
 
-      runtime.data[[session$userData$cbasession]] <<- readRDS(file=file.path(assessment_env$config$Datafolder,paste0(session$userData$cbasession,".RDS")))
-      if (assessment_env$config$verbose)
-        print(paste0("Info: Session - loaded from file (cbasession=", session$userData$cbasession, ")"))
+      tryCatch(
+        expr = {
+          runtime.data[[session$userData$cbasession]] <<- readRDS(file=file.path(assessment_env$config$Datafolder,paste0(session$userData$cbasession,".RDS")))
+          if (assessment_env$config$verbose)
+            print(paste0("Info: Session - loaded from file (cbasession=", session$userData$cbasession, ")"))
+        },
+        error = function(e){
+        },
+        warning = function(w){
+        },
+        finally = {
+        }
+      )
 
     } else {
 

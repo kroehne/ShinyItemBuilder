@@ -1,0 +1,17 @@
+---
+title: "Options for Persistent Data Storage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Options for Persistent Data Storage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+General information: https://shiny.posit.co/r/articles/build/persistent-data-storage/
