@@ -105,8 +105,6 @@ shinyassess_internal_prepare_execution_environment <- function (pool,config){
     cat(paste0("Start preparing execution environment.\n"))
   }
 
-  print(pool)
-
   if (length(unique(pool$runtimeCompatibilityVersion))>1){
     cat(paste0("Warning: Multiple runtime versions: ", unique(pool$runtimeCompatibilityVersion)))
   }
