@@ -1,5 +1,5 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   access: access.html
@@ -9,5 +9,4 @@ articles:
   feedback: feedback.html
   inspect_log_events: inspect_log_events.html
   maintenance: maintenance.html
-last_built: 2023-11-11T20:53Z
-
+last_built: 2024-07-19T09:52Z

@@ -1,75 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/access.html</loc>
-  </url>
-  <url>
-    <loc>/articles/booklets.html</loc>
-  </url>
-  <url>
-    <loc>/articles/cat_with_catR.html</loc>
-  </url>
-  <url>
-    <loc>/articles/datastorage.html</loc>
-  </url>
-  <url>
-    <loc>/articles/feedback.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/inspect_log_events.html</loc>
-  </url>
-  <url>
-    <loc>/articles/maintenance.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/assessmentOutput.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getConfig.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getDemoPool.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getPool.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getValueForTestTaker.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/parse_ib_scoring.html</loc>
-  </url>
-  <url>
-    <loc>/reference/parse_ib_trace.html</loc>
-  </url>
-  <url>
-    <loc>/reference/renderAssessment.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setValueForTestTaker.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/access.html</loc></url>
+<url><loc>/articles/booklets.html</loc></url>
+<url><loc>/articles/cat_with_catR.html</loc></url>
+<url><loc>/articles/datastorage.html</loc></url>
+<url><loc>/articles/feedback.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/inspect_log_events.html</loc></url>
+<url><loc>/articles/maintenance.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/assessmentOutput.html</loc></url>
+<url><loc>/reference/getConfig.html</loc></url>
+<url><loc>/reference/getDemoPool.html</loc></url>
+<url><loc>/reference/getPool.html</loc></url>
+<url><loc>/reference/getValueForTestTaker.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/parse_ib_scoring.html</loc></url>
+<url><loc>/reference/parse_ib_trace.html</loc></url>
+<url><loc>/reference/renderAssessment.html</loc></url>
+<url><loc>/reference/setValueForTestTaker.html</loc></url>
 </urlset>
+
