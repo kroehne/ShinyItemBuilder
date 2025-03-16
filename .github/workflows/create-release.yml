@@ -59,13 +59,6 @@ jobs:
           echo "Current Directory: $(pwd)"
           ls -lah
 
-      - name: Rename and Move Build Artifact
-        run: |
-          PACKAGE_FILE=$(ls *.tar.gz)
-          mv "$PACKAGE_FILE" "ShinyItemBuilder_${VERSION}.tar.gz"
-          echo "PACKAGE_PATH=$GITHUB_WORKSPACE/ShinyItemBuilder_${VERSION}.tar.gz" >> $GITHUB_ENV
-        shell: bash
-
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
