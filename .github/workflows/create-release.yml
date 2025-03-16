@@ -59,6 +59,13 @@ jobs:
           echo "Current Directory: $(pwd)"
           ls -lah
 
+      - name: Rename Build Artifact
+        run: |
+          PACKAGE_FILE=$(ls *.tar.gz)
+          mv "$PACKAGE_FILE" "ShinyItemBuilder_${VERSION}.tar.gz"
+          echo "PACKAGE_PATH=$GITHUB_WORKSPACE/ShinyItemBuilder_${VERSION}.tar.gz" >> $GITHUB_ENV
+        shell: bash
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -69,6 +76,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository (Required for Tagging)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history to allow tagging
+
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -77,12 +89,21 @@ jobs:
       - name: List Downloaded Artifacts
         run: ls -lah artifacts
 
+      - name: Create and Push Git Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag -a "v${VERSION}" -m "Release v${VERSION}"
+          git push origin "v${VERSION}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish GitHub Release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.VERSION }}"
+          automatic_release_tag: "v${{ env.VERSION }}"  # Uses the created Git tag
           prerelease: true
-          title: "${{ env.VERSION }} (${{ env.HASH }})"
+          title: "Release v${{ env.VERSION }} (${{ env.HASH }})"
           files: |
             ${{ github.workspace }}/ShinyItemBuilder_${{ env.VERSION }}.tar.gz
