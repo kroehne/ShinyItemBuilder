@@ -10,9 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {os: macos-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
+        config: 
           - {os: ubuntu-latest,   r: 'release'}
 
     env:
@@ -41,43 +39,26 @@ jobs:
           needs: check
 
       - name: Build Package
-        run: Rscript -e "devtools::build()"
+        run: |
+          Rscript -e "devtools::build(path = getwd())"
 
-      - name: List Package Files
-        run: ls -lah
+      - name: List Package Files (Debugging)
+        run: |
+          echo "Current Directory: $(pwd)"
+          ls -lah
 
       - name: Store Build Artifact
+        run: |
+          if ls *.tar.gz 1> /dev/null 2>&1; then
+            echo "Package built successfully, uploading artifact..."
+          else
+            echo "No package archive found! Check the build process."
+            exit 1
+          fi
+        shell: bash
+
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: R-package-${{ matrix.config.os }}
           path: "*.tar.gz"
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: artifacts/R-package-ubuntu-latest/*.tar.gz
-          asset_name: R-package-${{ github.ref_name }}.tar.gz
-          asset_content_type: application/gzip
