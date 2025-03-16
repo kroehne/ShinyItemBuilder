@@ -38,7 +38,7 @@ library(openxlsx)
 # read item parameter from excel file
 
 assessment_config$itemPoolDescription <- read.xlsx(
-  file.path(system.file("static", package = "ShinyItemBuilder"), "IBProjects/demo03/pool.xlsx"))
+  file.path(system.file(package = "ShinyItemBuilder"), "IBProjects/demo03/pool.xlsx"))
 
 it.parameters <- assessment_config$itemPoolDescription[,c("A","B","C","D")]
 it.parameters <- it.parameters[1:20,]  # Currently only 20 Tasks are defined in 'ImageCat.zip'
