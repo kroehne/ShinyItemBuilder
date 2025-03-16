@@ -1,18 +1,14 @@
 name: Build and Release R Package
 
 on:
-  repository_dispatch:
-    types: [create-release]
+  workflow_dispatch:
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        config: 
-          - {os: ubuntu-latest,   r: 'release'}
+  build_r_package:
 
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
@@ -64,32 +60,6 @@ jobs:
         with:
           name: R-package-${{ matrix.config.os }}
           path: "ShinyItemBuilder_${{ env.VERSION }}.tar.gz"
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository (Required for Tagging)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch full history to allow tagging
-
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-
-      - name: List Downloaded Artifacts
-        run: ls -lah artifacts
-
-      - name: Create and Push Git Tag
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git tag -a "v${VERSION}" -m "Release v${VERSION}"
-          git push origin "v${VERSION}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish GitHub Release
         uses: "marvinpinto/action-automatic-releases@latest"
