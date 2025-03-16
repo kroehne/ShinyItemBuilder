@@ -21,13 +21,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Read Version from R Package
-        run: echo "VERSION=$(grep "Version:" r/DESCRIPTION | perl -pe '($_)=/([0-9]+([.][0-9]+)+)/')" >> $GITHUB_ENV
-        shell: bash
-  
-      - name: Determine Shortened Hash
-        run: echo "HASH=$(git log --pretty=format:'%h' -n 1)" >> $GITHUB_ENV
-
       - name: Set up Pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
@@ -44,7 +37,19 @@ jobs:
             any::rcmdcheck
             any::devtools
           needs: check
-          
+
+      - name: Extract Version from DESCRIPTION
+        run: |
+          VERSION=$(grep -E '^Version:' DESCRIPTION | awk '{print $2}')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Extract Git Hash
+        run: |
+          HASH=$(git rev-parse --short HEAD)
+          echo "HASH=$HASH" >> $GITHUB_ENV
+        shell: bash
+
       - name: Build Package
         run: |
           Rscript -e "devtools::build(path = getwd())"
@@ -54,27 +59,37 @@ jobs:
           echo "Current Directory: $(pwd)"
           ls -lah
 
-      - name: Store Build Artifact
+      - name: Rename and Move Build Artifact
         run: |
-          if ls *.tar.gz 1> /dev/null 2>&1; then
-            echo "Package built successfully, uploading artifact..."
-          else
-            echo "No package archive found! Check the build process."
-            exit 1
-          fi
+          PACKAGE_FILE=$(ls *.tar.gz)
+          mv "$PACKAGE_FILE" "ShinyItemBuilder_${VERSION}.tar.gz"
+          echo "PACKAGE_PATH=$GITHUB_WORKSPACE/ShinyItemBuilder_${VERSION}.tar.gz" >> $GITHUB_ENV
         shell: bash
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: R-package-${{ matrix.config.os }}
-          path: "*.tar.gz"
+          path: "ShinyItemBuilder_${{ env.VERSION }}.tar.gz"
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
         with:
-              repo_token: "${{ secrets.GITHUB_TOKEN }}"
-              automatic_release_tag: "${{ env.VERSION}}"
-              prerelease: true
-              title: "${{ env.VERSION}} (${{ env.HASH}})"
-              files: |
-                ${{ github.workspace }}/${{format('ShinyItemBuilder_{0}.tar.gz', env.VERSION)}} 
+          path: artifacts
+
+      - name: List Downloaded Artifacts
+        run: ls -lah artifacts
+
+      - name: Publish GitHub Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.VERSION }}"
+          prerelease: true
+          title: "${{ env.VERSION }} (${{ env.HASH }})"
+          files: |
+            ${{ github.workspace }}/ShinyItemBuilder_${{ env.VERSION }}.tar.gz
