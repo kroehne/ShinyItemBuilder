@@ -1,9 +1,8 @@
 name: Build and Release R Package
 
 on:
-  push:
-    tags:
-      - 'v*'  # Runs when a new version tag (e.g., v1.0.0) is pushed
+  repository_dispatch:
+    types: [create-release]
 
 jobs:
   build:
