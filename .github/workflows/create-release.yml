@@ -41,8 +41,7 @@ jobs:
           needs: check
 
       - name: Build Package
-        run: |
-          R CMD build .
+        run: Rscript -e "devtools::build()"
 
       - name: List Package Files
         run: ls -lah
