@@ -19,5 +19,6 @@ Imports:
     utils,
     base64enc,
     xml2,
-    dplyr
+    dplyr,
+    purrr
 VignetteBuilder: knitr

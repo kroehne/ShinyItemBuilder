@@ -21,7 +21,7 @@ data frame with all classes and hits
 `get_scoring_info_from_ib_file` inspects a single CBA ItemBuilder project file
 }
 \details{
-The returned object returns a data.frame containing the scoring information defined in a CBA ItemBuilder project file
+The returned object is a data.frame containing the scoring information defined in a CBA ItemBuilder project file
 }
 \examples{
 \dontrun{
