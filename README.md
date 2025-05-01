@@ -21,7 +21,7 @@ install.packages("knitr")
 remotes::install_github("kroehne/ShinyItemBuilder", build_vignettes = TRUE) 
 ````
 
-![installation](./img/install.gif)
+![installation](man/figures/install.gif)
 
 * Run the following code in R
 
@@ -41,11 +41,11 @@ shinyApp(assessmentOutput(pool = item_pool,
  
 ````
 
-![demo01](./img/demo01.gif)
+![demo01](man/figures/demo01.gif)
 
 * If you don't see the item, try to use the option "Run External":
 
-![demo02](./img/demo02.gif)
+![demo02](man/figures/demo02.gif)
 
 To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder `items` and run the following code in R: 
 
