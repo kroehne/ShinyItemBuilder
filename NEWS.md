@@ -1,7 +1,7 @@
 # ShinyItemBuilder 0.4.0
 
 * Update for CBA ItemBuilder 10.3.0
-* Added funcction  'get_scoring_info_from_ib_file.R'
+* Added Inspect Project Tool (IPT) 
 
 # ShinyItemBuilder 0.3.0
 
