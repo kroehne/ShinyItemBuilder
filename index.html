@@ -59,7 +59,7 @@
 <div class="row">
   <main id="main" class="col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="shinyitembuilder--use-shiny-with-cba-itembuilder-items">ShinyItemBuilder – Use Shiny with CBA ItemBuilder Items<a class="anchor" aria-label="anchor" href="#shinyitembuilder--use-shiny-with-cba-itembuilder-items"></a>
+<div class="page-header"><h1 id="shinyitembuilder--use-rshiny-with-cba-itembuilder-items">ShinyItemBuilder – Use R/Shiny with CBA ItemBuilder Items<a class="anchor" aria-label="anchor" href="#shinyitembuilder--use-rshiny-with-cba-itembuilder-items"></a>
 </h1></div>
 <p>The R project <code>ShinyItemBuilder</code> can be used to implement computer-based assessments using the <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> and <a href="https://www.r-project.org/" class="external-link">R</a>/<a href="https://shiny.posit.co/" class="external-link">Shiny</a>.</p>
 <p>The <a href="https://cba.itembuilder.de" class="external-link">CBA ItemBuilder</a> is an authoring tool for designing and implementing simple and complex items for computer-based assessments (CBA) that can be used without a particular knowledge in a specific programming language (such as, for instance, JavaScript).</p>
@@ -73,9 +73,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"shiny"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"knitr"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kroehne/ShinyItemBuilder"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre>
-<div class="float">
-<img src="reference/figures/install.gif" alt="installation"><div class="figcaption">installation</div>
-</div>
+<p><img src="reference/figures/install.gif"></p>
 <ul>
 <li>Run the following code in R</li>
 </ul>
@@ -92,15 +90,11 @@
 <span>                          overwrite<span class="op">=</span><span class="cn">T</span><span class="op">)</span>,</span>
 <span>         <span class="va">renderAssessment</span><span class="op">)</span></span>
 <span> </span></code></pre>
-<div class="float">
-<img src="reference/figures/demo01.gif" alt="demo01"><div class="figcaption">demo01</div>
-</div>
+<p><img src="reference/figures/demo01.gif"></p>
 <ul>
 <li>If you don’t see the item, try to use the option “Run External”:</li>
 </ul>
-<div class="float">
-<img src="reference/figures/demo02.gif" alt="demo02"><div class="figcaption">demo02</div>
-</div>
+<p><img src="reference/figures/demo02.gif"></p>
 <p>To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder <code>items</code> and run the following code in R:</p>
 <pre><code><span><span class="co"># app.R</span></span>
 <span></span>
