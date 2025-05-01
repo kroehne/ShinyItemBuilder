@@ -14,9 +14,7 @@
 
 get_scoring_info_from_ib_file <- function(zip_path, scoring_xml_filename = "global.cbaitemscore") {
 
-  # Create a temporary directory and unzip the XML there
   tmp_dir <- tempdir()
-  #unzip(zip_path, files = scoring_xml_filename, exdir = tmp_dir)
   unzip(zip_path, exdir = tmp_dir)
 
   xml_file <- file.path(tmp_dir, scoring_xml_filename)
@@ -44,8 +42,6 @@ get_scoring_info_from_ib_file <- function(zip_path, scoring_xml_filename = "glob
     syntax_file <- file.path(tmp_dir, "scoringResources",result[i,"syntax"])
     result[i,"syntax"] <- readLines(syntax_file, warn = FALSE)
   }
-
-  unlink(tmp_dir, recursive = TRUE)
 
   return(result)
 }
