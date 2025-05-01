@@ -2,7 +2,7 @@
 % Please edit documentation in R/parse_ib_scoring.R
 \name{parse_ib_scoring}
 \alias{parse_ib_scoring}
-\title{Parse CBA ItemBuilder Scoring JSON}
+\title{Parse Scoring Provided by CBA ItemBuilder Runtime as JSON}
 \usage{
 parse_ib_scoring(scoringjson)
 }

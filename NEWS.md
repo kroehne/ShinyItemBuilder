@@ -1,3 +1,8 @@
+# ShinyItemBuilder 0.4.0
+
+* Update for CBA ItemBuilder 10.3
+* Added funcction  'get_scoring_info_from_ib_file.R'
+
 # ShinyItemBuilder 0.3.0
 
 * Update for CBA ItemBuilder 10.1 / 10.2

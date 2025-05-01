@@ -1,6 +1,6 @@
 # parse_ib_scoring.R
 
-#' @title Parse CBA ItemBuilder Scoring JSON
+#' @title Parse Scoring Provided by CBA ItemBuilder Runtime as JSON
 #' @description `parse_ib_scoring` converts the JSON to a data.frame
 #' @details The returned object returns a data.frame containing the scoring provided as JSON.
 #' @param scoringjson Scoring JSON as provided by the CBA ItemBuilder runtime.
