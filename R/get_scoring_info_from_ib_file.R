@@ -18,7 +18,7 @@ get_scoring_info_from_ib_file <- function(zip_path, scoring_xml_filename = "glob
   unzip(zip_path, exdir = tmp_dir)
 
   xml_file <- file.path(tmp_dir, scoring_xml_filename)
-  xml <- read_xml(xml_file)
+  xml <- xml2::read_xml(xml_file)
 
   item_nodes <- xml_find_all(xml, ".//itemScoreList")
 
@@ -36,7 +36,7 @@ get_scoring_info_from_ib_file <- function(zip_path, scoring_xml_filename = "glob
     )
   })
 
-  result <- bind_rows(all_data)
+  result <-  dplyr::bind_rows(all_data)
 
   for (i in 1:dim(result)[1]){
     syntax_file <- file.path(tmp_dir, "scoringResources",result[i,"syntax"])
