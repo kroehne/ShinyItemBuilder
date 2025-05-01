@@ -17,5 +17,7 @@ Imports:
     jsonlite,
     shiny,
     utils,
-    base64enc
+    base64enc,
+    xml2,
+    dplyr
 VignetteBuilder: knitr

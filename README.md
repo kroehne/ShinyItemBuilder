@@ -1,6 +1,6 @@
 [![R-CMD-check](https://github.com/kroehne/ShinyItemBuilder/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kroehne/ShinyItemBuilder/actions/workflows/R-CMD-check.yaml)
 
-# ShinyItemBuilder -- Use Shiny with CBA ItemBuilder Items
+# ShinyItemBuilder -- Use R/Shiny with CBA ItemBuilder Items
 
 The R project `ShinyItemBuilder` can be used to implement computer-based assessments using the [CBA ItemBuilder](https://cba.itembuilder.de) and [R](https://www.r-project.org/)/[Shiny](https://shiny.posit.co/).  
 
@@ -21,7 +21,7 @@ install.packages("knitr")
 remotes::install_github("kroehne/ShinyItemBuilder", build_vignettes = TRUE) 
 ````
 
-![installation](man/figures/install.gif)
+![](man/figures/install.gif)
 
 * Run the following code in R
 
@@ -41,11 +41,11 @@ shinyApp(assessmentOutput(pool = item_pool,
  
 ````
 
-![demo01](man/figures/demo01.gif)
+![](man/figures/demo01.gif)
 
 * If you don't see the item, try to use the option "Run External":
 
-![demo02](man/figures/demo02.gif)
+![](man/figures/demo02.gif)
 
 To use your own CBA ItemBuilder-project files, create a R-Studio project, copy the CBA ItemBuilder project files into a folder `items` and run the following code in R: 
 
