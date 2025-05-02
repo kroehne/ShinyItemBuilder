@@ -76,7 +76,7 @@ analyse_zip_content <- function(zip_path) {
 }
 
 ui <- navbarPage(
-  "Inspect Project Tool (IPT)",
+  "ShinyItemBuilder: Inspect Project Tool (IPT)",
 
   tabPanel("Upload & Export",
            fluidPage(
@@ -115,23 +115,23 @@ server <- function(input, output, session) {
       result_data(result)
 
       excel_path <- tempfile(fileext = ".xlsx")
-      wb <- createWorkbook()
+      wb <- openxlsx::createWorkbook()
       for (name in names(result)) {
-        addWorksheet(wb, name)
-        writeData(wb, name, result[[name]])
+        openxlsx::addWorksheet(wb, name)
+        openxlsx::writeData(wb, name, result[[name]])
       }
-      saveWorkbook(wb, excel_path, overwrite = TRUE)
+      openxlsx::saveWorkbook(wb, excel_path, overwrite = TRUE)
       result_file(excel_path)
 
       if (dim(result$Errors)[1] == 0) {
-        output$status <- renderText("Analyse erfolgreich abgeschlossen.")
+        output$status <- renderText("Analysis successfully completed.")
       } else {
-        output$status <- renderText(paste0("Analyse mit Fehlern abgeschlossen. ", dim(result$Errors)))
+        output$status <- renderText(paste0("Analysis completed with errors. ", dim(result$Errors)))
       }
 
 
     }, error = function(e) {
-      output$status <- renderText(paste("Fehler bei der Analyse:", e$message))
+      output$status <- renderText(paste("Errors in the analysis:", e$message))
       result_data(NULL)
       result_file(NULL)
     })
