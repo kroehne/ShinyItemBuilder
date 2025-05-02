@@ -27,7 +27,7 @@ get_variable_infos_from_ib_file <-  function(zip_path, stimulus_json_filename = 
   xml_file <- file.path(tmp_dir, variables_xml_file)
   xml <- xml2::read_xml(xml_file)
 
-  variables_nodes <- xml_find_all(xml, ".//variables")
+  variables_nodes <- xml2::xml_find_all(xml, ".//variables")
 
   var2 <- data.frame(
     name = xml2::xml_attr(variables_nodes, "name"),
