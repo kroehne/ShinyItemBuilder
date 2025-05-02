@@ -1,7 +1,10 @@
+# ShinyItemBuilder 0.5.0
+
+* Added Inspect Project Tool (IPT) 
+
 # ShinyItemBuilder 0.4.0
 
 * Update for CBA ItemBuilder 10.3.0
-* Added Inspect Project Tool (IPT) 
 
 # ShinyItemBuilder 0.3.0
 

@@ -8,3 +8,4 @@ inspect_project_tool <- function() {
   shiny::runApp(app_dir, display.mode = "normal")
 }
 
+
