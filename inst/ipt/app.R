@@ -140,7 +140,7 @@ server <- function(input, output, session) {
   output$tables_ui <- renderUI({
     req(result_data())
     tabs <- lapply(names(result_data()), function(name) {
-      tabPanel(title = name, dataTableOutput(paste0("table_", name)))
+      tabPanel(title = name, DT::DTOutput(paste0("table_", name)))
     })
     do.call(tabsetPanel, tabs)
   })
@@ -151,7 +151,7 @@ server <- function(input, output, session) {
       local({
         tab_name <- name
         output_id <- paste0("table_", tab_name)
-        output[[output_id]] <- renderDataTable({
+        output[[output_id]] <- DT::renderDT({
           head(result_data()[[tab_name]], 100)
         }, options = list(pageLength = 10))
       })
